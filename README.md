@@ -53,12 +53,26 @@ to set up MongoDB on your computer. Skip this step if you previously installed M
 - **Install project dependencies**: In the terminal/command prompt, enter this command:
 
     `npm install`
+    
+- **Install Bower components**: Enter each of these commands in the terminal/command prompt:
+    ```bash
+    npm install -g bower
+    
+    bower install
+    ```
+
+- **Configure MongoDB**: You need to configure your MongoDB to make it work with this app. In the root of this 
+project, create a file named `.env` and add the following configuration rules to it:
+    ```bash
+    MONGOHQ_URL=mongodb://localhost:27017/mifune
+    PORT=6000
+    ```
 
 - **Start a MongoDB server**:
 
   - For Mac, if you have [Homebrew](https://brew.sh) installed, start a MongoDB service using this command:
 
-      `brew services start mongodb`.
+      `brew services start mongodb`
 
   - For other operating systems or a Mac without Homebrew, please consult 
   [this link](https://docs.mongodb.com/v3.2/administration/install-community/).
@@ -68,7 +82,7 @@ to set up MongoDB on your computer. Skip this step if you previously installed M
     `npm run start`
 
 - **Open the Live App in a browser**: Launch your favorite web browser and navigate 
-to `http://localhost:3000`. You should see a live version of the app which is being run on your machine.
+to `http://localhost:3000`. You should see a live version of the app that's running on your machine. Voila!
 
 ## License
 
