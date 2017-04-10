@@ -11,7 +11,7 @@ Cards for Humanity is a fast-paced online version of the popular card game, Card
   1. [Licence](#license)
 
 # Our Team
---------
+
 Cards for Humanity was created at [Hack Reactor](http://www.hackreactor.com) by:
 * [Matt Silverstein](http://www.mattsilverstein.com/)
 * [Will Ngo](https://mrngoitall.net)
@@ -19,7 +19,7 @@ Cards for Humanity was created at [Hack Reactor](http://www.hackreactor.com) by:
 * [David Gonzalez](http://www.truthyfalsy.com)
 
 # About the Game
--------------
+
 The game is simple - each player is given 10 answer cards which are used to fill in the question card. For each round, one player is the "Card Czar". Their sole job is to select a submitted answer card that they think best fits the question. Whoever's card is selected wins a point for the round.
 
 Cards Against Humanity is open-source and licensed under Creative Commons. The idea for Cards for Humanity was to create a web version of the game we love so much, while still doing something good for humanity. To achieve this we integrated the option to donate to the Make a Wish Foundation.
@@ -31,44 +31,44 @@ The app is completely functional across all devices - from iPhone to full-sized 
 ![alt-text](http://www.tylermcginnis.com/images/cfh3.png "Desktop with Cards")
 
 # Our Tech Stack
---------------
+
 Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2. 
 
 ![alt-text](https://dl.dropboxusercontent.com/u/7390609/tech.png "Tech Stack Overview")
 
 
 # Installation and Setup
----------------
+
 Setting up this project on your local machine is easy. All you need to do is follow these instructions:
 
-- *Install NodeJS*: You may find the appropriate installation instructions for your computer 
+- **Install NodeJS**: You may find the appropriate installation instructions for your computer 
 [at this link](https://nodejs.org/en/download/). Skip this step if you already have a recent version of Node on your computer.
 
-- *Install MongoDB*: Follow the instructions [at this link](https://www.mongodb.com/download-center?jmp=nav#community) 
-to set up MongoDB on your computer.
+- **Install MongoDB**: Follow the instructions [at this link](https://www.mongodb.com/download-center?jmp=nav#community) 
+to set up MongoDB on your computer. Skip this step if you previously installed MongoDB.
 
-- *Clone this repo*: Open a terminal (Mac and Linux) or a command prompt (Windows) and enter this command:
+- **Clone this repo**: Open a terminal (Mac and Linux) or a command prompt (Windows) and enter this command:
 
     `git clone https://github.com/andela/mifune-cfh.git`
 
-- *Install project dependencies*: In the terminal/command prompt, enter this command:
+- **Install project dependencies**: In the terminal/command prompt, enter this command:
 
     `npm install`
 
-- *Start a MongoDB server*:
+- **Start a MongoDB server**:
 
--- For Mac, if you have [Homebrew](https://brew.sh) installed, start a MongoDB service using this command:
+  - For Mac, if you have [Homebrew](https://brew.sh) installed, start a MongoDB service using this command:
 
-`brew services start mongodb`.
+      `brew services start mongodb`.
 
--- For other operating systems or a Mac without Homebrew, please consult 
-[this link](https://docs.mongodb.com/v3.2/administration/install-community/).
+  - For other operating systems or a Mac without Homebrew, please consult 
+  [this link](https://docs.mongodb.com/v3.2/administration/install-community/).
 
-- *Run the App*: Enter the following in your terminal/command prompt:
+- **Run the App**: Enter the following in your terminal/command prompt:
 
-`npm run start`
+    `npm run start`
 
-- *Open the Live App in a browser*: Launch your favorite web browser and navigate 
+- **Open the Live App in a browser**: Launch your favorite web browser and navigate 
 to `http://localhost:3000`. You should see a live version of the app which is being run on your machine.
 
 
