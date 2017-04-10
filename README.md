@@ -1,5 +1,5 @@
 # Cards for Humanity - [http://cfh.io](http://cfh.io)
-===========
+
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
 # Table of Contents
@@ -32,10 +32,7 @@ The app is completely functional across all devices - from iPhone to full-sized 
 
 # Our Tech Stack
 
-Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2. 
-
-![alt-text](https://dl.dropboxusercontent.com/u/7390609/tech.png "Tech Stack Overview")
-
+Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2.
 
 # Installation and Setup
 
@@ -70,7 +67,6 @@ to set up MongoDB on your computer. Skip this step if you previously installed M
 
 - **Open the Live App in a browser**: Launch your favorite web browser and navigate 
 to `http://localhost:3000`. You should see a live version of the app which is being run on your machine.
-
 
 ## License
 
