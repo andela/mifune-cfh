@@ -58,7 +58,6 @@ require('./config/routes')(app, passport, auth);
 
 //Start the app by listening on <port>
 var port = config.port;
-var server = app.listen(port);
 console.log(port);
 var ioObj = io.listen(server, { log: false });
 //game logic handled here
