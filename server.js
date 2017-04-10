@@ -5,8 +5,10 @@ var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
-    io = require('socket.io');
+    io = require('socket.io'),
+    dotenv = require("dotenv");
 
+  dotenv.config();
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
@@ -56,7 +58,7 @@ require('./config/routes')(app, passport, auth);
 
 //Start the app by listening on <port>
 var port = config.port;
-var server = app.listen(port);
+console.log(port);
 var ioObj = io.listen(server, { log: false });
 //game logic handled here
 require('./config/socket/socket')(ioObj);
@@ -67,3 +69,5 @@ logger.init(app, passport, mongoose);
 
 //expose app
 exports = module.exports = app;
+
+
