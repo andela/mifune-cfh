@@ -2,7 +2,7 @@ const gulp = require('gulp');
 
 const mocha = require('gulp-mocha');
 const nodemon = require('gulp-nodemon');
-const browsers = require('browser-sync');
+const browser = require('browser-sync');
 const sass = require('gulp-sass'); 
 const eslint = require('gulp-eslint');
 require('dotenv').config();
@@ -17,8 +17,9 @@ gulp.task('nodemon', () => {
 });
 
 gulp.task('server', ['nodemon'], () => {
-    browserSync.init({
-        proxy: "http://localhost:3000",
+    browser.init({
+        proxy: "http://localhost:6000",
+        port: 5000,
         files: ["public/**/*.*"],
         reloadOnRestart: true
     });
@@ -57,11 +58,10 @@ gulp.task('lint', () => gulp.src([
 gulp.task('watch', () => {
     gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
     gulp.watch('public/css/*.css');
-    gulp.watch('public/css/**', browserSync.reload);
-    gulp.watch('app/views/**', browserSync.reload);
-    gulp.watch('public/views/**', browserSync.reload);
-    gulp.watch(['public/js/**', 'app/**/*.js'], browserSync.reload)
-    livereload.listen();
+    gulp.watch('public/css/**', browser.reload);
+    gulp.watch('app/views/**', browser.reload);
+    gulp.watch('public/views/**', browser.reload);
+    gulp.watch(['public/js/**', 'app/**/*.js'], browser.reload)
 });
 
 gulp.task('default', ['server', 'watch']);
