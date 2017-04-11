@@ -1,6 +1,6 @@
-var path = require('path'),
+const path = require('path');
 rootPath = path.normalize(__dirname + '/../..');
-var keys = rootPath + '/keys.txt';
+const keys = rootPath + '/keys.txt';
 require('dotenv').config();
 
 module.exports = {
