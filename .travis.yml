@@ -1,14 +1,9 @@
 language: node_js
 node_js:
-  - 0.12
+  - 7.8.6
 before_script:
   - npm install -g gulp
-script: gulp
+script: gulp test
 install: true
 deploy:
   skip_cleanup: true
-
-# safelist
-branches:
-  only:
-  - master
