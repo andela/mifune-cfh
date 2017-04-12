@@ -69,5 +69,10 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
+<<<<<<< HEAD
   });
 };
+=======
+  })
+}
+>>>>>>> move the karma.conf.js from test directory to root and refactor code
