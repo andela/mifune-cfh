@@ -25,6 +25,8 @@
     "dotenv": "^4.0.0",
     "express": "~3.4.0",
     "forever": "latest",
+    "gulp-bower": "0.0.13",
+    "gulp-eslint": "^3.0.1",
     "jade": "~0.35.0",
     "mean-logger": "~0.0.1",
     "mongoose": "~3.6.20",
