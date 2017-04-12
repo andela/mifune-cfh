@@ -5,8 +5,7 @@ const nodemon = require('gulp-nodemon');
 const browser = require('browser-sync');
 const sass = require('gulp-sass'); 
 const eslint = require('gulp-eslint');
-const myport = 'http://localhost:' + process.env.PORT;
-console.log(myport);
+require('dotenv').config();
 
 gulp.task('nodemon', () => {
   nodemon({
@@ -17,7 +16,6 @@ gulp.task('nodemon', () => {
 });
 
 gulp.task('server', ['nodemon'], () => {
-    require('dotenv').config();
     browser.init({
         proxy: 'http://localhost:' + process.env.PORT,
         port: 5000,
@@ -46,7 +44,7 @@ gulp.task('lint', () => gulp.src([
     'test/**/*.js',
     'public/js/**/*.js'
   ]).pipe(eslint({
-    configFile: '.eslintrc.json',
+    configFile: '.eslintrc',
     useEslintrc: true,
   }))
     .pipe(eslint.format())
@@ -54,7 +52,7 @@ gulp.task('lint', () => gulp.src([
   );
 
 gulp.task('watch', () => {
-    gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
+    gulp.watch(['public/css/common.scss'], ['sass']);
     gulp.watch('public/css/*.css'), ['sass'];
     gulp.watch('public/css/**', browser.reload);
     gulp.watch('app/views/**', browser.reload);
