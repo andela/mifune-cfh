@@ -3,7 +3,4 @@ node_js:
   - 6.10.2
 before_script:
   - npm install -g gulp
-script: gulp test
 install: true
-deploy:
-  skip_cleanup: true
