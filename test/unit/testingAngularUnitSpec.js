@@ -13,4 +13,3 @@ describe('Testing  AngularJS Test Suite', function () {
     });
   });
 });
-
