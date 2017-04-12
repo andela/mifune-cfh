@@ -1,17 +1,19 @@
-describe('Testing  AngularJS Test Suite', function(){
-    describe('Testing game Controller', function(){
-        it('should initialize the hasPickedCards property in the scope', function(){
+describe('Testing  AngularJS Test Suite', function() {
+    describe('Testing header Controller', function() {
+        it('should test scope object', function() {
             module('mean.system');
             var scope = {};
             var ctrl;
 
             inject(function($controller) {
-                ctrl = $controller('GameController', {$scope:scope});
+                ctrl = $controller('HeaderController', {$scope:scope, Global:{test:'test'}});
             });
-            expect($scope.hasPickedCards).toBe(true);
+            expect(scope.menu.length).toBe(2);
+            expect(typeof scope.global).toBe("object");
+            expect(scope.global.test).toBe('test');
 
         });
 
-    })
+    });
 
 })
