@@ -6,7 +6,14 @@ var express = require('express'),
     passport = require('passport'),
     logger = require('mean-logger'),
     io = require('socket.io'),
+<<<<<<< HEAD
     dotenv = require("dotenv");
+=======
+    dotenv = require('dotenv');
+  
+  
+  dotenv.config();
+>>>>>>> ba9d40bc56e447119b73b36f8fbded7101ece899
 
   dotenv.config();
 /**
