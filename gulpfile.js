@@ -5,6 +5,8 @@ const browser = require('browser-sync');
 const sass = require('gulp-sass');
 const eslint = require('gulp-eslint');
 const bower = require('gulp-bower');
+const istanbul = require('gulp-istanbul');
+const coveralls = require('gulp-coveralls');
 require('dotenv').config();
 
 gulp.task('nodemon', () => {
@@ -24,9 +26,40 @@ gulp.task('server', ['nodemon'], () => {
   });
 });
 
-gulp.task('test', () =>
+gulp.task('pre-test', () =>
+  gulp.src(['app/**/*.js'])
+    // Covering files
+    .pipe(istanbul())
+    // Force `require` to return covered files
+    .pipe(istanbul.hookRequire())
+);
+
+gulp.task('test', ['pre-test'], () =>
   gulp.src('test/**/*.js', { read: false })
-    .pipe(mocha({ reporter: 'nyan' }))
+    .pipe(mocha())
+    .once('error', () => {
+      process.exit(1);
+    })
+    .pipe(istanbul.writeReports(
+      {
+        dir: './coverage',
+        reporters: ['lcov', 'json', 'text', 'text-summary'],
+        reportOpts: { dir: './coverage' }
+      }
+    ))
+    // Enforce a coverage of at least 90%
+    // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
+    .once('error', (err) => {
+      console.log(err);
+    })
+);
+
+gulp.task('coveralls', ['test'], () =>
+  gulp.src('./coverage/lcov.info')
+    .pipe(coveralls())
+    .once('end', () => {
+      process.exit();
+    })
 );
 
 gulp.task('sass', () => gulp.src('./public/css/common.scss')
@@ -48,7 +81,7 @@ gulp.task('lint', () => gulp.src([
 }))
   .pipe(eslint.format())
   .pipe(eslint.failOnError())
-  );
+);
 
 gulp.task('watch', () => {
   gulp.watch(['public/css/common.scss'], ['sass']);
