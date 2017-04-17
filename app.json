@@ -1,0 +1,27 @@
+{
+  "name": "mifune-cfh",
+  "description": "Cards For Humanity: A game for horrible people desperately trying to do good.",
+  "keywords": [
+    "charity",
+    "mongodb",
+    "angularjs",
+    "online-game"
+  ],
+  "repository": "https://github.com/andela/mifune-cfh",
+  "env": {
+    "MONGOHQ_URL": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
