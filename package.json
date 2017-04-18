@@ -54,8 +54,6 @@
     "gulp-mocha": "3.0.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-sass": "^3.1.0",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-sass": "^3.1.0",   
     "gulp-bower": "0.0.13",
     "jasmine": "^2.5.3",
     "karma": "^1.6.0",
