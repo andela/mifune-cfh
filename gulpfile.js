@@ -19,12 +19,11 @@ gulp.task('nodemon', () => {
 
 gulp.task('server', ['nodemon'], () => {
   browser.init({
-    
-    // This is where the real app is launched, courtesy of Express.
-    // Note the use of backticks below (i.e ``).
+    // This is where the real app is launched using Express.
+    // Note the use of back-ticks below (i.e ``).
     proxy: `http://localhost:${process.env.PORT}`,
     
-    // This gives BS port to bind to.
+    // This gives BS a port to bind to.
     port: 3000,
     files: ['public/**/*.*'],
     reloadOnRestart: true
