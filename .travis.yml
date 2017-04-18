@@ -3,3 +3,7 @@ node_js:
   - 6.10.2
 before_script:
   - npm install -g gulp
+services: 
+  - mongodb
+before_script:
+  - sleep 15
