@@ -130,10 +130,18 @@ exports.createUserApi = function(req, res) {
               message: 'Failed to create '
             });
           }
+          // Otherwise, return a JWT for the newly created user.
+          const token = jwt.sign({
+              exp: Math.floor(Date.now() / 1000) + (3 * 60 * 60),
+              data: req.body.email
+            },
+            process.env.HS256_SECRET,
+            { algorithm: 'HS256'}
+          );
           res.json({
             success: 'User created',
             message: 'Account successfully created.',
-            jwtToken: 'foo_bar'
+            jwtToken: token
           });
         });
       } else {
