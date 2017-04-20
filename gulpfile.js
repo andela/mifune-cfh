@@ -40,9 +40,6 @@ gulp.task('pre-test', () =>
 gulp.task('test', ['pre-test'], () =>
   gulp.src('test/**/*.js', { read: false })
     .pipe(mocha())
-    .once('error', () => {
-      process.exit(1);
-    })
     .pipe(istanbul.writeReports(
       {
         dir: './coverage',
