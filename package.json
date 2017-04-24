@@ -15,7 +15,7 @@
   "scripts": {
     "deploy": "node node_modules/bower/bin/bower install && node node_modules/forever/bin/forever -m 5 server.js",
     "start": "gulp",
-    "test": "gulp test",
+    "test": "gulp test-frontend && gulp test-backend",
     "coveralls": "gulp coveralls"
   },
   "dependencies": {

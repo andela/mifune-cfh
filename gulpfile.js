@@ -37,8 +37,25 @@ gulp.task('pre-test', () =>
     .pipe(istanbul.hookRequire())
 );
 
-gulp.task('test', ['pre-test'], () =>
-  gulp.src('test/**/*.js', { read: false })
+gulp.task('test-backend', ['pre-test'], () =>
+  gulp.src('test/backend/**/*.js', { read: false })
+    .pipe(mocha())
+    .pipe(istanbul.writeReports(
+      {
+        dir: './coverage',
+        reporters: ['lcov', 'json', 'text', 'text-summary'],
+        reportOpts: { dir: './coverage' }
+      }
+    ))
+    // Enforce a coverage of at least 90%
+    // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
+    .once('error', (err) => {
+      console.log(err);
+    })
+);
+
+gulp.task('test-frontend', ['pre-test'], () =>
+  gulp.src('test/frontend/**/*.js', { read: false })
     .pipe(mocha())
     .pipe(istanbul.writeReports(
       {
