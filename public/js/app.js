@@ -1,4 +1,5 @@
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+// TODO: REPLACE UI.ROUTE WITH NGROUTE.
   .config(['$routeProvider',
       function($routeProvider) {
           $routeProvider.
@@ -18,7 +19,8 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             templateUrl: '/views/signin.html'
           }).
           when('/signup', {
-            templateUrl: '/views/signup.html'
+            templateUrl: '/views/signup.html',
+            controller: 'SignUpController'
           }).
           when('/choose-avatar', {
             templateUrl: '/views/choose-avatar.html'
