@@ -7,6 +7,7 @@ const eslint = require('gulp-eslint');
 const bower = require('gulp-bower');
 const istanbul = require('gulp-istanbul');
 const coveralls = require('gulp-coveralls');
+const Server = require('karma').Server;
 require('dotenv').config();
 
 gulp.task('nodemon', () => {
@@ -49,29 +50,20 @@ gulp.task('test-backend', ['pre-test'], () =>
     ))
     // Enforce a coverage of at least 90%
     // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
-    .once('error', (err) => {
-      console.log(err);
-    })
 );
 
-gulp.task('test-frontend', ['pre-test'], () =>
-  gulp.src('test/frontend/**/*.js', { read: false })
-    .pipe(mocha())
-    .pipe(istanbul.writeReports(
-      {
-        dir: './coverage',
-        reporters: ['lcov', 'json', 'text', 'text-summary'],
-        reportOpts: { dir: './coverage' }
-      }
-    ))
-    // Enforce a coverage of at least 90%
-    // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
-    .once('error', (err) => {
-      console.log(err);
-    })
-);
+gulp.task('test-frontend', ['test-backend'], done =>
+  new Server({
+    configFile: `${__dirname}/karma.conf.js`
+  }, () => {
+    done();
+  }).start());
 
-gulp.task('coveralls', ['test'], () =>
+gulp.task('test-dev', ['test-frontend', 'test-backend'], () => {
+  process.exit();
+});
+
+gulp.task('test', ['test-frontend', 'test-backend'], () =>
   gulp.src('./coverage/lcov.info')
     .pipe(coveralls())
     .once('end', () => {
