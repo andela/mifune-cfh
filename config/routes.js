@@ -8,6 +8,9 @@ module.exports = function(app, passport, auth) {
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
 
+    // Creating new users programmatically via a REST-ish API.
+    app.post('/api/auth/signup', users.createUserApi);
+
     //Setting up the users api
     app.post('/users', users.create);
     app.post('/users/avatars', users.avatars);

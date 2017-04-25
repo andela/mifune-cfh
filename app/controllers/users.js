@@ -1,9 +1,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-var avatars = require('./avatars').all();
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const avatars = require('./avatars').all();
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 /**
  * Auth callback
@@ -82,7 +86,7 @@ exports.create = function(req, res) {
       email: req.body.email
     }).exec(function(err,existingUser) {
       if (!existingUser) {
-        var user = new User(req.body);
+        const user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
@@ -104,6 +108,57 @@ exports.create = function(req, res) {
     });
   } else {
     return res.redirect('/#!/signup?error=incomplete');
+  }
+};
+
+/**
+ * Create a new user via the signup endpoint.
+ */
+exports.createUserApi = function(req, res) {
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec(function(err, isExistingUser) {
+      if (!isExistingUser) {
+        const user = new User(req.body);
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save(function(err) {
+          if (err) {
+            return res.json({
+              error: 'Not created', 
+              message: 'Failed to create '
+            });
+          }
+          // Otherwise, return a JWT for the newly created user.
+          const token = jwt.sign({
+              exp: Math.floor(Date.now() / 1000) + (3 * 60 * 60),
+              data: req.body.email
+            },
+            process.env.HS256_SECRET,
+            { algorithm: 'HS256'}
+          );
+          return res.status(200).json({
+            status: 200,
+            success: 'User created',
+            message: 'Account successfully created.',
+            jwtToken: token
+          });
+        });
+      } else {
+        return res.status(400).json({
+          status: 400,
+          error: 'Not creatable',
+          message: 'User already exists.'
+        });
+      }
+    });
+  } else {
+    return res.status(400).json({
+      status: 400,
+      error: 'Incomplete data',
+      message: 'Either full name, email or password wasn\'t specified.'
+    });
   }
 };
 
@@ -134,8 +189,8 @@ exports.addDonation = function(req, res) {
       })
       .exec(function(err, user) {
         // Confirm that this object hasn't already been entered
-        var duplicate = false;
-        for (var i = 0; i < user.donations.length; i++ ) {
+        let duplicate = false;
+        for (const i = 0; i < user.donations.length; i++ ) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
@@ -156,7 +211,7 @@ exports.addDonation = function(req, res) {
  *  Show profile
  */
 exports.show = function(req, res) {
-  var user = req.profile;
+  const user = req.profile;
 
   res.render('users/show', {
     title: user.name,
