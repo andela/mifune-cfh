@@ -21,7 +21,8 @@ exports.authCallback = (req, res) => {
  */
 exports.signin = (req, res) => {
   if (!req.user) {
-    res.redirect('/#!/signin?error=invalid');
+    return res.json({ success: false,
+          message: 'Invalid' });
   } else {
     res.redirect('/#!/app');
   }
