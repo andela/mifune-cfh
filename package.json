@@ -13,6 +13,8 @@
     "npm": "3.10.10"
   },
   "scripts": {
+    "preinstall": "npm prune",
+    "postinstall": "rsync pre-commit .git/hooks && chmod 755 .git/hooks/pre-commit",
     "deploy": "node node_modules/bower/bin/bower install && node node_modules/forever/bin/forever -m 5 server.js",
     "start": "gulp",
     "test": "gulp test",
