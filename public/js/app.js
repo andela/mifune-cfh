@@ -1,4 +1,4 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives'])
 // TODO: REPLACE UI.ROUTE WITH NGROUTE.
   .config(['$routeProvider',
       function($routeProvider) {
