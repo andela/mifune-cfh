@@ -138,22 +138,25 @@ exports.createUserApi = function(req, res) {
             process.env.HS256_SECRET,
             { algorithm: 'HS256'}
           );
-          res.json({
+          return res.status(200).json({
+            status: 200,
             success: 'User created',
             message: 'Account successfully created.',
             jwtToken: token
           });
         });
       } else {
-        return res.json({
-          error: 'Not created',
+        return res.status(400).json({
+          status: 400,
+          error: 'Not creatable',
           message: 'User already exists.'
         });
       }
     });
   } else {
-    return res.json({
-      error: 'Incomplete data', 
+    return res.status(400).json({
+      status: 400,
+      error: 'Incomplete data',
       message: 'Either full name, email or password wasn\'t specified.'
     });
   }
