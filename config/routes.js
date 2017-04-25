@@ -5,7 +5,7 @@ const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
 const jwt = require('./jwt');
 
-module.exports = function (app, passport, auth) { // eslint-disable-line
+module.exports = (app, passport) => {
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -82,7 +82,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
-  // Question Routes
+    // Question Routes
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
   // Finish with setting up the questionId param
@@ -95,3 +95,4 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.get('/play', index.play);
   app.get('/', index.render);
 };
+
