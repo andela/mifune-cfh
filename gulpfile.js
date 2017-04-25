@@ -50,6 +50,10 @@ gulp.task('test-backend', ['pre-test'], () =>
     ))
     // Enforce a coverage of at least 90%
     // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
+    .once('error', (err) => {
+      // eslint-disable-line
+      console.log(err);
+    })
 );
 
 gulp.task('test-frontend', ['test-backend'], done =>

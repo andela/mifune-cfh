@@ -4,6 +4,7 @@ describe('Testing  AngularJS Test Suite', function () {
       module('mean.system');
       const scope = {};
       inject(function ($controller) {
+        // eslint-disable-line
         const ctrl = $controller('HeaderController', { $scope: scope, Global: { test: 'test' } });
       });
       expect(scope.menu.length).toBe(2);

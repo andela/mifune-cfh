@@ -9,7 +9,7 @@ const should = require('should'),
     User = mongoose.model('User');
 
 //Globals
-var user;
+let user;
 
 //The tests
 describe('<Unit Test>', function() {
@@ -28,6 +28,7 @@ describe('<Unit Test>', function() {
     describe('Method Save', function() {
       it('should be able to save whithout problems', function(done) {
         user.save(function(err) {
+          // eslint-disable-line
           console.log(err);
           should.not.exist(err);
           done();
