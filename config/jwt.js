@@ -1,43 +1,5 @@
-const jwt = require('jsonwebtoken'),
-  mongoose = require('mongoose'),
-  avatars = require('../app/controllers/avatars').all();
-  expiryDate = 86400, // 24hours
-  secret = process.env.SECRET,
-  User = mongoose.model('User'),
-  
-
-// routing process to authenticate users and generate token
-exports.authToken = (req, res) => {
-  // find the user
-  User.findOne({
-    email: req.body.email
-  }, (error, existingUser) => {
-    if (error) {
-      throw error;
-    }
-    if (!existingUser) {
-      return res.json({ success: false,
-        message: 'User Notfound' });
-    } else if (existingUser) {
-      if (!existingUser.authenticate(req.body.password)) {
-        return res.json({ success: false,
-          message: 'Invalid' });
-      }
-      // Create the token
-      req.logIn(existingUser, (err) => {
-        if (err) {
-          throw err;
-        }
-        const token = jwt.sign(existingUser, secret, {
-          expiresIn: expiryDate
-        });
-        // return the token as JSON
-        return res.json({ success: true, message: 'Signed up', token });
-      });
-    }
-  });
-};
-
+const jwt = require('jsonwebtoken');
+const avatars = require('../app/controllers/avatars').all();
 
 // Routing process of the middleware to verify a user token
 exports.checkToken = (req, res, next) => {
