@@ -17,12 +17,12 @@ angular.module('mean.system')
     };
 
     userService.signUp(data)
-      .then(response => {
+      .then((response) => {
         $scope.hideErrorMessage = 'hidden';
         $cookies.put('token', response.data.jwtToken);
         $cookies.putObject('user', response.data.user);
         $location.path('/');
-      }, error => {
+      }, (error) => {
         // Show the error message area and tell the user the error that occured.
         $scope.hideErrorMessage = '';
         if (error.data.error === 'Incomplete data') {
