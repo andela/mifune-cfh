@@ -23,6 +23,10 @@ module.exports = function(app, passport, auth) {
     app.get('/users/me', users.me);
     app.get('/users/:userId', users.show);
 
+    //retrieve all users
+    // app.get('/users/allUsers', users.retrieveUsers);
+    app.get('/api/search/users', users.retrieveUsers);
+
     //Setting the facebook oauth routes
     app.get('/auth/facebook', passport.authenticate('facebook', {
         scope: ['email'],
