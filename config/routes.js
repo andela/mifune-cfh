@@ -15,6 +15,9 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
 
+  // Creating new users programmatically via a REST-ish API.
+  app.post('/api/auth/signup', users.createUserApi);
+
   // Donation Routes
   app.post('/donations', users.addDonation);
 
