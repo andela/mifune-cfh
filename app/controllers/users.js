@@ -123,41 +123,40 @@ exports.createUserApi = (req, res) => {
         const user = new User(req.body);
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
-        user.save((err) => {
+        user.save((err, savedUser) => {
           if (err) {
-            return res.json({
-              error: 'Not created',
-              message: 'Failed to create '
+            return res.status(500).json({
+              error: 'User not created'
             });
           }
           // Otherwise, return a JWT for the newly created user.
           const token = jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (3 * 60 * 60),
-            data: req.body.email
+            user: {
+              id: savedUser._id,
+              email: savedUser.email
+            }
           },
             process.env.HS256_SECRET,
             { algorithm: 'HS256' }
           );
           return res.status(200).json({
-            status: 200,
-            success: 'User created',
-            message: 'Account successfully created.',
-            jwtToken: token
+            jwtToken: token,
+            user: {
+              id: savedUser._id,
+              email: savedUser.email
+            }
           });
         });
       } else {
         return res.status(400).json({
-          status: 400,
-          error: 'Not creatable',
-          message: 'User already exists.'
+          error: 'User already exists'
         });
       }
     });
   } else {
     return res.status(400).json({
-      status: 400,
-      error: 'Incomplete data',
-      message: 'Either full name, email or password wasn\'t specified.'
+      error: 'Incomplete data'
     });
   }
 };
