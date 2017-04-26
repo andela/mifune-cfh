@@ -7,6 +7,7 @@ const eslint = require('gulp-eslint');
 const bower = require('gulp-bower');
 const istanbul = require('gulp-istanbul');
 const coveralls = require('gulp-coveralls');
+const gutil = require('gulp-util');
 const Server = require('karma').Server;
 require('dotenv').config();
 
@@ -56,12 +57,32 @@ gulp.task('test-backend', ['pre-test'], () =>
     })
 );
 
-gulp.task('test-frontend', ['test-backend'], done =>
-  new Server({
-    configFile: `${__dirname}/karma.conf.js`
-  }, () => {
+gulp.task('test-frontend', ['test-backend'], (done) => {
+  // new Server({
+  //   configFile: `${__dirname}/karma.conf.js`
+  // }, () => {
+  //   done();
+
+  const server = new Server({
+    configFile: `${__dirname}/karma.conf.js`,
+    singleRun: true
+  });
+
+  server.on('browser_error', (browsers, err) => {
+    gutil.log(`Karma Run Failed: ${err.message}`);
+    throw err;
+  });
+
+  server.on('run_complete', (browsers, results) => {
+    if (results.failed) {
+      throw new Error('Karma: Tests Failed');
+    }
+    gutil.log('Karma Run Complete: No Failures');
     done();
-  }).start());
+  });
+
+  server.start();
+});
 
 gulp.task('test-dev', ['test-frontend', 'test-backend'], () => {
   process.exit();
