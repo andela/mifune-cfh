@@ -7,6 +7,7 @@ const eslint = require('gulp-eslint');
 const bower = require('gulp-bower');
 const istanbul = require('gulp-istanbul');
 const coveralls = require('gulp-coveralls');
+const Server = require('karma').Server;
 require('dotenv').config();
 
 gulp.task('nodemon', () => {
@@ -22,7 +23,6 @@ gulp.task('server', ['nodemon'], () => {
     // This is where the real app is launched using Express.
     // Note the use of back-ticks below (i.e ``).
     proxy: `http://localhost:${process.env.PORT}`,
-    
     // This gives BS a port to bind to.
     port: 3000,
     files: ['public/**/*.*'],
@@ -38,12 +38,9 @@ gulp.task('pre-test', () =>
     .pipe(istanbul.hookRequire())
 );
 
-gulp.task('test', ['pre-test'], () =>
-  gulp.src('test/**/*.js', { read: false })
+gulp.task('test-backend', ['pre-test'], () =>
+  gulp.src('test/backend/**/*.js', { read: false })
     .pipe(mocha())
-    .once('error', () => {
-      process.exit(1);
-    })
     .pipe(istanbul.writeReports(
       {
         dir: './coverage',
@@ -54,11 +51,23 @@ gulp.task('test', ['pre-test'], () =>
     // Enforce a coverage of at least 90%
     // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
     .once('error', (err) => {
+      // eslint-disable-line
       console.log(err);
     })
 );
 
-gulp.task('coveralls', ['test'], () =>
+gulp.task('test-frontend', ['test-backend'], done =>
+  new Server({
+    configFile: `${__dirname}/karma.conf.js`
+  }, () => {
+    done();
+  }).start());
+
+gulp.task('test-dev', ['test-frontend', 'test-backend'], () => {
+  process.exit();
+});
+
+gulp.task('test', ['test-frontend', 'test-backend'], () =>
   gulp.src('./coverage/lcov.info')
     .pipe(coveralls())
     .once('end', () => {

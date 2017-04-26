@@ -19,7 +19,7 @@ module.exports = function(config) {
       'public/lib/angular-mocks/angular-mocks.js',
       'public/js/app.js',
       'public/js/controllers/header.js',
-      'test/unit/testingAngularUnitSpec.js'
+      'test/frontend/unit/testingAngularUnitSpec.js'
     ],
 
 
@@ -49,12 +49,13 @@ module.exports = function(config) {
 
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR ||
+    // config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers

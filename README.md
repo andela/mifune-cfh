@@ -81,7 +81,11 @@ project, create a file named `.env` and add the following configuration rules to
 
 - **Run the App**: Enter the following in your terminal/command prompt:
 
-    `npm run start`
+    `npm start`
+
+- **Run test suite**: Enter the following in your terminal/command prompt:
+
+    `npm run test:dev`
 
 - **Open the Live App in a browser**: Launch your favorite web browser and navigate 
 to `http://localhost:3000`. You should see a live version of the app that's running on your machine. Voila!

@@ -4,7 +4,8 @@
     "env": {
       "node": true,
       "es6": true,
-      "mocha": true
+      "mocha": true,
+      "jasmine": true 
     },
     "ecmaFeatures": {
       "arrowFunctions": false
@@ -27,11 +28,11 @@
         "requireReturnDescription": true
       }],
       "require-jsdoc": ["error", {
-          "require": {
-              "FunctionDeclaration": true,
-              "MethodDefinition": true,
-              "ClassDeclaration": true
-          }
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
       }]
     }
 }
