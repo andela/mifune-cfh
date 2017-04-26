@@ -3,7 +3,7 @@ const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
-const jwt = require('./jwt');
+// const jwt = require('./jwt');
 
 module.exports = (app, passport) => {
   // User Routes
@@ -18,7 +18,7 @@ module.exports = (app, passport) => {
 
   // Creating new users programmatically via a REST-ish API.
   app.post('/api/auth/signup', users.createUserApi);
-  app.post('/api/auth/login', jwt.authToken);
+  app.post('/api/auth/login', users.login);
 
     // Donation Routes
   app.post('/donations', users.addDonation);
