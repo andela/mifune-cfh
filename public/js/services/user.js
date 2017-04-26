@@ -1,7 +1,7 @@
 angular.module('mean.system')
-  .factory('userService', ['$http', function($http) {
+  .factory('userService', ['$http', ($http) => {
     return {
-      signUp: function(data) {
+      signUp(data) {
         return $http.post('/api/auth/signup', data);
       }
     };

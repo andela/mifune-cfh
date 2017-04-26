@@ -1,14 +1,14 @@
 angular.module('mean.system')
-.controller('SignUpController', ['$scope', '$cookies', '$location', 'AvatarService', 'userService', function ($scope, $cookies, $location, AvatarService, userService) {
+.controller('SignUpController', ['$scope', '$cookies', '$location', 'AvatarService', 'userService', ($scope, $cookies, $location, AvatarService, userService) => {
   $scope.avatars = [];
   $scope.errorMessage = '';
   $scope.hideErrorMessage = 'hidden';
-    AvatarService.getAvatars()
-      .then(function(data) {
-        $scope.avatars = data;
-      });
+  AvatarService.getAvatars()
+    .then((data) => {
+      $scope.avatars = data;
+    });
 
-  $scope.signUp = function() {
+  $scope.signUp = () => {
     const data = {
       name: $scope.name,
       email: $scope.email,
@@ -17,25 +17,25 @@ angular.module('mean.system')
     };
 
     userService.signUp(data)
-      .then(function(response) {
+      .then(response => {
         $scope.hideErrorMessage = 'hidden';
         $cookies.put('token', response.data.jwtToken);
         $cookies.putObject('user', response.data.user);
         $location.path('/');
-      }, function(error) {
+      }, error => {
         // Show the error message area and tell the user the error that occured.
         $scope.hideErrorMessage = '';
-        if(error.data.error === 'Incomplete data') {
-          $scope.errorMessage = 'Error. You didn\'t specify either your name, email or password.'
+        if (error.data.error === 'Incomplete data') {
+          $scope.errorMessage = 'Error. You didn\'t specify either your name, email or password.';
         }
 
-        if(error.data.error === 'Not creatable') {
-          $scope.errorMessage = 'Error. We have that email in our records already.'
+        if (error.data.error === 'Not creatable') {
+          $scope.errorMessage = 'Error. We have that email in our records already.';
         }
       });
   };
 
-  $scope.setAvatarId = function(id) {
+  $scope.setAvatarId = (id) => {
     $scope.avatarId = id;
-  }
+  };
 }]);
