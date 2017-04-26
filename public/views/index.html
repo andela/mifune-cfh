@@ -14,7 +14,7 @@ $(document).ready(function() {
 </script>
 
 <script></script>
-<div landing id="main-bod">
+<div landing id="main-bod" ng-controller="IndexController">
   <!-- Fixed Logo & Menu Bar Start -->
   <div id="top-part">
     <div class="wpb-top-bar">
@@ -33,12 +33,12 @@ $(document).ready(function() {
                 <li><a onClick="scroll(0,742);">How to Play</a></li>
                 <li><a onClick="scroll(0,1411);">Charity</a></li>
                 <li><a onClick="scroll(0,2021);">About Us</a></li>
-                <span ng-show="showOptions">
+                <span ng-hide="global.authenticated">
                   <li><a href="#!/signup">Sign Up</a></li>
                   <li><a href="#!/signin">Sign In</a></li>
                 </span>
-                <span ng-hide="showOptions">
-                  <li><a href="/signout">Sign Out</a></li>
+                <span ng-show="global.authenticated">
+                  <li><a href="/signout"  ng-click="logout()">Sign Out</a></li>
                 </span>
               </ul>
             </div>

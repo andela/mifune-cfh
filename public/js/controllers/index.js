@@ -1,24 +1,32 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', function ($scope, Global, $location, socket, game, AvatarService) {
-    $scope.global = Global;
+  .controller('IndexController', ['$scope', '$cookies', 'Global', '$http', '$location',
+    'socket', 'game', 'AvatarService', '$window',
+    function IndexController($scope, $cookies, Global, $http, $location,
+      socket, game, AvatarService) {
+      $scope.global = Global;
+      $scope.errorMsg = '';
 
-    $scope.playAsGuest = function() {
-      game.joinGame();
-      $location.path('/app');
-    };
+      $scope.playAsGuest = () => {
+        game.joinGame();
+        $location.path('/app');
+      };
 
-    $scope.showError = function() {
-      if ($location.search().error) {
-        return $location.search().error;
-      } else {
+      $scope.showError = () => {
+        if ($location.search().error) {
+          return $location.search().error;
+        }
         return false;
-      }
-    };
+      };
 
-    $scope.avatars = [];
-    AvatarService.getAvatars()
-      .then(function(data) {
-        $scope.avatars = data;
-      });
+      $scope.logout = () => {
+        $cookies.remove('token');
+        $cookies.remove('user');
+      };
 
-}]);
+      $scope.avatars = [];
+      AvatarService.getAvatars()
+        .then((data) => {
+          $scope.avatars = data;
+        });
+    }
+  ]);
