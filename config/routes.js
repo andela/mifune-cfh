@@ -3,9 +3,15 @@ const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
+const games = require('../app/controllers/games');
+const checkToken = require('.jwt').checkToken;
 // const jwt = require('./jwt');
 
-module.exports = (app, passport) => {
+
+module.exports = function (app, passport, auth) { // eslint-disable-line
+  // Create and Start Game
+  app.post('/api/games/:id/start', checkToken, games.start);
+
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
