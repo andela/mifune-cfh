@@ -12,7 +12,7 @@ dotenv.config();
 /**
  * Auth callback
  */
-exports.authCallback = (req, res, next) => {
+exports.authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
 
@@ -84,7 +84,7 @@ exports.create = (req, res) => {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec((err,existingUser) => {
+    }).exec((err, existingUser) => {
       if (!existingUser) {
         const user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
@@ -162,10 +162,9 @@ exports.createUserApi = (req, res) => {
   }
 };
 
- /** 
+ /** @returns a redirect response
   * @params req: a request object.
   * @params res: a response object.
-  * @returns a redirect response
   * Assign avatar to user
  */
 exports.avatars = (req, res) => {
