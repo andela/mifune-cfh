@@ -63,7 +63,7 @@ exports.checkAvatar = (req, res) => {
     User.findOne({
       _id: req.user._id
     })
-    .exec((err, user) {
+    .exec((err, user) => {
       if (user.avatar !== undefined) {
         res.redirect('/#!/');
       } else {
