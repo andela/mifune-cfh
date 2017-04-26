@@ -13,7 +13,7 @@ angular.module('mean.system')
           email: $scope.email,
           password: $scope.password
         };
-        userService.sigIn(user).then((response) => {
+        userService.signIn(user).then((response) => {
           $cookies.put('token', response.data.token);
           $cookies.putObject('user', response.data.user);
           $location.path('/');
