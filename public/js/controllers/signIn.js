@@ -1,7 +1,7 @@
 angular.module('mean.system')
 .controller('SignInController', ['$scope', '$cookies', 'Global', '$http', '$location',
   'AvatarService', '$window', 'userService',
-  ($scope, $cookies, Global, $http, $location, AvatarService, $window, userService) => {
+  function ($scope, $cookies, Global, $http, $location, AvatarService, $window, userService) {
     $scope.global = Global;
     $scope.avatars = [];
     $scope.errorMessage = '';
@@ -29,10 +29,5 @@ angular.module('mean.system')
       }, (err) => {
         $scope.errorMsg = 'An error occured!!! '.concat(err.status);
       });
-    };
-
-    $scope.logout = () => {
-      $cookies.remove('token');
-      $cookies.remove('userId');
     };
   }]);

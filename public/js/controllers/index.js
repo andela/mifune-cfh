@@ -18,6 +18,11 @@ angular.module('mean.system')
       return false;
     };
 
+    $scope.logout = () => {
+      $cookies.remove('token');
+      $cookies.remove('userId');
+    };
+
     $scope.avatars = [];
     AvatarService.getAvatars()
       .then((data) => {

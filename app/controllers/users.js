@@ -11,6 +11,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const secret = process.env.HS256_SECRET;
 const expiryDate = 86400;
+
 /**
  * Auth callback
  */
@@ -63,7 +64,6 @@ exports.login = (req, res) => {
     });
   }
 };
-
 
 /**
  * Show login form

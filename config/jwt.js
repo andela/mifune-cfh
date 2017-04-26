@@ -1,5 +1,52 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 const avatars = require('../app/controllers/avatars').all();
+const dotenv = require('dotenv');
+
+dotenv.config();
+const secret = process.env.HS256_SECRET;
+const expiryDate = 86400;
+
+exports.authToken = (req, res) => {
+  if (req.body.password && req.body.email) {
+    // find the user
+    User.findOne({
+      email: req.body.email
+    }, (error, existingUser) => {
+      if (error) {
+        throw error;
+      }
+      if (!existingUser) {
+        return res.status(400).json({
+          error: 'User not found'
+        });
+      } else if (!existingUser.authenticate(req.body.password)) {
+        return res.status(400).json({
+          error: 'Invalid Login details'
+        });
+      }
+        // Create the token
+      req.logIn(existingUser, (err) => {
+        if (err) {
+          throw err;
+        }
+        const token = jwt.sign(existingUser, secret, {
+          expiresIn: expiryDate
+        });
+          // return the token as JSON
+        return res.status(200).json({
+          token,
+          userId: existingUser.email
+        });
+      });
+    });
+  } else {
+    return res.status(400).json({
+      error: 'Incomplete data'
+    });
+  }
+};
 
 // Routing process of the middleware to verify a user token
 exports.checkToken = (req, res, next) => {
