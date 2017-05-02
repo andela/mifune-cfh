@@ -93,7 +93,6 @@ gulp.task('lint', () => gulp.src([
   useEslintrc: true,
 }))
   .pipe(eslint.format())
-  .pipe(eslint.failOnError())
 );
 
 gulp.task('watch', () => {

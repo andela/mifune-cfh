@@ -3,12 +3,13 @@ const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
+<<<<<<< HEAD
 const games = require('../app/controllers/game');
+// const jwt = require('./jwt');
 
-module.exports = function (app, passport, auth) { // eslint-disable-line
-  // Create and Start Game
+module.exports = (app, passport) => {
+   // Create and Start Game
   app.post('/api/games/:id/start', games);
-
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -19,7 +20,11 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
 
-  // Donation Routes
+  // Creating new users programmatically via a REST-ish API.
+  app.post('/api/auth/signup', users.createUserApi);
+  app.post('/api/auth/login', users.login);
+
+    // Donation Routes
   app.post('/donations', users.addDonation);
 
   app.post('/users/session', passport.authenticate('local', {
@@ -30,7 +35,8 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.get('/users/me', users.me);
   app.get('/users/:userId', users.show);
 
-  // Setting the facebook oauth routes
+
+    // Setting the facebook oauth routes
   app.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['email'],
     failureRedirect: '/signin'
@@ -40,7 +46,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  // Setting the github oauth routes
+    // Setting the github oauth routes
   app.get('/auth/github', passport.authenticate('github', {
     failureRedirect: '/signin'
   }), users.signin);
@@ -49,7 +55,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  // Setting the twitter oauth routes
+    // Setting the twitter oauth routes
   app.get('/auth/twitter', passport.authenticate('twitter', {
     failureRedirect: '/signin'
   }), users.signin);
@@ -58,7 +64,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
     failureRedirect: '/signin'
   }), users.authCallback);
 
-  // Setting the google oauth routes
+    // Setting the google oauth routes
   app.get('/auth/google', passport.authenticate('google', {
     failureRedirect: '/signin',
     scope: [
@@ -80,7 +86,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
-  // Question Routes
+    // Question Routes
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
   // Finish with setting up the questionId param
@@ -93,3 +99,4 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.get('/play', index.play);
   app.get('/', index.render);
 };
+
