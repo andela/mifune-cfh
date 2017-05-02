@@ -3,11 +3,11 @@ const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
-const games = require('../app/controllers/games');
+const games = require('../app/controllers/game');
 
 module.exports = function (app, passport, auth) { // eslint-disable-line
   // Create and Start Game
-  app.post('/api/games/:id/start', games.start);
+  app.post('/api/games/:id/start', games);
 
   // User Routes
   app.get('/signin', users.signin);

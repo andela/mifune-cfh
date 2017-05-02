@@ -1,9 +1,9 @@
-import Game from '../models/game';
+const Game = require('../models/game');
 
 /**
  * start game if request is authenticated
  */
-exports.start = (req, res, next) => {
+module.exports = (req, res, next) => {
   if (req.isAuthenticated()) {
     const newGame = new Game({
       game_id: req.game,
