@@ -3,7 +3,6 @@ const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
-<<<<<<< HEAD
 const games = require('../app/controllers/game');
 // const jwt = require('./jwt');
 
