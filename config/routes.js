@@ -4,11 +4,13 @@ const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
 const games = require('../app/controllers/game');
+// const checkToken = require('./jwt').checkToken;
 // const jwt = require('./jwt');
 
 module.exports = (app, passport) => {
-   // Create and Start Game
-  app.post('/api/games/:id/start', games);
+  // Create and Start Game
+  // app.post('/api/games/:id/start', checkToken, games.start);
+  app.post('/api/games/:id/start', games.start);
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
