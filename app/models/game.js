@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 /**
  * Game Schema
  */
-const GameSchema = new Schema({
+const Game = new Schema({
   game_id: String,
   gameOwner_id: String,
   game_players: [],
@@ -14,4 +14,4 @@ const GameSchema = new Schema({
   date: Date
 });
 
-mongoose.model('Game', GameSchema);
+mongoose.model('Game', Game);

@@ -1,21 +1,25 @@
-const Game = require('../models/game');
+const mongoose = require('mongoose');
+const Game = mongoose.model('Game');
 
 /**
  * start game if request is authenticated
+ * @return {void}
+ * @param {string} req - request from client end.
+ * @param {string} res - response send to client end.
  */
-module.exports = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    const newGame = new Game({
-      game_id: req.game,
-      gameOwner_id: req.user.id,
-      game_players: [],
-      game_winner: String,
-      date: Date
-    });
-    newGame.save((err) => {
-      if (err) throw (err);
-      res.redirect('/play');
-    });
-  }
-  next();
+
+exports.start = (req, res) => {
+  const newGame = new Game();
+  // game_id should use _id
+  // this is just a sample data, should be updated for real user
+  newGame.game_id = 'ID';
+  newGame.gameOwner_id = 'Owner';
+  newGame.game_players = ['obi', 'precious', 'chibujaz'];
+  newGame.game_winner = 'obi';
+  newGame.date = new Date();
+
+  newGame.save((err) => {
+    if (err) throw (err);
+    res.json(newGame);
+  });
 };
