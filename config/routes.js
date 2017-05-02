@@ -5,12 +5,13 @@ const avatars = require('../app/controllers/avatars');
 const index = require('../app/controllers/index');
 const games = require('../app/controllers/games');
 const checkToken = require('.jwt').checkToken;
+const game = require('../app/controllers/game');
 // const jwt = require('./jwt');
 
 
 module.exports = function (app, passport, auth) { // eslint-disable-line
   // Create and Start Game
-  app.post('/api/games/:id/start', checkToken, games.start);
+  app.post('/api/games/:id/start', checkToken, game.start);
 
   // User Routes
   app.get('/signin', users.signin);
