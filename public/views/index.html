@@ -38,7 +38,7 @@ $(document).ready(function() {
                   <li><a href="#!/signin">Sign In</a></li>
                 </span>
                 <span ng-show="global.authenticated">
-                  <li id="start_game_action">Start Game</li>
+                  <li id="start_game_action" ng-click="startGame()">Start Game</li>
                   <li><a href="/signout"  ng-click="logout()">Sign Out</a></li>
                 </span>
               </ul>
