@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -16,7 +17,9 @@ dotenv.config();
 
 // Load configurations
 // if test env, load example file
-// const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+/*eslint-disable */
+const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+/*eslint-enable */
 const config = require('./config/config');
 const mongoose = require('mongoose');
 
