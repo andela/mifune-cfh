@@ -17,7 +17,6 @@ angular.module('mean.system')
           authenticated
         };
       },
-
       setCurrentGameId: (gameID) => {
         $window.localStorage.setItem('currentGameId', gameID);
       }

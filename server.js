@@ -20,7 +20,6 @@ dotenv.config();
 /*eslint-disable */
 // const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 /*eslint-enable */
-
 const config = require('./config/config');
 const mongoose = require('mongoose');
 

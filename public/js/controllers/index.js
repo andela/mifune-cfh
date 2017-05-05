@@ -1,14 +1,12 @@
-/*eslint-disable */
-/* global window, angular */
+/* global window, angular, swal, $ */
 angular.module('mean.system')
   .controller('IndexController', ['$scope', 'Global', '$location', '$window',
     'socket', 'game', 'AvatarService', 'RegionService', 'userService',
     function IndexController($scope, Global, $location, $window,
-      socket, game, AvatarService, RegionService, userService) {
+      socket, game, AvatarService, RegionService) {
       $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
-      const user =  $scope.global.user;
       $scope.gameType = 'guest';
       $scope.startGame = (gameType) => {
         swal({
@@ -22,22 +20,22 @@ angular.module('mean.system')
           closeOnConfirm: true,
           closeOnCancel: true
         },
-        (isConfirm) => {
-          if (isConfirm) {
+          (isConfirm) => {
+            if (isConfirm) {
               $scope.gameType = gameType;
-              displayMessage("#message-modal");
-          }
-        });
+              displayMessage('#message-modal');
+            }
+          });
       };
 
       $scope.gameOn = () => {
-        if ($scope.gameType === 'guest'){
+        if ($scope.gameType === 'guest') {
           game.joinGame();
           $location.path('/app');
         } else {
           $location.path('/app').search('custom');
         }
-      }
+      };
 
       $scope.showError = () => {
         if ($location.search().error) {
@@ -48,7 +46,7 @@ angular.module('mean.system')
 
       $scope.logout = () => {
         Global.removeTokenAndUser();
-        $location.path('/#')
+        $location.path('/#');
       };
 
       $scope.signIn = () => {
@@ -63,22 +61,21 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
-        $scope.countries = [];
+      $scope.countries = [];
 
-        RegionService.getCountries()
-          .then((data) => {
-            $scope.countries = data;
-          });
-
-        const displayMessage = (modalID) => {
-          $(modalID).modal();
-        };
-
-        $scope.$watch('selectedCountry', () =>{
-          if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
-
-             socket.emit('region', $scope.selectedCountry);
-          }
+      RegionService.getCountries()
+        .then((data) => {
+          $scope.countries = data;
         });
+
+      const displayMessage = (modalID) => {
+        $(modalID).modal();
+      };
+
+      $scope.$watch('selectedCountry', () => {
+        if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined) {
+          socket.emit('region', $scope.selectedCountry);
+        }
+      });
     }
   ]);
