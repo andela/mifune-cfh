@@ -1,13 +1,11 @@
 /**
  * Module dependencies.
  */
-// import express from 'express';
 const express = require('express');
 const flash = require('connect-flash');
 const helpers = require('view-helpers');
 const compression = require('compression');
 const favicon = require('serve-favicon');
-// const serveStatic = require('serve-static');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
@@ -16,11 +14,6 @@ const session = require('express-session');
 const config = require('./config');
 const mongoStore = require('connect-mongo')(session);
 const path = require('path');
-const auth = require('./middlewares/authorization');
-const routes = require('./routes');
-// flash = require('connect-flash'),
-// helpers = require('view-helpers'),
-// config = require('./config');
 
 module.exports = (app, passport, mongoose) => {
   app.set('showStackError', true);
@@ -49,7 +42,6 @@ module.exports = (app, passport, mongoose) => {
   // Enable jsonp
   app.enable('jsonp callback');
 
-  // app.configure(function() {
   // cookieParser should be above session
   app.use(cookieParser());
 
@@ -79,9 +71,7 @@ module.exports = (app, passport, mongoose) => {
   // use passport session
   app.use(passport.initialize());
   app.use(passport.session());
-  routes(app, passport, auth);
   // routes should be at the last
-  // app.use(app.router);
 
   // Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid,
   // you can do whatever you like, set properties, use instanceof etc.
@@ -90,7 +80,7 @@ module.exports = (app, passport, mongoose) => {
     if (err.message.indexOf('not found') > -1) return next();
 
     // Log it
-    // console.error(err.stack);
+    console.error(err.stack); // eslint-disable-line
 
     // Error page
     res.status(500).render('500', {
@@ -106,6 +96,4 @@ module.exports = (app, passport, mongoose) => {
     });
     next();
   });
-
-  // });
 };
