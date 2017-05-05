@@ -12,10 +12,10 @@ exports.start = (req, res) => {
   const newGame = new Game();
   // game_id should use _id
   // this is just a sample data, should be updated for real user
-  newGame.game_id = 'DEMO';
-  newGame.gameOwner_id = 'Owner';
-  newGame.game_players = ['obi', 'precious', 'chibujaz'];
-  newGame.game_winner = 'obi';
+  newGame.gameID = req.body.gameID;
+  newGame.gameOwnerId = req.body.gameOwnerId;
+  newGame.players = req.body.players;
+  newGame.gameWinner = req.body.gameWinner;
   newGame.date = new Date();
 
   newGame.save((err) => {

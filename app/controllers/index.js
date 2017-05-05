@@ -1,9 +1,3 @@
-/**
- * Module dependencies.
- */
-// const mongoose = require('mongoose');
-// const async = require('async');
-// const _ = require('underscore');
 
 /**
  * Redirect users to /#!/app (forcing Angular to reload the page)

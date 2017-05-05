@@ -7,10 +7,10 @@ const Schema = mongoose.Schema;
  * Game Schema
  */
 const Game = new Schema({
-  game_id: String,
-  gameOwner_id: String,
-  game_players: [],
-  game_winner: String,
+  gameID: String,
+  gameOwnerId: String,
+  players: [],
+  gameWinner: String,
   date: Date
 });
 
