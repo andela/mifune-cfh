@@ -7,7 +7,7 @@ const secret = process.env.HS256_SECRET;
 // Routing process of the middleware to verify a user token
 exports.checkToken = (req, res, next) => {
     // checking header or url parameters or post parameters for token
-  const token = req.headers.token;
+  const token = req.headers['x-xsrf-token'];
     // decoding the token
   if (token) {
       // verifies secret and checks

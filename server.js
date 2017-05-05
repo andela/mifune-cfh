@@ -7,8 +7,6 @@ const passport = require('passport');
 const logger = require('mean-logger');
 const io = require('socket.io');
 const dotenv = require('dotenv');
-const auth = require('./config/middlewares/authorization');
-const routes = require('./config/routes');
 
 dotenv.config();
 /**
@@ -53,9 +51,6 @@ app.use((req, res, next) => {
 
 // express settings
 require('./config/express')(app, passport, mongoose);
-
-// Bootstrap routes
-routes(app, passport, auth);
 
 // Start the app by listening on <port>
 const port = config.port;

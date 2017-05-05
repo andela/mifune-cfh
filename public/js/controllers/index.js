@@ -1,12 +1,13 @@
 /*eslint-disable */
 angular.module('mean.system')
   .controller('IndexController', ['$scope', '$cookies', 'Global', '$http', '$location',
-    'socket', 'game', 'AvatarService', 'userService', '$window',
+    'socket', 'game', 'AvatarService', 'userService',
     function IndexController($scope, $cookies, Global, $http, $location,
       socket, game, AvatarService, userService) {
       $scope.global = Global.isAuthenticated();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
+      const user =  $scope.global.user;
 
       $scope.startGame = () => {
         swal({
@@ -22,7 +23,14 @@ angular.module('mean.system')
         },
         (isConfirm) => {
           if (isConfirm) {
-            userService.startGame();
+            const data = {
+              gameOwnerId: user.id,
+              players: [user.id]
+            };
+            userService.startGame(data).then(({ data }) => {
+              Global.setCurrentGameId(data._id);
+              $location.path('/app');
+            });
           } else {
             swal('Cancelled', 'You are off! Shitty you!!!', 'error');
           }

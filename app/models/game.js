@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
  * Game Schema
  */
 const Game = new Schema({
-  gameID: String,
   gameOwnerId: String,
   players: [],
   gameWinner: String,

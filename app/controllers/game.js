@@ -12,7 +12,6 @@ exports.start = (req, res) => {
   const newGame = new Game();
   // game_id should use _id
   // this is just a sample data, should be updated for real user
-  newGame.gameID = req.body.gameID;
   newGame.gameOwnerId = req.body.gameOwnerId;
   newGame.players = req.body.players;
   newGame.gameWinner = req.body.gameWinner;

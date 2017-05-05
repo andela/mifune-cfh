@@ -14,6 +14,7 @@ const session = require('express-session');
 const config = require('./config');
 const mongoStore = require('connect-mongo')(session);
 const path = require('path');
+const auth = require('./middlewares/authorization');
 
 module.exports = (app, passport, mongoose) => {
   app.set('showStackError', true);
@@ -72,6 +73,10 @@ module.exports = (app, passport, mongoose) => {
   app.use(passport.initialize());
   app.use(passport.session());
   // routes should be at the last
+
+/*eslint-disable */
+  // Bootstrap routes
+  require('./routes')(app, passport, auth);
 
   // Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid,
   // you can do whatever you like, set properties, use instanceof etc.

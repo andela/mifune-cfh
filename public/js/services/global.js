@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('Global', ['$cookies', function Global($cookies) {
+  .factory('Global', ['$cookies', '$window', function Global($cookies, $window) {
     return {
       saveTokenAndUser: (token, user) => {
         $cookies.put('XSRF-TOKEN', token);
@@ -12,6 +12,9 @@ angular.module('mean.system')
           user,
           authenticated
         };
+      },
+      setCurrentGameId: (gameID) => {
+        $window.localStorage.setItem('currentGameId', gameID);
       }
     };
   }])
