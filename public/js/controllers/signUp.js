@@ -1,7 +1,7 @@
 /* global angular */
 angular.module('mean.system')
-  .controller('SignUpController', ['$scope', '$cookies', '$location', 'AvatarService', 'userService',
-    function SignUpController ($scope, $cookies, $location, AvatarService, userService) {
+  .controller('SignUpController', ['$scope', '$cookies', '$window', 'AvatarService', 'userService',
+    function SignUpController ($scope, $cookies, $window, AvatarService, userService) {
       $scope.avatars = [];
       $scope.errorMessage = '';
       $scope.hideErrorMessage = 'hidden';
@@ -22,9 +22,9 @@ angular.module('mean.system')
         userService.signUp(data)
           .then((response) => {
             $scope.hideErrorMessage = 'hidden';
-            $cookies.put('token', response.data.jwtToken);
+            $cookies.put('token', response.data.token);
             $cookies.putObject('user', response.data.user);
-            $location.path('/');
+            $window.location.href = '/';
           }, (error) => {
             // Show the error message area and tell the user the error that occured.
             $scope.hideErrorMessage = '';
