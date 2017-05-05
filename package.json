@@ -18,7 +18,7 @@
     "commit-hook": "rsync pre-commit .git/hooks && chmod 755 .git/hooks/pre-commit",
     "deploy": "node node_modules/bower/bin/bower install && node node_modules/forever/bin/forever -m 5 server.js",
     "start": "gulp",
-    "test:dev": "gulp test-dev",
+    "test:dev": "NODE_ENV=test gulp test-dev",
     "test": "gulp test"
   },
   "dependencies": {
