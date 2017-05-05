@@ -56,7 +56,7 @@ app.use((req, res, next) => {
 require('./config/express')(app, passport, mongoose);
 
 // Start the app by listening on <port>
-const port = config.port;
+const port = process.env.PORT;
 const server = app.listen(port);
 const ioObj = io.listen(server, { log: false });
 // game logic handled here
