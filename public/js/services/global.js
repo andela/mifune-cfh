@@ -1,10 +1,21 @@
 angular.module('mean.system')
-  .factory('Global', ['$cookies', function Global($cookies) {
-    const authenticated = $cookies.get('token') !== undefined;
-    const user = $cookies.get('user');
+  .factory('Global', ['$cookies', '$window', function Global($cookies, $window) {
     return {
-      user,
-      authenticated
+      saveTokenAndUser: (token, user) => {
+        $cookies.put('XSRF-TOKEN', token);
+        $cookies.putObject('user', user);
+      },
+      isAuthenticated: () => {
+        const authenticated = $cookies.get('XSRF-TOKEN') !== undefined;
+        const user = $cookies.get('user');
+        return {
+          user,
+          authenticated
+        };
+      },
+      setCurrentGameId: (gameID) => {
+        $window.localStorage.setItem('currentGameId', gameID);
+      }
     };
   }])
   .factory('AvatarService', ['$http', '$q', function AvatarService($http, $q) {

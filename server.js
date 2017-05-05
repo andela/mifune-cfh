@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -7,8 +8,6 @@ const passport = require('passport');
 const logger = require('mean-logger');
 const io = require('socket.io');
 const dotenv = require('dotenv');
-const auth = require('./config/middlewares/authorization');
-const routes = require('./config/routes');
 
 dotenv.config();
 /**
@@ -18,7 +17,9 @@ dotenv.config();
 
 // Load configurations
 // if test env, load example file
+/*eslint-disable */
 // const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+/*eslint-enable */
 const config = require('./config/config');
 const mongoose = require('mongoose');
 
@@ -54,11 +55,8 @@ app.use((req, res, next) => {
 // express settings
 require('./config/express')(app, passport, mongoose);
 
-// Bootstrap routes
-routes(app, passport, auth);
-
 // Start the app by listening on <port>
-const port = config.port;
+const port = process.env.PORT;
 const server = app.listen(port);
 const ioObj = io.listen(server, { log: false });
 // game logic handled here
