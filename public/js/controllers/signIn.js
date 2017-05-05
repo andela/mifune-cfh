@@ -1,8 +1,8 @@
 angular.module('mean.system')
-  .controller('SignInController', ['$scope', '$cookies', 'Global', '$location',
+  .controller('SignInController', ['$scope', '$cookies', 'Global',
     'AvatarService', '$window', 'userService',
     function SignInController($scope, $cookies, Global,
-      $location, AvatarService, $window, userService) {
+      AvatarService, $window, userService) {
       $scope.global = Global;
       $scope.avatars = [];
       $scope.errorMessage = '';
@@ -16,7 +16,7 @@ angular.module('mean.system')
         userService.signIn(user).then((response) => {
           $cookies.put('token', response.data.token);
           $cookies.putObject('user', response.data.user);
-          $location.path('/');
+          $window.location.href = '/';
         }, (err) => {
           $scope.errorMsg = 'An error occured!!! '.concat(err.error);
         });
