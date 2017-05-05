@@ -348,7 +348,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
         border-color: white;
         color: white;
         height: 100%;
-        width: 35.5em;
+        width: 97.5%;
         padding-left: 2%;
         padding-right: 2%;
     }
@@ -559,195 +559,6 @@ body{
                 position: relative;
                 top: 0;
                 left: 0;
-                // background: white;
-            }
-
-            #player-container{
-                height: 13.166667%;
-                position: relative;
-                padding-top: 4%;
-                padding-bottom: 4%;
-                min-height: 85px;
-                background: #7CE4E8;
-                margin: 0 0 6% 8%;
-                @include br;
-
-                @include mobile-only{
-                    min-height: 0;
-                    display: inline-block;
-                    margin: 0px .5%;
-                    width: 15.5%;
-                    height: 48px;
-                    padding-top: 1%;
-                    padding-bottom: 0;
-                }
-
-                #above-czar-container{
-                    height: 65%;
-                    width: 100%;
-
-                    @include mobile-only{
-                        height: 100%;
-                    }
-
-                    #avatar_ {
-                        height: 100%;
-                        width: 38%;
-                        float: left;
-                        position: relative;
-                        z-index: 999;
-
-                        #king {
-                           position: absolute;
-                           max-width: 80%;
-                           bottom: 20px;
-                           -webkit-transform: rotate(-18deg);
-                           left: -5px;
-
-                           @include tablet-portrait-only {
-                                max-width: 80%;
-                                bottom: 27px;
-                           }
-
-                           @include mobile-only {
-                                max-width: 80%;
-                                bottom: 31px;
-                                left: -3px;
-                           }
-                         }
-
-
-                        img {
-                            width: 100%;
-                            height: 140%;
-                            float: left;
-                            @include br;
-                            min-width: 40px;
-                            min-height: 40px;
-
-                            @include tablet-portrait-only{
-                                width: 100%;
-                                height: 100%;
-                                margin-left: 3px;
-                            }
-
-                            @include mobile-only{
-                                height: 69%;
-                                width: 100%;
-                                min-height: 0;
-                                min-width: 0;
-                                margin: 0;
-                            }
-                        }
-                    }
-                    #player-container-inner{
-                        float: left;
-                        position: relative;
-                        bottom: 8px;
-                        left: 2px;
-                        max-width: 62%;
-                        overflow: hidden;
-
-                        @include tablet-portrait-only{
-                            left: 3px;
-                        }
-
-                        @include mobile-only{
-                            bottom: 0;
-                            left: 0;
-                            height: 100%;
-                            width: 60%;
-                        }
-
-                        #player-name{
-
-                            h4{
-                                font-family: 'Lobster', cursive;
-                                margin-bottom: 0px;
-                            }
-                            h4{
-
-                                @include tablet-portrait-only{
-                                    font-size: 14px;
-                                }
-
-                                @include mobile-only{
-                                    font-family: 'Lobster', cursive;
-                                    font-size: 10px;
-                                    margin-top: 3px;
-                                    margin-bottom: 5px;
-                                }
-                            }
-                        }
-
-                        #player-score{
-                            float: left;
-
-                            h2{
-
-                                font-size: 26px;
-                                margin-top: 0;
-                                margin-bottom: 0;
-
-                                @include tablet-portrait-only{
-                                    font-size: 21px;
-                                }
-
-                                @include mobile-only{
-                                    font-size: 17px;
-                                    line-height: 40%;
-                                }
-                            }
-                        }
-
-                        #player-star{
-                        float: left;
-                        margin-top: 3px;
-                        margin-left: 10px;
-
-                        @include tablet-portrait-only{
-                            margin-top: 1px;
-                            margin-left: 5px;
-                        }
-
-                        @include mobile-only{
-                            display: none;
-                        }
-
-                            img {
-                                width: 22px;
-
-                                @include tablet-portrait-only{
-                                    width: 18px;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                #czar-container {
-                    position: absolute;
-                    bottom: 0;
-                    text-align: center;
-                    width: 100%;
-                    @include br-bottom;
-                    background: black;
-                    opacity:0.4;
-
-                    @include mobile-only{
-                        overflow: auto;
-                    }
-
-                    #the-czar{
-                        color: #fff;
-                        font-weight: bold;
-                        font-size: 20px;
-
-                        @include mobile-only{
-                            display: none;
-                        }
-                    }
-                }
             }
         }
 
@@ -797,6 +608,21 @@ body{
                         color: white;
                         margin-bottom: 1em;
                         margin-top: 1em;
+                    }
+
+                    #answers-container-outer {
+                        #info-container {
+                            background-color: #252525;
+                            border-radius: 5px;
+                            margin: 1em;
+                            padding: 1em;
+
+                            #inner-info {
+                                ul li {
+                                    list-style-type: circle;
+                                }
+                            }
+                        }
                     }
                 }
             }
