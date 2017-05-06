@@ -14,19 +14,20 @@
 </script>
 
 
-<div landing id="main-bod" ng-controller="IndexController">
-  <div class="nav cfh-nav">
+<div landing id="container-fluid" ng-controller="IndexController">
+  <div class="cfh-nav">
     <div class="cfh-nav-image" ng-show="global.authenticated">
       <img src="/img/cards.png" />
     </div>
-    <div class="lastNode">
+    <div>
       <span ng-show="global.authenticated">
             <a href="/signout" ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-          </span>
+            <a href="#!/team" class="cfh-team">Meet the team</a>
+        </span>
       <span ng-hide="global.authenticated">
             <a href="#!/signup"><button class="cfh-btn btn-pink">Sign Up</button></a>
             <a href="#!/signin"><button class="cfh-btn btn-white">Login</button></a>
-          </span>
+        </span>
     </div>
   </div>
   <div class="row cfh-explanation">
@@ -38,29 +39,29 @@
           while remaining as despicable and awkward as you naturally are.
         </h5>
         <div>
-          <a href="#!/signup"><button class="cfh-btn2 btn-pink">Donate</button></a>
-          <a href="#!/signin"><button class="cfh-btn2 btn-white">How to Play</button></a>
+          <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
+          <a href="#"><button class="cfh-btn2 btn-white">How to Play</button></a>
         </div>
       </div>
-
     </section>
     <section class="col-sm-6">
       <div ng-hide="global.authenticated">
         <figure>
-          <img src="img/cards_attack.png">
+          <img src="img/cards_attack.png" class="card-attack">
         </figure>
       </div>
-      <div ng-show"global.authenticated" class="start-game-button col-md-4 col-md-offset-4"><button>Start a Game</button>
       <div ng-show="global.authenticated">
-        <div class="flat-button col-md-4 col-md-offset-4"><button>Join a Game</button></div>
-        <div class="game-list">
+        <div class="row start-game-button"><button>Start a Game</button>
+        </div>
+        <div class="flat-button">Join a Game</div>
+        <div class="row game-list">
           <div class="avail-game">
-            <h3> Game Scrum</h3>
+            <h3 class="align-middle"> Game Scrum</h3>
             <button>Join</button>
-          </div>
           </div>
         </div>
       </div>
-    </section>
   </div>
+  </section>
+</div>
 </div>
