@@ -5,6 +5,10 @@ angular.module('mean.system')
         $cookies.put('XSRF-TOKEN', token);
         $cookies.putObject('user', user);
       },
+      removeTokenAndUser: () => {
+        $cookies.remove('XSRF-TOKEN');
+        $cookies.remove('user');
+      },
       isAuthenticated: () => {
         const authenticated = $cookies.get('XSRF-TOKEN') !== undefined;
         const user = $cookies.get('user');
