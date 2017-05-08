@@ -61,7 +61,7 @@
       display: inline-block;
       content: '.'; }
 
-html, body, .main-container, .cont, #first-section, #inner-container {
+html, .main-container, .cont, #first-section, #inner-container {
   height: 100%; }
 
 html {
