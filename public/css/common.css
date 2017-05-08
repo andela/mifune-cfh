@@ -872,3 +872,9 @@ body {
   text-transform: none !important; }
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
+
+.startGame {
+  height: 300px; }
+
+#time {
+  position: relative; }
