@@ -1,8 +1,8 @@
 /*eslint-disable */
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', '$cookies', 'Global', '$http', '$location',
+  .controller('IndexController', ['$scope', 'Global', '$location',
     'socket', 'game', 'AvatarService', 'userService',
-    function IndexController($scope, $cookies, Global, $http, $location,
+    function IndexController($cookies, Global, $location,
       socket, game, AvatarService, userService) {
       $scope.global = Global.isAuthenticated();
       $scope.errorMsg = '';
@@ -32,7 +32,7 @@ angular.module('mean.system')
               $location.path('/app');
             });
           } else {
-            swal('Cancelled', 'You are off! Shitty you!!!', 'error');
+            swal('Cancelled');
           }
         });
       };
