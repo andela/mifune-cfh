@@ -50,8 +50,8 @@ angular.module('mean.system')
       };
 
       $scope.logout = () => {
-        $cookies.remove('token');
-        $cookies.remove('user');
+        Global.removeTokenAndUser();
+        $location.path('/')
       };
 
       $scope.avatars = [];
