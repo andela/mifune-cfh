@@ -18,10 +18,9 @@ exports.render = (req, res) => {
   res.render('index', {
     user: req.user ? JSON.stringify(req.user) : 'null'
   });
-
 };
 
-exports.gameTour = function(req, res) {
+exports.gameTour = (req, res) => {
   if (Object.keys(req.query)[0] === 'custom') {
     res.redirect('/#!/gametour');
   } else {

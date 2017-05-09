@@ -1,5 +1,5 @@
 /* global window, angular */
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives','angular-intro'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives', 'angular-intro'])
   .config(['$routeProvider',
     function RouteConfig($routeProvider) {
       $routeProvider
@@ -27,8 +27,8 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ngRoute', 'm
         templateUrl: '/views/choose-avatar.html'
       })
       .when('/gametour', {
-            templateUrl: '/views/onboard.html'
-          })
+        templateUrl: '/views/onboard.html'
+      })
       .otherwise({
         redirectTo: '/'
       });
