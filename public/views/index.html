@@ -16,17 +16,18 @@
 
 <div landing id="container-fluid" >
   <div class="cfh-nav" ng-controller="IndexController">
-    <div class="cfh-nav-image" ng-hide="showOptions">
+    <div class="cfh-nav-image" >
       <img src="/img/cards.png" />
     </div>
     <div>
       <span ng-hide="showOptions">
             <a ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-            <a href="#team" class="cfh-team">Meet the team</a>
+            <a href="#!/team" class="cfh-team">Meet the team</a>
         </span>
       <span ng-show="showOptions">
             <a ng-click="signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
             <a ng-click="signIn()"><button class="cfh-btn btn-white">Login</button></a>
+             <a href="#!/team" class="cfh-team">Meet the team</a>
         </span>
     </div>
   </div>
@@ -67,63 +68,5 @@
   </div>
   </section>
 </div>
-<div class="row cfh-team-row" id="team" ng-hide="showOptions">
-  <div class="row txt">
-        <h1>Team Mifune</h1>
-        </div>
-        <div class="row">
-        <div class="col-md-8">
-        <ul id="categories" class="clr">
   
-  <li class="pusher"></li>
-  <li>
-      <div>
-        <img src="/img/folusho.jpeg" alt=""/>
-    </div>
-  </li>
-  <li>
-      <div>
-        <img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt=""/>
-        <h1>This is a title</h1>
-    </div>
-  </li><li>
-      <div>
-        <img src="https://farm4.staticflickr.com/3766/12953056854_b8cdf14f21.jpg" alt=""/>
-    </div>
-  </li>
-  <li>
-      <div>
-        <img src="/img/Hope.jpeg" alt=""/>
-        <h1>This is a title</h1>
-    </div>
-  </li>
-  <li>
-      <div>
-        <img src="/img/jude.jpeg" alt=""/>
-        <h1>This is a title</h1>
-    </div>
-  </li>
-    <li class="pusher"></li>
-  <li>
-      <div>
-        <img src="https://farm7.staticflickr.com/6217/6216951796_e50778255c.jpg" alt=""/>
-        <h1>This is a title</h1>
-    </div>
-  </li>
-  
-  <li>
-      <div>
-        <img src="/img/Obinna.jpeg" alt=""/>
-        <h1>This is a title</h1>
-    </div>
-  </li>
-</ul>
-</div>
- <div class="col-sm-4 team-text">
-        <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to <a href="/donate"><b>give</b></a>. Have
-          fun while playing.
-        </h5>
-    </div>
-  </div>
-  </div>
   

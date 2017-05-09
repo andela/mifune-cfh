@@ -1240,11 +1240,13 @@
  .btn-pink {
    background-color: #ff0e52;
    color: white;
+   margin:3%;
  }
 
  .btn-white {
    background-color: white;
    color: #ff0e52;
+   margin:3%
  }
  /*Cfh Nav*/
 
@@ -1265,8 +1267,6 @@
 
  .cfh-team-row .txt {
    color: black;
-   width: 85%;
-   margin: 0 auto;
  }
 
  .cfh-team-row .txt p {
@@ -1391,9 +1391,8 @@
  }
 
  .cfh-team {
-   border-bottom: 1px solid white;
+   border-bottom: 0 solid white;
    display: inline;
-   padding: 10px;
    text-decoration: none;
    float: right;
    margin-bottom: 0;
@@ -1409,10 +1408,13 @@
    border-radius: 8px
  }
  .team-text{
-     margin-top: 18%;
+     margin-top: 7%;
 }
 .team-text p {
     font-size: 22px;
+}
+.team-text h5 {
+  line-height: 8vh;
 }
 
  .team-container {
@@ -1426,7 +1428,6 @@
 #categories{
   overflow:hidden;
   width:90%;
-  margin:5% auto;
 }
 .clr:after{
   content:"";
@@ -1437,7 +1438,7 @@
   position:relative;
   list-style-type:none;
   width:27.857143%;
-  padding-bottom: 32.16760145166612%;
+  padding-bottom: 35.167601%;
   float:left;
   overflow:hidden;
   visibility:hidden;
@@ -1490,22 +1491,22 @@
 }
 
 #categories div h1, #categories div p{
-  width:90%;
-  padding:0 5%;
+  width:100%;
+  padding:0 3%;
   background-color:#ff0e52; background-color: #ff0e52(0, 128, 128, 0.8);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Tahoma', sans-serif;
   
-  -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
+  /*-webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
-  transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
+  transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;*/
 }
 #categories li h1{
   bottom:110%;
   font-style:italic;
   font-weight:normal;
   font-size:1.5em;
-  padding-top:100%;
-  padding-bottom:100%;
+  padding-top:50%;
+  padding-bottom:50%;
 }
 #categories li h1:after{
 	content:'';

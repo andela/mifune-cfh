@@ -98,7 +98,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
   // Home route
   app.get('/play', index.play);
-  app.get('/team', index.render);
+  //app.get('/team', index.render);
   app.get('/', index.render);
 };
 
