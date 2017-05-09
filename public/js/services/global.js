@@ -17,10 +17,10 @@ angular.module('mean.system')
           authenticated
         };
       },
-      deleteTokenAndUser: () => {
-        $cookies.remove('XSRF-TOKEN');
-        $cookies.remove('user');
-      },
+      // deleteTokenAndUser: () => {
+      //   $cookies.remove('XSRF-TOKEN');
+      //   $cookies.remove('user');
+      // },
 
       setCurrentGameId: (gameID) => {
         $window.localStorage.setItem('currentGameId', gameID);

@@ -51,7 +51,7 @@ angular.module('mean.system')
 
       $scope.logout = () => {
         Global.removeTokenAndUser();
-        $location.path('/')
+        $location.path('/#')
       };
       
       $scope.signIn = () => {
