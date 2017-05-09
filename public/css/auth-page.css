@@ -3,7 +3,6 @@
   min-height: 20px;
   margin-bottom: 7%;
   font-weight: 400;
-  margin-left: 35%;
 }
 .wrapperInfo{
 	position:absolute;	z-index:1;
@@ -150,6 +149,7 @@ li {
   display: inline-block;
   vertical-align: middle;
   width:100%;
+  display:flex;
 }
 .fb_override {
   display: inline-block;

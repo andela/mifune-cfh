@@ -7,6 +7,10 @@ angular.module('mean.system')
       $scope.errorMessage = '';
       $scope.hideErrorMessage = 'hidden';
 
+      $scope.signUp = () => {
+        $location.path('/signup');
+      };
+
       $scope.login = () => {
         const data = {
           email: $scope.email,
