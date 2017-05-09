@@ -8,7 +8,6 @@ angular.module('mean.system')
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       const user =  $scope.global.user;
-
       $scope.startGame = () => {
         swal({
           title: 'Start a new Game?',
@@ -51,7 +50,14 @@ angular.module('mean.system')
 
       $scope.logout = () => {
         Global.removeTokenAndUser();
-        $location.path('/')
+        $location.path('/#')
+      };
+      
+      $scope.signIn = () => {
+        $location.path('/signin');
+      };
+      $scope.signUp = () => {
+        $location.path('/signup');
       };
 
       $scope.avatars = [];
