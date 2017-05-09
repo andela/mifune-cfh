@@ -93,7 +93,7 @@ exports.signup = (req, res) => {
  * Logout
  */
 exports.signout = (req, res) => {
-  req.logout();
+  // req.logout();
   res.redirect('/');
 };
 
@@ -123,7 +123,7 @@ exports.checkAvatar = (req, res) => {
     });
   } else {
     // If user doesn't even exist, redirect to /
-    res.redirect('/');
+    res.redirect('/#!/app');
   }
 };
 
