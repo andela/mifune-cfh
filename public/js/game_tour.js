@@ -37,8 +37,7 @@ angular.module('mean.system').controller('GameTourController', ['$scope', '$wind
     },
     {
       element: '#cards',
-      intro: 'You also have different answer cards to pick what you deem the most appropriate answer to the question.',
-      position: 'top'
+      intro: 'You also have different answer cards to pick what you deem the most appropriate answer to the question.'
     },
     {
       element: '#inner-timer-container',
@@ -50,13 +49,11 @@ angular.module('mean.system').controller('GameTourController', ['$scope', '$wind
     },
     {
       element: '#inner-text-container',
-      intro: 'After a game ends, you can join a new a game or return to Lobby',
-      position: 'top'
+      intro: 'After a game ends, you can join a new a game or return to Lobby'
     },
     {
       element: '#charity-widget-container',
-      intro: 'Click here to donate to charity at the end of the game.',
-      position: 'top'
+      intro: 'Click here to donate to charity at the end of the game.'
     },
     {
       element: '#abandon-game-button',
@@ -64,8 +61,7 @@ angular.module('mean.system').controller('GameTourController', ['$scope', '$wind
     },
     {
       element: '#home',
-      intro: 'Now you the boss!!! Talk is cheap, start a new game now!!!',
-      position: 'bottom'
+      intro: 'Now you the boss!!! Talk is cheap, start a new game now!!!'
     }
 
     ]
