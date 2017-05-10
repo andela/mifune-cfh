@@ -68,6 +68,8 @@ angular.module('mean.system')
       return false;
     };
 
+    $scope.getPlayerPosition = obj => obj.color + 1;
+
     $scope.showFirst = card => game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
     $scope.showSecond = card =>
