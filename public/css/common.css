@@ -46,6 +46,7 @@
     color: white;
     width: 97.5%;
     height: 100%;
+    width: 97.5%;
     padding-left: 2%;
     padding-right: 2%;
     background-color: inherit;
@@ -387,10 +388,12 @@ body {
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #questions-container-outer {
         border-bottom: 1px solid #ff1a56; }
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #start-game-btn {
+        background-color: #ff1a56;
         color: white;
         margin-bottom: 1em;
         margin-top: 1em; }
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container {
+        background-color: #252525;
         border-radius: 5px;
         margin: 1em;
         padding: 1em; }
