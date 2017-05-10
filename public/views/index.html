@@ -14,8 +14,8 @@
 </script>
 
 
-<div landing id="container-fluid" >
-  <div class="cfh-nav" ng-controller="IndexController">
+<div id="container-fluid" ng-controller="IndexController">
+  <div class="cfh-nav">
     <div class="cfh-nav-image" >
       <img src="/img/cards.png" />
     </div>
@@ -53,8 +53,8 @@
       </div>
       <div ng-hide="showOptions">
         <div class="row start-game-button">
-        <button>Play as Guest</button>
-        <button>Play With Friends</button>
+        <button ng-click="startGame('guest')">Play as Guest</button>
+        <button ng-click="startGame('user')">Play With Friends</button>
         <div>
         </div>
         <div class="flat-button">Join a Game</div>
