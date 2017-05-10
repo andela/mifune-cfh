@@ -41,6 +41,7 @@
     "jasmine": "^2.5.3",
     "jsonwebtoken": "^7.3.0",
     "mean-logger": "~0.0.1",
+    "mongodb": "^2.2.26",
     "mongoose": "~4.6.5",
     "passport": "~0.1.17",
     "passport-facebook": "~2.0.0",
