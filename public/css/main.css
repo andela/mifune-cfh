@@ -62,6 +62,7 @@
       content: '.'; }
 
 html, body, .main-container, .cont, #first-section, #inner-container {
+  background-color: #2d2d2d;
   height: 100%; }
 html {
   background-color: #2d2d2d;

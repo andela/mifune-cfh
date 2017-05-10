@@ -1,7 +1,7 @@
 /* global angular */
 angular.module('mean.system')
   .controller('SignUpController', ['$scope', 'Global', '$location', 'AvatarService', 'userService',
-    function SignUpController ($scope, Global, $location, AvatarService, userService) {
+    function SignUpController($scope, Global, $location, AvatarService, userService) {
       $scope.avatars = [];
       $scope.errorMessage = '';
       $scope.hideErrorMessage = 'hidden';
@@ -10,6 +10,14 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+
+      $scope.signIn = () => {
+        $location.path('/signin');
+      };
+
+      $scope.signUp = () => {
+        $location.path('/signup');
+      };
 
       $scope.signUp = () => {
         const data = {
@@ -20,7 +28,12 @@ angular.module('mean.system')
         };
 
         userService.signUp(data)
-          .then(({ data: { token, user } }) => {
+          .then(({
+            data: {
+              token,
+              user
+            }
+          }) => {
             $scope.hideErrorMessage = 'hidden';
             Global.saveTokenAndUser(token, user);
             $location.path('/');
@@ -40,4 +53,5 @@ angular.module('mean.system')
       $scope.setAvatarId = (id) => {
         $scope.avatarId = id;
       };
-    }]);
+    }
+  ]);
