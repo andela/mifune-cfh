@@ -8,7 +8,7 @@ angular.module('mean.system')
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       const user =  $scope.global.user;
-      $scope.startGame = () => {
+      $scope.startGame = (gameType) => {
         swal({
           title: 'Start a new Game?',
           text: 'You want to start the game now?',
@@ -22,16 +22,13 @@ angular.module('mean.system')
         },
         (isConfirm) => {
           if (isConfirm) {
-            const data = {
-              gameOwnerId: user.id,
-              players: [user.id]
-            };
-            userService.startGame(data).then(({ data }) => {
-              Global.setCurrentGameId(data._id);
+            if (gameType === 'guest'){
               $location.path('/app');
-            });
+            }else{
+              $location.path('/app').search('custom');
+            }         
           } else {
-            swal('Cancelled', 'You are off! Shitty you!!!', 'error');
+            swal('Cancelled', 'Game was cancelled', 'error');
           }
         });
       };
