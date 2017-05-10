@@ -1,4 +1,4 @@
-<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}" class="text-center player-container">
+<div id="player-container" ng-repeat="player in game.players" class="text-center player-container dark-grey-bg">
   <div id ="above-czar-container">
     <div id="avatar_">
       <span ng-show="isPremium($index)">
@@ -7,14 +7,15 @@
       <img ng-src="{{player.avatar}}" class="img-responsive center-block"/>
     </div>
     <div id="player-container-inner">
-      <div id="player-name"><h4>{{player.username | upperFirstLetter}}</h4></div>
-      <div id="player-score"><h2>{{player.points}}/{{game.pointLimit}}</h2></div>
-      <div ng-show="isPlayer($index)" id="player-star">
-        <img src="../img/11.png"/>
+      <div id="player-name">
+        <h4>{{player.username | upperFirstLetter}}</h4>
+      </div>
+      <div id="player-score">
+        <h2>{{getPlayerPosition(player)}}/{{game.pointLimit}}</h2>
       </div>
     </div>
   </div>
-  <div id="czar-container" ng-show="currentCzar($index)">
+  <div id="czar-container" ng-show="currentCzar($index)" class="pink-bg">
     <span id='the-czar'>CZAR</span>
   </div>
 </div>
