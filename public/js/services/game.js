@@ -62,7 +62,6 @@ angular.module('mean.system')
     socket.on('onlineUsers', (data) => {
       game.onlineUsers = data;
     });
-
     socket.on('prepareGame', (data) => {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;
@@ -76,10 +75,8 @@ angular.module('mean.system')
       if (game.gameID !== data.gameID) {
         game.gameID = data.gameID;
       }
-
       game.joinOverride = false;
       clearTimeout(game.joinOverrideTimeout);
-
 
     // Cache the index of the player in the players array
       for (let i = 0; i < data.players.length; i += 1) {

@@ -63,6 +63,7 @@
     "import/resolver": "node"
   },
   "globals": {
-    "angular": true
+    "angular": true,
+    "inject": true
   }
 }
