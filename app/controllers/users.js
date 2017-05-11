@@ -11,7 +11,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const secret = process.env.HS256_SECRET;
 const expiryDate = 86400;
-
 /**
  * Auth callback
  */
@@ -68,6 +67,7 @@ exports.login = (req, res) => {
 /**
  * Show login form
  */
+
 exports.signin = (req, res) => {
   if (!req.user) {
     return res.json({
@@ -81,6 +81,7 @@ exports.signin = (req, res) => {
 /**
  * Show sign up form
  */
+
 exports.signup = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signup');
@@ -92,6 +93,7 @@ exports.signup = (req, res) => {
 /**
  * Logout
  */
+
 exports.signout = (req, res) => {
   // req.logout();
   res.redirect('/');
@@ -100,6 +102,7 @@ exports.signout = (req, res) => {
 /**
  * Session
  */
+
 exports.session = (req, res) => {
   res.redirect('/');
 };
@@ -130,6 +133,7 @@ exports.checkAvatar = (req, res) => {
 /**
  * Create user
  */
+
 exports.create = (req, res, next) => {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
@@ -215,6 +219,7 @@ exports.createUserApi = (req, res) => {
  * @params res: a response object.
  * Assign avatar to user
  */
+
 exports.avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
@@ -246,7 +251,6 @@ exports.addDonation = (req, res) => {
           }
         }
         if (!duplicate) {
-          console.log('Validated donation');
           user.donations.push(req.body);
           user.premium = 1;
           user.save();
@@ -260,6 +264,7 @@ exports.addDonation = (req, res) => {
 /**
  *  Show profile
  */
+
 exports.show = (req, res) => {
   const user = req.profile;
 
@@ -272,6 +277,7 @@ exports.show = (req, res) => {
 /**
  * Send User
  */
+
 exports.me = (req, res) => {
   res.jsonp(req.user || null);
 };
@@ -279,6 +285,7 @@ exports.me = (req, res) => {
 /**
  * Find user by id
  */
+
 exports.user = (req, res, next, id) => {
   User.findOne({
     _id: id
@@ -290,3 +297,24 @@ exports.user = (req, res, next, id) => {
     next();
   });
 };
+
+exports.user = (req, res, next, id) => {
+  User
+    .findOne({
+      _id: id
+    })
+    .exec((err, user) => {
+      if (err) return next(err);
+      if (!user) return next(new Error(`Failed to load User ${id}`));
+      req.profile = user;
+      next();
+    });
+};
+
+exports.retrieveUsers = (req, res) => {
+  User.find().exec((err, data) => {
+    if (err) return res.status(400).json({ success: false, message: 'An error occurred' });
+    return res.status(200).json({ success: true, data });
+  });
+};
+
