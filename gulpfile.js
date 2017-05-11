@@ -8,6 +8,7 @@ const bower = require('gulp-bower');
 const istanbul = require('gulp-istanbul');
 const coveralls = require('gulp-coveralls');
 const Server = require('karma').Server;
+
 require('dotenv').config();
 
 gulp.task('nodemon', () => {
@@ -51,7 +52,6 @@ gulp.task('test-backend', ['pre-test'], () =>
     // Enforce a coverage of at least 90%
     // .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
     .once('error', (err) => {
-      // eslint-disable-line
       console.log(err);
     })
 );
