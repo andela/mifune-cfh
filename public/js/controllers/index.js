@@ -23,19 +23,13 @@ angular.module('mean.system')
         (isConfirm) => {
           if (isConfirm) {
             if (gameType === 'guest'){
+              game.joinGame();
               $location.path('/app');
             }else{
               $location.path('/app').search('custom');
-            }         
-          } else {
-            swal('Cancelled', 'Game was cancelled', 'error');
+            }
           }
         });
-      };
-
-      $scope.playAsGuest = () => {
-        game.joinGame();
-        $location.path('/app');
       };
 
       $scope.showError = () => {
