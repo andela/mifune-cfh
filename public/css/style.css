@@ -1546,6 +1546,7 @@ fieldset legend {
     background: #ff0e52;
     color: #fff;
     padding: 5px 10px ;
+    width: 80%;
     font-size: 32px;
     border-radius: 5px;
     box-shadow: 0 0 0 2px #ddd;
@@ -1561,4 +1562,7 @@ fieldset legend {
 }
 .btn-join{
   margin-top: -10px;
+}
+.gamejoinwrapper{
+  margin-bottom: 30px;
 }
