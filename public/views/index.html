@@ -19,16 +19,15 @@
     <div class="cfh-nav-image" >
       <img src="/img/cards.png" />
     </div>
-    <div>
+    <div class="cfh-nav-right">
       <span ng-hide="showOptions">
             <a ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-            <a href="#!/team" class="cfh-team">Meet the team</a>
         </span>
       <span ng-show="showOptions">
             <a ng-click="signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
             <a ng-click="signIn()"><button class="cfh-btn btn-white">Login</button></a>
-             <a href="#!/team" class="cfh-team">Meet the team</a>
-        </span>
+      </span>
+      <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
     </div>
   </div>
   <div class="row cfh-explanation">
@@ -42,6 +41,8 @@
         <div>
           <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
           <a href="#!/gametour"><button class="cfh-btn2 btn-white">How to Play</button></a>
+          <a><button ng-click="startGame('guest')" class="cfh-btn2 btn-pink">Play as Guest</button></a>
+          <a><button ng-click="startGame('player')" class="cfh-btn2 btn-white">Play with Friends</button></a>
         </div>
       </div>
     </section>
@@ -52,19 +53,82 @@
         </figure>
       </div>
       <div ng-hide="showOptions">
-        <div class="row start-game-button">
-        <button>Play as Guest</button>
-        <button>Play With Friends</button>
-        <div>
-        </div>
-        <div class="flat-button">Join a Game</div>
-        <div class="row game-list">
-          <div class="avail-game">
-            <h3 class="align-middle"> Game Scrum</h3>
-            <button>Join</button>
-          </div>
-        </div>
+
+        <section style="margin: 10px;">
+        <fieldset style="min-height:100px;">
+        <legend><b> My Statistics </b> </legend>
+        <label> <br/> </label>
+        <label> <br/> </label>
+        </fieldset>
+        </section>
+
+      </div>
       </div>
   </div>
   </section>
+  <div id="team">
+    <div class="row cfh-team-row">
+        <div class="col-md-7">
+            <ul id="categories" class="clr">
+
+                <li class="pusher"></li>
+                <li>
+                    <div>
+                        <img src="/img/folusho.jpeg" alt="" />
+                        <h1>Folusho Oladipo</h1>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="/img/Precious.png" alt="" />
+                        <h1>Precious Ijege</h1>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="img/chibujax.jpg" alt="" />
+                        <h1>Uchendu Chibueze</h1>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="/img/Hope.jpg" alt="" />
+                        <h1>Hope Ngerebara</h1>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="/img/jude.jpeg" alt="" />
+                        <h1>Etanuwoma Jude </h1>
+                    </div>
+                </li>
+                <li class="pusher"></li>
+                <li>
+                    <div>
+                        <img src="img/ifiok.jpeg" alt="" />
+                        <h1>Eyo Ifiok</h1>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <img src="/img/Obinna.jpeg" alt="" />
+                        <h1>Nnenanya Obinna </h1>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4 team-text">
+            <div class="row txt">
+                <h1>Team Mifune</h1>
+            </div>
+            <div class="row">
+                <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
+                    <a href="/donate"><b>give</b></a>. Have fun while playing.
+                </h5>
+                <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
