@@ -1566,3 +1566,6 @@ fieldset legend {
 .gamejoinwrapper{
   margin-bottom: 30px;
 }
+.top-section{
+  height: 100vh;
+}
