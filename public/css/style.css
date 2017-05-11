@@ -1205,7 +1205,6 @@
  .cfh-btn {
    border: none;
    display: inline;
-   padding: 10px 20px;
    text-decoration: none;
    float: right;
    margin-bottom: 0;
@@ -1215,9 +1214,7 @@
    font-size: 14px;
    text-align: center;
    line-height: 120%;
-   margin: 34px 20px 34px 34px;
-   margin-top: 50px;
-   border-radius: 0px
+   margin: 15px 2px 1px 7px;
  }
 
  .cfh-btn2 {
@@ -1227,7 +1224,6 @@
    text-decoration: none;
    float: left;
    margin-right: 10px;
-   width: 150px;
    height: 38px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
    font-size: 14px;
@@ -1240,23 +1236,29 @@
  .btn-pink {
    background-color: #ff0e52;
    color: white;
-   margin:3%;
  }
 
  .btn-white {
    background-color: white;
    color: #ff0e52;
-   margin:3%
+   margin:1tem;
  }
  /*Cfh Nav*/
 
  .cfh-nav {
-   height: 50px;
-   margin: 30px 30px 30px 50px;
+  display: flex;
+  alight-items: center;
+  justify-content: space-between;
+  align-content: center;
+  padding: 2rem;
  }
 
  .cfh-nav-image {
    float: left;
+ }
+
+.cfh-nav-right {
+   width:100%;
  }
  /* Cfh Team*/
 
@@ -1390,7 +1392,7 @@
    top: 47%;
  }
 
- .cfh-team {
+ /*.cfh-team {
    border-bottom: 0 solid white;
    display: inline;
    text-decoration: none;
@@ -1406,7 +1408,7 @@
    margin: 34px 20px 34px 34px;
    margin-top: 50px;
    border-radius: 8px
- }
+ }*/
  .team-text{
      margin-top: 7%;
 }
@@ -1428,6 +1430,7 @@
 #categories{
   overflow:hidden;
   width:90%;
+  margin:3%;
 }
 .clr:after{
   content:"";
@@ -1527,3 +1530,42 @@
   padding-top:10%;
 }
 
+.homeLink{
+  font-size: 2rem;
+}
+
+fieldset {
+    font-family: sans-serif;
+    border: 2px solid #ff0e52;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+fieldset legend {
+    background: #ff0e52;
+    color: #fff;
+    padding: 5px 10px ;
+    width: 80%;
+    font-size: 32px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px #ddd;
+    margin-left: 20px;
+}
+.gamename{
+  width: 45%;
+  float: left;
+}
+.gamejoin{
+  width: 45%;
+  float: right;
+}
+.btn-join{
+  margin-top: -10px;
+}
+.gamejoinwrapper{
+  margin-bottom: 30px;
+}
+.top-section{
+  height: 100vh;
+}

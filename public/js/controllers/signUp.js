@@ -15,6 +15,10 @@ angular.module('mean.system')
         $location.path('/signin');
       };
 
+      $scope.home = () => {
+        $location.path('/');
+      };
+
       $scope.signUp = () => {
         $location.path('/signup');
       };
