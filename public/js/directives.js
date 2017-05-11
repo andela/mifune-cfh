@@ -50,8 +50,6 @@ angular.module('mean.directives', [])
             } else {
               curQ.text += ` ${startStyle}${scope.game.table[scope.game.winningCard].card[0].text}${endStyle}`;
             }
-          } else {
-            curQ.text += ` ${startStyle}${scope.game.table[scope.game.winningCard].card[0].text}${endStyle}`;
           }
         });
       }
