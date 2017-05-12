@@ -97,13 +97,6 @@ angular.module('mean.system')
       } else if (newState && data.state === 'winner has been chosen') {
         game.time = game.timeLimits.stateResults - 1;
         timeSetViaUpdate = true;
-        const playedGameData = {
-          gameID: data.gameID,
-          players: data.players,
-          winningCard: data.winningCard,
-          gameWinner: data.gameWinner,
-        };
-        userService.startGame(playedGameData);
       }
 
     // Set these properties on each update
