@@ -9,7 +9,7 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
-module.exports = function (io) {
+module.exports = (io) => {
   // let game;
   const allGames = {};
   const allPlayers = {};
@@ -32,6 +32,10 @@ module.exports = function (io) {
     socket.on('loggedOut', () => {
       onlineUsers = removeUser(socket.id);
       socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('invite', (data) => {
+      socket.broadcast.to(data.to).emit('newInvite', data.gameID);
     });
 
     socket.on('pickCards', (data) => {

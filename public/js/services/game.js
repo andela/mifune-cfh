@@ -62,6 +62,7 @@ angular.module('mean.system')
     socket.on('onlineUsers', (data) => {
       game.onlineUsers = data;
     });
+
     socket.on('prepareGame', (data) => {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;

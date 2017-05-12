@@ -1,8 +1,9 @@
 /*eslint-disable */
+/* global window, angular */
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location',
+  .controller('IndexController', ['$scope', 'Global', '$location', '$window',
     'socket', 'game', 'AvatarService', 'userService',
-    function IndexController($scope, Global, $location,
+    function IndexController($scope, Global, $location, $window,
       socket, game, AvatarService, userService) {
       $scope.global = Global.isAuthenticated();
       $scope.errorMsg = '';
@@ -56,5 +57,11 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+
+      socket.on('newInvite', (data) => {
+        const { host, hash } = $window.location;
+        const inviteLink = `${host}/${hash}app?game=${data}`
+        console.log(inviteLink);
+      })
     }
   ]);

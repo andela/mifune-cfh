@@ -12,7 +12,7 @@ ng-controller="InviteController">
         <ul>
           <li ng-repeat="user in searchResult">
             {{ user.name.toUpperCase() }} 
-            <button type="button" class="btn btn-primary" ng-disabled="user.disabled">Send Invite
+            <button type="button" class="btn btn-primary" ng-disabled="user.disabled" ng-click="inviteUsers(user.socketID)">Send Invite
             </button>
           </li>
         </ul>

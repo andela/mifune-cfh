@@ -18,6 +18,7 @@
   function InviteController ($scope, $location, game, userService, Global, socket) {
     $scope.searchResult = [];
     $scope.user = JSON.parse(Global.isAuthenticated().user);
+    $scope.allInvitees = [];
 
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players' && game.players.length < game.playerMinLimit) {
@@ -62,7 +63,19 @@
     });
 
     $scope.inviteUsers = (id) => {
-      socket.to(id).emit('invite', game.gameID);
+      if ($scope.allInvitees.length < 11) {
+        socket.emit('invite', { gameID: game.gameID, to: id });
+        $scope.allInvitees.push({ gameID: game.gameID });
+      } else {
+        swal({
+          title: 'Maximum number of Invites',
+          text: 'Sorry!, You can only invite a maximum of 11 players to this game',
+          type: 'warning',
+          confirmButtonText: 'ok',
+          cancelButtonText: 'No, Am off this shit',
+          closeOnConfirm: true,
+        });
+      }
     };
   }
 }());
