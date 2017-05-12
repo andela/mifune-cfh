@@ -1,6 +1,6 @@
 /* global io */
 angular.module('mean.system')
-  .factory('socket', ['$rootScope', ($rootScope) => {
+  .factory('socket', ['$rootScope', function socketService ($rootScope) {
     const socket = io.connect();
     return {
       on (eventName, callback) {
@@ -18,7 +18,7 @@ angular.module('mean.system')
         });
         $rootScope.safeApply(() => {
           if (callback) {
-            callback.apply(socket, args);    // eslint-disable-line
+            callback.apply(socket, args);    // eslint-disable-line 
           }
         });
       },
