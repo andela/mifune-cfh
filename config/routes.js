@@ -17,6 +17,11 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.get('/chooseavatars', users.checkAvatar);
   app.get('/signout', users.signout);
 
+  app.post('/api/selected-region', (req) => {
+    const gameRegion = req.body.regionId;
+    questions.setRegion(gameRegion);
+  });
+
   // Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);

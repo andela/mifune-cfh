@@ -13,7 +13,7 @@
       <div id="loading-container">
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+      <div id="start-game-container" ng-click="startGame(); selectCountry('58f4de8ef08434413b6aec50');" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
         <div id='start-game-button'>
           Start Game</br>with {{game.players.length}} players
         </div>
@@ -31,6 +31,27 @@
       <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
         <div class="game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
         That makes you a loser, unfortunately.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="message-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: #800000">Diversity is Good, But Simplicity is the Best</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{message}}</p><br>
+        <p>Kindly select a region&nbsp;&nbsp;
+        <select id="selectedCountry" style="text-align:center;" ng-model="selectedCountry" ng-options="region.country for region in countries" ng-change="selectCountry();"></select>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #B22222; border:none;">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="regionSelected = true; startGame();">Game On!</button>
       </div>
     </div>
   </div>
