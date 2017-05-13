@@ -145,31 +145,39 @@ angular.module('mean.system')
         $scope.showTable = true;
       }
       // here is ok,
-      if (game.state === 'winner has been chosen') {
+      if (game.state === 'game ended') {
         if ($scope.global && game.playerIndex === 0) {
-          const { email } = $scope.global;
+          const { email } = JSON.parse($scope.global.user);
+          const { players, gameWinner, } = game;
+          const gameWinnerUsername = players[gameWinner].username;
           const playedGameData = {
-            gameOwner: email,
-            gameID: game.gameID,
-            players: game.players,
-            winningCard: game.winningCard,
-            gameWinner: game.gameWinner,
+            gameOwnerEmail: email,
+            players: players,
+            gameWinner: gameWinnerUsername,
           };
-
-          userService.savetGame(playedGameData).then({
+          userService.saveGame(playedGameData).then(
             function(response) {
-              console.log(response);
+              // swal is sweetalert module used for custom alerts
               swal({
-                title: 'Game Save successfully!',
-                text: `Game saved successfully, ${game.gameWinner} won!`,
-                type: 'warning',
+                title: 'Game Saved successfully!',
+                text: `<div>
+                        <b>Game Owner: </b>${email}</br>
+                        <b>Game Winner: </b>${gameWinnerUsername}</br>
+                        <b>Game Players: </b>${players.map( (player, i) => {
+                          return i === 0 ? player.username : ' ' + player.username;
+                        })}</br></br>
+                        <b>Go for Next Round</b>
+                       </div>`,
+                type: 'info',
                 showCancelButton: false,
                 confirmButtonColor: '#DD6B55',
                 confirmButtonText: 'Close',
                 closeOnConfirm: true,
+                html: true
               });
             },
             function(err) {
+              console.log('error occured now now')
               swal({
                 title: 'Game not saved!',
                 text: 'Your last game could not be saved due to an internal server error. If this continues, alert the support team.',
@@ -177,14 +185,13 @@ angular.module('mean.system')
                 showConfirmButton: false
               });
             }
-          });
+          );
         }
       }
     });
 
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {
-        console.log(game.gameID, game.players, game.gameWinner, game, $scope.global.user);
         if (!$scope.isCustomGame() && $location.search().game) {
           // If the player didn't successfully enter the request room,
           // reset the URL so they don't think they're in the requested room.
