@@ -65,6 +65,12 @@ module.exports = function(io) {
       }
     });
 
+    socket.on('CzarCardDraw', () => {
+
+      allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
+
+    });
+
     socket.on('leaveGame', function() {
       exitGame(socket);
     });

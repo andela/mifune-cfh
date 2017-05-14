@@ -138,10 +138,10 @@ class Game {
   }
 
   startGame() {
-    console.log(this.gameID, this.state);
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
     this.stateChoosing(this);
+    this.changeCzars(this);
   }
 
   sendUpdate() {
@@ -198,7 +198,7 @@ class Game {
       // Automatically select a card if only one card was submitted
       self.selectFirst();
     } else if (self.table.length === 0) {
-      self.changeCards(self);
+      self.changeCzars(self);
     } else {
       self.sendUpdate();
       self.judgingTimeout = setTimeout(() => {
@@ -211,7 +211,6 @@ class Game {
   stateResults() {
     const self = this;
     self.state = 'winner has been chosen';
-    console.log(self.state);
     // TODO: do stuff
     let winner = -1;
     for (let i = 0; i < self.players.length; i += 1) {
@@ -298,7 +297,6 @@ class Game {
     if (this.state === 'waiting for players to pick') {
       // Find the player's position in the players array
       const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
-      console.log('player is at index', playerIndex);
       if (playerIndex !== -1) {
         // Verify that the player hasn't previously picked a card
         let previouslySubmitted = false;
@@ -317,12 +315,10 @@ class Game {
                 cardIndex = j;
               }
             }
-            console.log('card', i, 'is at index', cardIndex);
             if (cardIndex !== null) {
               tableCard.push(this.players[playerIndex].hand.splice(cardIndex,
               1)[0]);
             }
-            console.log('table object at', cardIndex, ':', tableCard);
           }
           if (tableCard.length === this.curQuestion.numAnswers) {
             this.table.push({
@@ -330,7 +326,6 @@ class Game {
               player: this.players[playerIndex].socket.id
             });
           }
-          console.log('final table object', this.table);
           if (this.table.length === this.players.length - 1) {
             clearTimeout(this.choosingTimeout);
             this.stateJudging(this);
@@ -432,6 +427,26 @@ class Game {
     clearTimeout(this.choosingTimeout);
     clearTimeout(this.judgingTimeout);
     clearTimeout(this.drawingCardTimeout);
+  }
+
+  CzarCardDraw(self) {
+    if (self.state === 'Please wait for Czar to draw cards') {
+      self.stateChoosing(self);
+    }
+  }
+
+  changeCzars(self) {
+    self.state = 'Please wait for Czar to draw cards';
+    self.table = [];
+    if (self.czar >= self.players.length - 1) {
+      self.czar = 0;
+    } else {
+      self.czar += 1;
+    }
+    self.sendUpdate();
+
+    self.changeCzarTimeout = setTimeout(() => {
+    }, self.timeLimits.stateOfCzar * 1000);
   }
 }
 

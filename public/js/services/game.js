@@ -209,6 +209,10 @@ angular.module('mean.system')
       socket.emit('pickWinning', { card: card.id });
     };
 
+    game.CzarCardDraw = () => {
+     socket.emit('CzarCardDraw');
+    };
+
     decrementTime();
 
     return game;
