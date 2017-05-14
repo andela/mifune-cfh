@@ -1,24 +1,23 @@
-let Game = require('./game');
-let Player = require('./player');
-require("console-stamp")(console, "m/dd HH:MM:ss");
-let mongoose = require('mongoose');
-let User = mongoose.model('User');
+const Game = require('./game');
+const Player = require('./player');
+require('console-stamp')(console, 'm/dd HH:MM:ss');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
-let avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
-let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = (io) => {
-
   let game;
-  let allGames = {};
-  let allPlayers = {};
-  let gamesNeedingPlayers = [];
+  const allGames = {};
+  const allPlayers = {};
+  const gamesNeedingPlayers = [];
   let gameID = 0;
 
   io.sockets.on('connection', (socket) => {
-    console.log(socket.id + 'Connected');
-    socket.emit('id', {id: socket.id});
+    console.log(`${socket.id}Connected`);
+    socket.emit('id', { id: socket.id });
 
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
@@ -39,22 +38,22 @@ module.exports = (io) => {
 
     socket.on('joinGame', (data) => {
       if (!allPlayers[socket.id]) {
-        joinGame(socket,data);
+        joinGame(socket, data);
       }
     });
 
     socket.on('joinNewGame', (data) => {
       exitGame(socket);
-      joinGame(socket,data);
+      joinGame(socket, data);
     });
 
     socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
-        console.log('comparing',thisGame.players[0].socket.id, 'with', socket.id);
+        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
-          gamesNeedingPlayers.forEach(function(game,index) {
+          gamesNeedingPlayers.forEach((game, index) => {
             if (game.gameID === socket.gameID) {
               return gamesNeedingPlayers.splice(index, 1);
             }
@@ -79,7 +78,7 @@ module.exports = (io) => {
   });
 
   let joinGame = (socket, data) => {
-    let player = new Player(socket);
+    const player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
     if (data.userID !== 'unauthenticated') {
@@ -87,7 +86,7 @@ module.exports = (io) => {
         _id: data.userID
       }).exec((err, user) => {
         if (err) {
-          console.log('err',err);
+          console.log('err', err);
           return err; // Hopefully this never happens.
         }
         if (!user) {
