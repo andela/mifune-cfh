@@ -223,7 +223,7 @@ class Game {
       if (winner !== -1) {
         self.stateEndGame(winner);
       } else {
-        self.changeCards(self);
+        self.changeCzars(self);
       }
     }, self.timeLimits.stateResults * 1000);
   }

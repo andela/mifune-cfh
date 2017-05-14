@@ -1,3 +1,4 @@
+//services game.js
 /*eslint-disable*/
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', 'userService', function (socket, $timeout, userService) {
@@ -143,6 +144,14 @@ angular.module('mean.system')
       if (newState || game.curQuestion !== data.curQuestion) {
         game.state = data.state;
       }
+      if (data.state === 'Please wait for Czar to draw cards') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('You\'re the czar. Please wait!');
+        } else {
+          addToNotificationQueue('wait for czar to shuffle');
+        }
+      } else
 
       if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
@@ -166,6 +175,12 @@ angular.module('mean.system')
         } else {
           addToNotificationQueue('The czar is contemplating...');
         }
+      } else if (data.state === 'Please wait for Czar to draw cards') {
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('Click to Draw the Cards!');
+        } else {
+          addToNotificationQueue('The czar is drawing the cards...');
+        }
       } else if (data.state === 'winner has been chosen' &&
               game.curQuestion.text.indexOf('<u></u>') > -1) {
         game.curQuestion = data.curQuestion;
@@ -182,6 +197,13 @@ angular.module('mean.system')
     socket.on('notification', (data) => {
       addToNotificationQueue(data.notification);
     });
+
+    // socket.on('alert', (data) => {
+    //   $location.url('/');
+    //   $rootScope.popupMessage = data;
+    //   $('#popup-modal').modal('show');
+    // });
+
 
     game.joinGame = function(mode, room, createPrivate) {
       mode = mode || 'joinGame';
