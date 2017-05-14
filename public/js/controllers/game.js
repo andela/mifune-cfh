@@ -181,4 +181,8 @@ angular.module('mean.system')
       game.joinGame();
     }
 
+    $scope.CzarCardDraw = () => {
+    game.CzarCardDraw();
+  };
+
 }]);
