@@ -13,7 +13,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.post('/api/games', checkToken, game.save);
 
   // Get saved game data
-  app.get('/api/games', checkToken, game.retrieveGame);
+  app.get('/api/users/:id/games', checkToken, game.retrieveGame);
 
   // User Routes
   app.get('/signin', users.signin);

@@ -1,7 +1,9 @@
-/* eslint-disable */
+/* eslint-disable func-names*/
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'Global', 'MakeAWishFactsService', '$dialog', 'userService',
-  function ($scope, game, $timeout, $location, Global, MakeAWishFactsService, $dialog, userService) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'Global', 'MakeAWishFactsService',
+  '$dialog', 'userService',
+  function ($scope, game, $timeout, $location, Global, MakeAWishFactsService,
+    $dialog, userService) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -144,27 +146,30 @@ angular.module('mean.system')
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
-      // here is ok,
       if (game.state === 'game ended') {
         if ($scope.global && game.playerIndex === 0) {
-          const { email } = JSON.parse($scope.global.user);
+          const { id } = JSON.parse($scope.global.user);
           const { players, gameWinner, } = game;
           const gameWinnerUsername = players[gameWinner].username;
           const playedGameData = {
-            gameOwnerEmail: email,
-            players: players,
+            gameOwnerId: id,
+            players,
             gameWinner: gameWinnerUsername,
           };
           userService.saveGame(playedGameData).then(
-            function(response) {
+            /* eslint-disable no-unused-vars, no-undef*/
+            (response) => {
               // swal is sweetalert module used for custom alerts
               swal({
                 title: 'Game Saved successfully!',
                 text: `<div>
-                        <b>Game Owner: </b>${email}</br>
+                        <b>Game Owner: </b> You; as ${players[0].username}</br>
                         <b>Game Winner: </b>${gameWinnerUsername}</br>
-                        <b>Game Players: </b>${players.map( (player, i) => {
-                          return i === 0 ? player.username : ' ' + player.username;
+                        <b>Game Players: </b>${players.map((player, i) => {
+                          if (i === 0) {
+                            return player.username;
+                          }
+                          return ` ${player.username}`;
                         })}</br></br>
                         <b>Go for Next Round</b>
                        </div>`,
@@ -176,8 +181,7 @@ angular.module('mean.system')
                 html: true
               });
             },
-            function(err) {
-              console.log('error occured now now')
+            (err) => {
               swal({
                 title: 'Game not saved!',
                 text: 'Your last game could not be saved due to an internal server error. If this continues, alert the support team.',
@@ -214,7 +218,6 @@ angular.module('mean.system')
     });
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-      console.log('joining custom game');
       game.joinGame('joinGame', $location.search().game);
     } else if ($location.search().custom) {
       game.joinGame('joinGame', null, true);

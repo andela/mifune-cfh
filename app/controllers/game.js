@@ -10,30 +10,28 @@ const Game = mongoose.model('Game');
 
 exports.save = (req, res) => {
   const newGame = new Game();
-  // game_id should use _id
-  // this is just a sample data, should be updated for real user
-  newGame.gameOwnerEmail = req.body.gameOwnerEmail;
+  newGame.gameOwnerId = req.body.gameOwnerId;
   newGame.players = req.body.players;
   newGame.gameWinner = req.body.gameWinner;
   newGame.date = new Date();
   newGame.save((err, success) => {
     if (err) {
-      throw (err);
+      res.status(500).send({ error: 'An error occured' });
     } else {
-      res.send(success);
+      res.status(200).json(success);
     }
   });
 };
 
 exports.retrieveGame = (req, res) => {
-  const { gameOwnerEmail } = req.query;
-  Game.find({ gameOwnerEmail }, (err, data) => {
+  const { gameOwnerId } = req.params;
+  Game.find({ gameOwnerId }, (err, data) => {
     if (err) {
-      res.send('error ocured');
+      res.status(500).send({ error: 'An error occured' });
     } else if (data.length > 0) {
-      res.json(data);
+      res.status(200).json(data);
     } else {
-      res.send('No game found');
+      res.status(404).json('No Game found');
     }
   });
 };
