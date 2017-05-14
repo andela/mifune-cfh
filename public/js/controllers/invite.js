@@ -30,7 +30,7 @@
           confirmButtonText: 'Yes i will invite',
           cancelButtonText: 'No, Am off this shit',
           closeOnConfirm: true,
-          closeOnCancel: false
+          closeOnCancel: true
         },
           (isConfirm) => {
             if (isConfirm) {
@@ -54,9 +54,9 @@
               });
               $('#myModal').modal('show');
             } else {
-              game.leaveGame();
-              $location.path('/');
-              swal('Cancelled', 'You are off the game shitty you!!', 'error');
+              // game.leaveGame();
+              // $location.path('/');
+              swal('Cancelled', 'You chose not to invite players', 'error');
             }
           });
       }
@@ -72,7 +72,6 @@
           text: 'Sorry!, You can only invite a maximum of 11 players to this game',
           type: 'warning',
           confirmButtonText: 'ok',
-          cancelButtonText: 'No, Am off this shit',
           closeOnConfirm: true,
         });
       }

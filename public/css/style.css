@@ -87,6 +87,7 @@
    max-width: 25%;
  }
 
+
  @media(min-width: 400px) and (max-width: 950px) {
    .some-text {
      text-align: center;
