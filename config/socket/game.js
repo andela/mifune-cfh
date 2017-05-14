@@ -151,7 +151,6 @@ class Game {
   stateChoosing() {
     const self = this;
     self.state = 'waiting for players to pick';
-    // console.log(self.gameID,self.state);
     self.table = [];
     self.winningCard = -1;
     self.winningCardPlayer = -1;
@@ -164,7 +163,6 @@ class Game {
     }
     self.round += 1;
     self.dealAnswers();
-    // Rotate card czar
 
     self.sendUpdate();
 
@@ -183,16 +181,12 @@ class Game {
       this.stateResults(this);
       this.sendNotification(`${this.players[winnerIndex].username} has won the round!`);
       this.sendUpdate();
-    } else {
-      // console.log(this.gameID,'no cards were picked!');
-      // this.stateDrawCards(this);
     }
   }
 
   stateJudging() {
     const self = this;
     self.state = 'waiting for czar to decide';
-    // console.log(self.gameID,self.state);
 
     if (self.table.length === 1) {
       // Automatically select a card if only one card was submitted
@@ -334,8 +328,6 @@ class Game {
           }
         }
       }
-    } else {
-      console.log('NOTE:', thisPlayer, 'picked a card during', this.state);
     }
   }
 
@@ -412,8 +404,6 @@ class Game {
         clearTimeout(this.judgingTimeout);
         this.winnerAutopicked = autopicked;
         this.stateResults(this);
-      } else {
-        console.log('WARNING: czar', thisPlayer, 'picked a card that was not on the table.');
       }
     } else {
       // TODO: Do something?
@@ -422,7 +412,6 @@ class Game {
   }
 
   killGame() {
-    console.log('Killing game', this.gameID);
     clearTimeout(this.resultsTimeout);
     clearTimeout(this.choosingTimeout);
     clearTimeout(this.judgingTimeout);

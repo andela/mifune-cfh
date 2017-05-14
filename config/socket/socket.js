@@ -16,23 +16,17 @@ module.exports = (io) => {
   let gameID = 0;
 
   io.sockets.on('connection', (socket) => {
-    console.log(`${socket.id}Connected`);
     socket.emit('id', { id: socket.id });
 
     socket.on('pickCards', (data) => {
-      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
-      } else {
-        console.log('Received pickCard from', socket.id, 'but game does not appear to exist!');
       }
     });
 
     socket.on('pickWinning', (data) => {
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickWinning(data.card, socket.id);
-      } else {
-        console.log('Received pickWinning from', socket.id, 'but game does not appear to exist!');
       }
     });
 
@@ -50,7 +44,6 @@ module.exports = (io) => {
     socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
-        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
           gamesNeedingPlayers.forEach((game, index) => {
@@ -69,7 +62,6 @@ module.exports = (io) => {
     });
 
     socket.on('disconnect', () => {
-      console.log('Rooms on Disconnect ', io.sockets.adapter.rooms);
       exitGame(socket);
     });
     socket.on('CzarCardDraw', () => {
@@ -112,9 +104,7 @@ module.exports = (io) => {
   let getGame = (player, socket, requestedGameId, createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
-    console.log(socket.id, 'is requesting room', requestedGameId);
     if (requestedGameId.length && allGames[requestedGameId]) {
-      console.log('Room', requestedGameId, 'is valid');
       game = allGames[requestedGameId];
       // Ensure that the same socket doesn't try to join the same game
       // This can happen because we rewrite the browser's URL to reflect
@@ -142,7 +132,6 @@ module.exports = (io) => {
       }
     } else {
       // Put players into the general queue
-      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
         createGameWithFriends(player, socket);
       } else {
@@ -193,7 +182,6 @@ module.exports = (io) => {
         isUniqueRoom = true;
       }
     }
-    console.log(socket.id, 'has created unique game', uniqueRoom);
     game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
@@ -206,7 +194,6 @@ module.exports = (io) => {
   };
 
   let exitGame = (socket) => {
-    console.log(socket.id, 'has disconnected');
     if (allGames[socket.gameID]) { // Make sure game exists
       game = allGames[socket.gameID];
       delete allPlayers[socket.id];

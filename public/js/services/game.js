@@ -1,4 +1,3 @@
-//services game.js
 /*eslint-disable*/
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', 'userService', function (socket, $timeout, userService) {
@@ -35,7 +34,7 @@ angular.module('mean.system')
         setNotification();
       }
     };
-    var setNotification = function() {
+    const setNotification = function() {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
         clearInterval(timeout);
         timeout = false;
@@ -47,7 +46,7 @@ angular.module('mean.system')
     };
 
     let timeSetViaUpdate = false;
-    var decrementTime = function() {
+    const decrementTime = function() {
       if (game.time > 0 && !timeSetViaUpdate) {
         game.time--;
       } else {
