@@ -4,7 +4,7 @@
     <div class="card smallest card-bg-img" ng-class="getBackgroundImage($index)" ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
     ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
         <div class="card-icon">
-          <img src="{{getCardIcon($index)}}" class="img-responsive"/>
+          <img ng-src="{{getCardIcon($index)}}" class="img-responsive"/>
         </div>
         <div class="card-main-content">
           <span ng-bind-html="card.text" class="h4"></span>
@@ -12,7 +12,7 @@
           <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
         </div>
         <div class="card-icon">
-          <img src="{{getCardIcon($index)}}" class="img-responsive pull-right"/>
+          <img ng-src="{{getCardIcon($index)}}" class="img-responsive pull-right"/>
         </div>
     </div>
     <span ng-repeat="answer in game.table">
