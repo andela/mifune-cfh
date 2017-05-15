@@ -16,19 +16,20 @@
    * @return {void}
    */
   function InviteController ($scope, $location, game, userService, Global, socket) {
+    const { user, authenticated } = Global.getSavedUser();
     $scope.searchResult = [];
-    $scope.user = JSON.parse(Global.isAuthenticated().user);
+    $scope.user = JSON.parse(user || JSON.stringify({}));
     $scope.allInvitees = [];
 
     $scope.$watch('game.gameID', () => {
-      if (game.gameID && game.state === 'awaiting players' && game.players.length < game.playerMinLimit) {
+      if (game.gameID && game.state === 'awaiting players' && game.players.length < game.playerMinLimit && authenticated) {
         swal({
           title: 'friends Needed',
           text: "You'll need 3 or more users to start this game",
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Yes i will invite',
-          cancelButtonText: 'No, Am off this shit',
+          cancelButtonText: 'No, not interested',
           closeOnConfirm: true,
           closeOnCancel: true
         },
@@ -39,23 +40,21 @@
                 const registeredUsers = response.data.data;
                 $scope.searchResult = registeredUsers
                   .filter(user => user._id !== $scope.user.id) // eslint-disable-line
-                  .map((user) => {
-                    user.disabled = true;
+                  .map((regUser) => {
+                    regUser.disabled = true;
                     const online = game.onlineUsers
-                    .find(onlineUser => onlineUser.email === user.email);
+                    .find(onlineUser => onlineUser.email === regUser.email);
                     if (online) {
-                      user.socketID = online.socketID;
-                      user.disabled = false;
+                      regUser.socketID = online.socketID;
+                      regUser.disabled = false;
                     }
-                    return user;
+                    return regUser;
                   });
               }, (err) => {
                 $scope.errorMsg = 'An error occured!!! '.concat(err.error);
               });
               $('#myModal').modal('show');
             } else {
-              // game.leaveGame();
-              // $location.path('/');
               swal('Cancelled', 'You chose not to invite players', 'error');
             }
           });

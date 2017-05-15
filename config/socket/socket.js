@@ -10,7 +10,6 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = (io) => {
-  // let game;
   const allGames = {};
   const allPlayers = {};
   const gamesNeedingPlayers = [];
@@ -37,7 +36,6 @@ module.exports = (io) => {
     socket.on('invite', (data) => {
       socket.broadcast.to(data.to).emit('newInvite', data.gameID);
     });
-
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
@@ -111,6 +109,7 @@ module.exports = (io) => {
           player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
         } else {
           player.username = user.name;
+          player.email = user.email;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
         }

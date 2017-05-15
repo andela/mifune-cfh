@@ -5,7 +5,7 @@ angular.module('mean.system')
     'socket', 'game', 'AvatarService', 'userService',
     function IndexController($scope, Global, $location, $window,
       socket, game, AvatarService, userService) {
-      $scope.global = Global.isAuthenticated();
+      $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       const user =  $scope.global.user;

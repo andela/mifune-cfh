@@ -11,6 +11,10 @@ angular.module('mean.system')
         $location.path('/signup');
       };
 
+      $scope.home = () => {
+        $location.path('/');
+      };
+
       $scope.login = () => {
         const data = {
           email: $scope.email,
