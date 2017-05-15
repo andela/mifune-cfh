@@ -9,12 +9,14 @@ ng-controller="InviteController">
         <h4 class="modal-title">All Available Users</h4>
       </div>
       <div class="modal-body notify-invite">
-        <ul>
-          <li ng-repeat="user in searchResult">
-            {{ user.name.toUpperCase() }} 
+        <ul class="invite-ul">
+         
+          <li class="user-list" ng-repeat="user in searchResult | orderBy:'socketID'">
+            <span>{{ user.name }} </span>
             <button type="button" class="btn btn-primary" ng-disabled="user.disabled" ng-click="inviteUsers(user.socketID)">Send Invite
             </button>
           </li>
+         
         </ul>
       </div>
       <div class="modal-footer">

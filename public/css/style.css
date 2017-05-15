@@ -36,6 +36,45 @@
    margin-bottom: 10px;
  }
 
+ .notify-invite {
+   padding: 20px 0px;
+ }
+
+ .notify-invite ul{
+   width: 100% !important;
+   padding: 0 0;
+ }
+
+ .invite-ul{
+   background-color: #ffffff;
+  }
+  .invite-ul :nth-child(even){
+    background-color: #e5e5e5;
+  }
+  .user-list :nth-child(even){
+    background-color: #FF5A8C;
+  }
+
+.notify-invite ul li {
+  text-transform: capitalize !important;
+  width: 100% !important;
+  height: 50px;
+ }
+.notify-invite ul li :nth-child(even){
+ background-color: #FF5A8C;
+}
+ .notify-invite span{
+    display: inline-block;
+    padding-top: 12px;
+    margin-left: 20px;
+ }
+
+ .notify-invite ul button {
+   float: right;
+   margin-right: 20px;
+   margin-top: 7px;
+ }
+
  #facebook-share {
    font-size: 12px;
    padding: 3px;

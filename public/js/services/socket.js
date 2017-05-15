@@ -4,7 +4,7 @@ angular.module('mean.system')
     const socket = io.connect();
     return {
       on (eventName, callback) {
-        socket.on(eventName, () => {
+        socket.on(eventName, function () { // eslint-disable-line
           const args = arguments;    // eslint-disable-line
           $rootScope.safeApply(() => {
             callback.apply(socket, args);
@@ -13,7 +13,7 @@ angular.module('mean.system')
       },
 
       emit (eventName, data, callback) {
-        socket.emit(eventName, data, () => {
+        socket.emit(eventName, data, function () { // eslint-disable-line
           const args = arguments;       // eslint-disable-line
         });
         $rootScope.safeApply(() => {
@@ -23,7 +23,7 @@ angular.module('mean.system')
         });
       },
       removeAllListeners (eventName, callback) {
-        socket.removeAllListeners(eventName, () => {
+        socket.removeAllListeners(eventName, function () { // eslint-disable-line
           const args = arguments; // eslint-disable-line
           $rootScope.safeApply(() => {
             if (callback) {
