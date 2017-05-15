@@ -70,6 +70,31 @@ angular.module('mean.system')
 
     $scope.getPlayerPosition = obj => obj.color + 1;
 
+    $scope.getBackgroundImage = (index) => {
+      const backgroundImageClasses = [
+        'spade-on-white-bg',
+        'heart-on-white-bg',
+        'diamond-on-white-bg',
+        'club-on-white-bg',
+      ];
+      const numOfImageClasses = backgroundImageClasses.length;
+      const imgClassIndex = index % numOfImageClasses;
+      const imgClass = backgroundImageClasses[imgClassIndex];
+
+      return imgClass;
+    };
+
+    $scope.getCardIcon = (index) => {
+      const icons = [
+        '/img/icons/spade-extra-small.png',
+        '/img/icons/heart-extra-small.png',
+        '/img/icons/diamond-extra-small.png',
+        '/img/icons/club-extra-small.png',
+      ];
+      const cardIcon = icons[index];
+      return cardIcon;
+    };
+
     $scope.showFirst = card => game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
     $scope.showSecond = card =>
