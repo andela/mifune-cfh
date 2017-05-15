@@ -527,20 +527,27 @@ body {
                 margin-top: 0px;
             }
 
-            #logo {
+            #cfh-text-logo {
                 display: inline-block;
-                color: #FFD1DD;
-                margin-left: 10px;
+                margin: 12px 0 0;
                 font-size: 28px;
-                font-family: 'Lobster', cursive;
+                font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
                 cursor: pointer;
 
                 @include mobile-only {
                     font-size: 20px;
                 }
 
-                #text-logo {
-                    color: #FFE8EE;
+                .cfh-text-logo {
+                    display: inline-block;
+                    color: white;
+                    font-style: normal;
+                }
+
+                .cfh-img-logo {
+                    display: inline;
+                    width: 30px;
+                    vertical-align: text-top;
                 }
             }
 

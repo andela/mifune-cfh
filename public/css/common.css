@@ -180,18 +180,23 @@ body {
         #main-container #app-container #menu-container {
           margin-bottom: 1px;
           margin-top: 0px; } }
-      #main-container #app-container #menu-container #logo {
+      #main-container #app-container #menu-container #cfh-text-logo {
         display: inline-block;
-        color: #FFD1DD;
-        margin-left: 10px;
+        margin: 12px 0 0;
         font-size: 28px;
-        font-family: 'Lobster', cursive;
+        font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
         cursor: pointer; }
         @media (max-width: 520px) {
-          #main-container #app-container #menu-container #logo {
+          #main-container #app-container #menu-container #cfh-text-logo {
             font-size: 20px; } }
-        #main-container #app-container #menu-container #logo #text-logo {
-          color: #FFE8EE; }
+        #main-container #app-container #menu-container #cfh-text-logo .cfh-text-logo {
+          display: inline-block;
+          color: white;
+          font-style: normal; }
+        #main-container #app-container #menu-container #cfh-text-logo .cfh-img-logo {
+          display: inline;
+          width: 30px;
+          vertical-align: text-top; }
       #main-container #app-container #menu-container #abandon-game-button {
         display: inline-block;
         float: right;
