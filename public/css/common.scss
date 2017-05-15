@@ -8,6 +8,7 @@ $mq-desktop: 1100px !default;
 $mq-custom-wide : 1200px !default;
 
 $color-background: #fff;
+$site-deep-black: #252525;
 
 .white-text {
     color: #ffffff;
@@ -31,6 +32,14 @@ $color-background: #fff;
 
 .white-bg {
     background-color: white;
+}
+
+.carousel-caption {
+    background-color: rgba(240, 240, 240, 0.85);
+
+    h3, p {
+        color: $site-deep-black;
+    }
 }
 
 .card-bg-img {
@@ -270,7 +279,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
     border-bottom-left-radius: 8px;
     text-indent: 0;
     display: inline-block;
-    color: #252525;
+    color: $site-deep-black;
     font-size: 39px;
     font-weight: bold;
     font-style: normal;
@@ -366,7 +375,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
 
     border-radius: 8px;
 
-    color: #252525;
+    color: $site-deep-black;
     font-family: Arial;
     font-size: 20px;
     font-weight: bold;
@@ -396,7 +405,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
     }
 
     &.longBlack {
-        background: #252525;
+        background: $site-deep-black;
         border-color: white;
         color: white;
         width: 97.5%;
@@ -517,7 +526,7 @@ body {
             -webkit-border-radius: 8px;
             -moz-border-radius: 8px;
             border-radius: 8px;
-            background: #252525;
+            background: $site-deep-black;
             margin-bottom: 10px;
             margin-top: 5px;
             padding: 5px;
@@ -684,7 +693,7 @@ body {
 
                     #answers-container-outer {
                         #info-container {
-                            background-color: #252525;
+                            background-color: $site-deep-black;
                             border-radius: 5px;
                             margin: 1em;
                             padding: 1em;

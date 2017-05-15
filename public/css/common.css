@@ -16,6 +16,11 @@
 .white-bg {
   background-color: white; }
 
+.carousel-caption {
+  background-color: rgba(240, 240, 240, 0.85); }
+  .carousel-caption h3, .carousel-caption p {
+    color: #252525; }
+
 .card-bg-img {
   background-repeat: no-repeat;
   background-position: center; }
