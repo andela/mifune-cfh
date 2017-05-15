@@ -91,7 +91,8 @@ angular.module('mean.system')
         '/img/icons/diamond-extra-small.png',
         '/img/icons/club-extra-small.png',
       ];
-      const cardIcon = icons[index];
+      const quotient = index % icons.length;
+      const cardIcon = icons[quotient];
       return cardIcon;
     };
 
