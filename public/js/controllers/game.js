@@ -77,19 +77,18 @@ angular.module('mean.system').controller('GameController', [
       return false;
     };
 
-    $scope.showFirst = card => (
-        game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id
-      );
+    $scope.showFirst = card =>
+      game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
-    $scope.showSecond = card => (
-        game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id
-      );
+    $scope.showSecond = card =>
+      game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
 
     $scope.isCzar = () => game.czar === game.playerIndex;
 
     $scope.isPlayer = $index => $index === game.playerIndex;
 
-    $scope.isCustomGame = () => !/^\d+$/.test(game.gameID) && game.state === 'awaiting players';
+    $scope.isCustomGame = () =>
+      !/^\d+$/.test(game.gameID) && game.state === 'awaiting players';
 
     $scope.isPremium = $index => game.players[$index].premium;
 
@@ -184,6 +183,20 @@ angular.module('mean.system').controller('GameController', [
 
     $scope.CzarCardDraw = () => {
       game.CzarCardDraw();
+    };
+
+    $scope.shuffleCards = () => {
+      const card = $('#card');
+      card.addClass('animated rotateOut');
+      $timeout(() => {
+        $scope.CzarCardDraw();
+      }, 1000);
+    };
+
+    $scope.CzarCardDraw = () => {
+      if ($scope.isCzar()) {
+        game.CzarCardDraw();
+      }
     };
   }
 ]);
