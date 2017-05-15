@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-console, import/no-dynamic-require */
 const Game = require('./game');
 const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
@@ -9,17 +9,33 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
-module.exports = function(io) {
-  let game;
+module.exports = (io) => {
   const allGames = {};
   const allPlayers = {};
   const gamesNeedingPlayers = [];
   let gameID = 0;
+  let onlineUsers = [];
 
   io.sockets.on('connection', (socket) => {
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
 
+    socket.emit('onlineUsers', onlineUsers);
+
+    socket.on('loggedIn', (data) => {
+      data.socketID = socket.id;
+      onlineUsers = addUser(data);
+      socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('loggedOut', () => {
+      onlineUsers = removeUser(socket.id);
+      socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('invite', (data) => {
+      socket.broadcast.to(data.to).emit('newInvite', data.gameID);
+    });
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
@@ -70,11 +86,12 @@ module.exports = function(io) {
     });
 
     socket.on('disconnect', () => {
+      onlineUsers = removeUser(socket.id);
       exitGame(socket);
     });
   });
 
-  var joinGame = function(socket, data) {
+  const joinGame = (socket, data) => {
     const player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
@@ -106,7 +123,7 @@ module.exports = function(io) {
     }
   };
 
-  var getGame = function(player, socket, requestedGameId, createPrivate) {
+  const getGame = (player, socket, requestedGameId, createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
     console.log(socket.id, 'is requesting room', requestedGameId);
@@ -119,7 +136,7 @@ module.exports = function(io) {
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
       if (game.state === 'awaiting players' && (!game.players.length ||
-        game.players[0].socket.id !== socket.id)) {
+          game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
@@ -148,7 +165,7 @@ module.exports = function(io) {
     }
   };
 
-  var fireGame = function(player, socket) {
+  const fireGame = (player, socket) => {
     let game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
@@ -182,13 +199,13 @@ module.exports = function(io) {
     }
   };
 
-  var createGameWithFriends = function(player, socket) {
+  const createGameWithFriends = (player, socket) => {
     let isUniqueRoom = false;
     let uniqueRoom = '';
     // Generate a random 6-character game ID
     while (!isUniqueRoom) {
       uniqueRoom = '';
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 6; i += 1) {
         uniqueRoom += chars[Math.floor(Math.random() * chars.length)];
       }
       if (!allGames[uniqueRoom] && !(/^\d+$/).test(uniqueRoom)) {
@@ -207,7 +224,7 @@ module.exports = function(io) {
     game.sendUpdate();
   };
 
-  var exitGame = function(socket) {
+  const exitGame = (socket) => {
     console.log(socket.id, 'has disconnected');
     if (allGames[socket.gameID]) { // Make sure game exists
       const game = allGames[socket.gameID];
@@ -218,7 +235,7 @@ module.exports = function(io) {
         game.removePlayer(socket.id);
       } else {
         game.stateDissolveGame();
-        for (let j = 0; j < game.players.length; j++) {
+        for (let j = 0; j < game.players.length; j += 1) {
           game.players[j].socket.leave(socket.gameID);
         }
         game.killGame();
@@ -226,5 +243,18 @@ module.exports = function(io) {
       }
     }
     socket.leave(socket.gameID);
+  };
+
+  const removeUser = id => onlineUsers.filter(user => user.socketID !== id);
+
+  const addUser = (user) => {
+    const users = onlineUsers.slice();
+    const oldUserIndex = onlineUsers.findIndex(item => item.email === user.email);
+    if (oldUserIndex === -1) {
+      users.push(user);
+    } else {
+      users[oldUserIndex] = user;
+    }
+    return users;
   };
 };

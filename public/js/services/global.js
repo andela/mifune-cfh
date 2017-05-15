@@ -9,7 +9,7 @@ angular.module('mean.system')
         $cookies.remove('XSRF-TOKEN');
         $cookies.remove('user');
       },
-      isAuthenticated: () => {
+      getSavedUser: () => {
         const authenticated = $cookies.get('XSRF-TOKEN') !== undefined;
         const user = $cookies.get('user');
         return {

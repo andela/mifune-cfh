@@ -25,6 +25,9 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
 
+   // retrieve all users
+  app.get('/api/search/users', users.retrieveUsers);
+
   // Creating new users programmatically via a REST-ish API.
   app.post('/api/auth/signup', users.createUserApi);
   app.post('/api/auth/login', users.login);
@@ -99,7 +102,6 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
   // Avatar Routes
   app.get('/avatars', avatars.allJSON);
-
   // Home route
   app.get('/play', index.play);
   // Intro route
