@@ -1,15 +1,16 @@
 <div class="cfh-nav">
-    <div class="cfh-nav-image">
-      <img src="/img/cards.png">
-    </div>
-    <div class="cfh-nav-right">
-      <span ng-hide="showOptions" class="ng-hide">
-        <a ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-      </span>
-      <span ng-show="showOptions">
-        <a ng-click="signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
-        <a ng-click="signIn()"><button class="cfh-btn btn-white">Login</button></a>
-      </span>
-      <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
-    </div>
+  <div class="cfh-nav-image">
+    <a ng-click="$ctrl.home()"><img src="/img/cards.png" /></a>
+    <a class="text-logo-icon" ng-click="$ctrl.home()"><span>Cards f<span class="pink-text">&hearts;</span>r Humanity</span></a>
   </div>
+  <div class="cfh-nav-right">
+    <span ng-show="$ctrl.showOptions" class="ng-hide">
+        <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+      </span>
+    <span ng-hide="$ctrl.showOptions">
+        <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
+        <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
+      </span>
+    <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
+  </div>
+</div>

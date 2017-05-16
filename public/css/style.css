@@ -1250,15 +1250,13 @@
    border: none;
    display: inline;
    text-decoration: none;
-   float: right;
-   margin-bottom: 0;
-   width: 118px;
-   height: 38px;
+   padding: 1.3rem 1.8rem;
+   width: 115px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-   font-size: 14px;
+   font-size: 12px;
    text-align: center;
    line-height: 120%;
-   margin: 15px 2px 1px 7px;
+   margin: 8px;
  }
 
  .cfh-btn2 {
@@ -1291,18 +1289,39 @@
 
  .cfh-nav {
   display: flex;
-  alight-items: center;
+  align-items: center;
   justify-content: space-between;
   align-content: center;
   padding: 2rem;
  }
-
- .cfh-nav-image {
-   float: left;
+ .cfh-nav > div {
+  flex: 1 auto;
  }
 
-.cfh-nav-right {
-   width:100%;
+ .cfh-nav-image {
+   display: flex;
+   align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+   color: #ff0e52;
+ }
+
+ .cfh-nav-image img {
+   width: 50px;
+   height: 50px;
+ }
+ .cfh-nav-image .text-logo-icon {
+   margin-left: 10px; 
+ }
+ .text-logo-icon .pink-text {
+   color: #ff0e52;
+ }
+
+ .cfh-nav-right{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+   align-items: center;
  }
  /* Cfh Team*/
 

@@ -60,4 +60,3 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap',
 
 angular.module('mean.system', []);
 angular.module('mean.directives', []);
-angular.module('mean.components', []);
