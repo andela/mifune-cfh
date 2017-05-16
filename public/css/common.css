@@ -285,20 +285,22 @@ body {
           background-color: #ff1a56; }
           #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container #czar-container #the-czar {
             font-weight: bold; }
-      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #questions-container-outer {
-        border-bottom: 1px solid #ff1a56; }
-      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #start-game-btn {
-        background-color: #ff1a56;
-        color: white;
-        margin-bottom: 1em;
-        margin-top: 1em; }
-      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container {
-        background-color: #252525;
-        border-radius: 5px;
-        margin: 1em;
-        padding: 1em; }
-        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container #inner-info ul li {
-          list-style-type: circle; }
+      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container {
+        float: right; }
+        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #questions-container-outer {
+          border-bottom: 1px solid #ff1a56; }
+        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #start-game-btn {
+          background-color: #ff1a56;
+          color: white;
+          margin-bottom: 1em;
+          margin-top: 1em; }
+        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container {
+          background-color: #252525;
+          border-radius: 5px;
+          margin: 1em;
+          padding: 1em; }
+          #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container #inner-info ul li {
+            list-style-type: circle; }
 
 @media only screen and (min-width: 521px) and (max-width: 768px) {
   #notifications {
