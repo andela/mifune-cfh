@@ -3,21 +3,23 @@ angular.module('mean').component('header', {
   controller: HeaderController
 });
 
-HeaderController.inject = ['$location', 'Global'];
+HeaderController.inject = ['$location', 'Global', 'game'];
 
 /**
  * @param {*} $location
  * @param {*} Global
+ * @param {*} game
  * @returns {void}
  */
-function HeaderController($location, Global) {
+function HeaderController($location, Global, game) {
   const ctrl = this;
   ctrl.showOptions = Global.getSavedUser().authenticated;
   ctrl.location = () => {
     const currentLocation = $location.path();
     return {
       signin: currentLocation !== '/signin',
-      signup: currentLocation !== '/signup'
+      signup: currentLocation !== '/signup',
+      app: currentLocation.indexOf('/app') > -1
     };
   };
 
@@ -36,5 +38,9 @@ function HeaderController($location, Global) {
   ctrl.logout = () => {
     Global.removeTokenAndUser();
     $location.path('/#');
+  };
+  ctrl.abandonGame = () => {
+    game.leaveGame();
+    $location.path('/');
   };
 }
