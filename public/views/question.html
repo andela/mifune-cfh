@@ -1,3 +1,32 @@
+<!-- modal to retrieve all users -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+ng-controller="InviteController">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">All Available Users</h4>
+      </div>
+      <div class="modal-body notify-invite">
+        <ul class="invite-ul">
+         
+          <li class="user-list" ng-repeat="user in searchResult | orderBy:'socketID'">
+            <span>{{ user.name }} </span>
+            <button type="button" class="btn btn-primary" ng-disabled="user.disabled" ng-click="inviteUsers(user.socketID)">Send Invite
+            </button>
+          </li>
+         
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- end of users -->
 <div id="question-container-inner">
   <div class="card longBlack">
     <span ng-bind-html="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>

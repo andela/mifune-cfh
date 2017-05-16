@@ -9,8 +9,12 @@ const checkToken = require('./jwt').checkToken;
 
 
 module.exports = function (app, passport, auth) { // eslint-disable-line
-  // Create and Start Game
-  app.post('/api/games/:id/start', checkToken, game.start);
+  // Save played game
+  app.post('/api/games', checkToken, game.save);
+
+  // Get saved game data
+  app.get('/api/users/:id/games', checkToken, game.retrieveGame);
+
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -20,6 +24,9 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   // Setting up the users api
   app.post('/users', users.create);
   app.post('/users/avatars', users.avatars);
+
+   // retrieve all users
+  app.get('/api/search/users', users.retrieveUsers);
 
   // Creating new users programmatically via a REST-ish API.
   app.post('/api/auth/signup', users.createUserApi);
@@ -95,7 +102,6 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
   // Avatar Routes
   app.get('/avatars', avatars.allJSON);
-
   // Home route
   app.get('/play', index.play);
   // Intro route

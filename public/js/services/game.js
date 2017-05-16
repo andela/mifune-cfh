@@ -1,6 +1,6 @@
-/*eslint-disable*/
+/* global _, window */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', 'userService', function (socket, $timeout, userService) {
+  .factory('game', ['socket', '$timeout', function GameService (socket, $timeout) {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -20,35 +20,37 @@ angular.module('mean.system')
       curQuestion: null,
       notification: null,
       timeLimits: {},
-      joinOverride: false
+      joinOverride: false,
+      onlineUsers: []
     };
 
     const notificationQueue = [];
     let timeout = false;
-    const self = this;
-    let joinOverrideTimeout = 0;
 
-    const addToNotificationQueue = function(msg) {
+    const addToNotificationQueue = (msg) => {
       notificationQueue.push(msg);
       if (!timeout) { // Start a cycle if there isn't one
         setNotification();
       }
     };
-    const setNotification = function() {
+
+    const setNotification = () => {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
         clearInterval(timeout);
         timeout = false;
         game.notification = '';
       } else {
-        game.notification = notificationQueue.shift(); // Show a notification and check again in a bit
+        // Show a notification and check again in a bit
+        game.notification = notificationQueue.shift();
         timeout = $timeout(setNotification, 1300);
       }
     };
 
     let timeSetViaUpdate = false;
-    const decrementTime = function() {
+
+    const decrementTime = () => {
       if (game.time > 0 && !timeSetViaUpdate) {
-        game.time--;
+        game.time -= 1;
       } else {
         timeSetViaUpdate = false;
       }
@@ -57,6 +59,10 @@ angular.module('mean.system')
 
     socket.on('id', (data) => {
       game.id = data.id;
+    });
+
+    socket.on('onlineUsers', (data) => {
+      game.onlineUsers = data;
     });
 
     socket.on('prepareGame', (data) => {
@@ -72,13 +78,11 @@ angular.module('mean.system')
       if (game.gameID !== data.gameID) {
         game.gameID = data.gameID;
       }
-
       game.joinOverride = false;
       clearTimeout(game.joinOverrideTimeout);
 
-      let i;
     // Cache the index of the player in the players array
-      for (i = 0; i < data.players.length; i++) {
+      for (let i = 0; i < data.players.length; i += 1) {
         if (game.id === data.players[i].socketID) {
           game.playerIndex = i;
         }
@@ -97,13 +101,6 @@ angular.module('mean.system')
       } else if (newState && data.state === 'winner has been chosen') {
         game.time = game.timeLimits.stateResults - 1;
         timeSetViaUpdate = true;
-        const playedGameData = {
-          gameID: data.gameID,
-          players: data.players,
-          winningCard: data.winningCard,
-          gameWinner: data.gameWinner,
-        };
-        userService.startGame(playedGameData);
       }
 
     // Set these properties on each update
@@ -120,15 +117,15 @@ angular.module('mean.system')
       } else {
         const added = _.difference(_.pluck(data.table, 'player'), _.pluck(game.table, 'player'));
         const removed = _.difference(_.pluck(game.table, 'player'), _.pluck(data.table, 'player'));
-        for (i = 0; i < added.length; i++) {
-          for (let j = 0; j < data.table.length; j++) {
+        for (let i = 0; i < added.length; i += 1) {
+          for (let j = 0; j < data.table.length; j += 1) {
             if (added[i] === data.table[j].player) {
               game.table.push(data.table[j], 1);
             }
           }
         }
-        for (i = 0; i < removed.length; i++) {
-          for (let k = 0; k < game.table.length; k++) {
+        for (let i = 0; i < removed.length; i += 1) {
+          for (let k = 0; k < game.table.length; k += 1) {
             if (removed[i] === game.table[k].player) {
               game.table.splice(k, 1);
             }
@@ -184,54 +181,47 @@ angular.module('mean.system')
               game.curQuestion.text.indexOf('<u></u>') > -1) {
         game.curQuestion = data.curQuestion;
       } else if (data.state === 'awaiting players') {
-        joinOverrideTimeout = $timeout(() => {
+        game.joinOverrideTimeout = $timeout(() => {
           game.joinOverride = true;
         }, 15000);
       } else if (data.state === 'game dissolved' || data.state === 'game ended') {
         game.players[game.playerIndex].hand = [];
         game.time = 0;
       }
-    }); // here
+    });
 
     socket.on('notification', (data) => {
       addToNotificationQueue(data.notification);
     });
 
-    // socket.on('alert', (data) => {
-    //   $location.url('/');
-    //   $rootScope.popupMessage = data;
-    //   $('#popup-modal').modal('show');
-    // });
-
-
-    game.joinGame = function(mode, room, createPrivate) {
+    game.joinGame = (mode, room, createPrivate) => {
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      const userID = window.user ? user._id : 'unauthenticated';
+      const userID = window.user ? user._id : 'unauthenticated'; // eslint-disable-line
       socket.emit(mode, { userID, room, createPrivate });
     };
 
-    game.startGame = function() {
+    game.startGame = () => {
       socket.emit('startGame');
     };
 
-    game.leaveGame = function() {
+    game.leaveGame = () => {
       game.players = [];
       game.time = 0;
       socket.emit('leaveGame');
     };
 
-    game.pickCards = function(cards) {
+    game.pickCards = (cards) => {
       socket.emit('pickCards', { cards });
     };
 
-    game.pickWinning = function(card) {
+    game.pickWinning = (card) => {
       socket.emit('pickWinning', { card: card.id });
     };
 
     game.CzarCardDraw = () => {
-     socket.emit('CzarCardDraw');
+      socket.emit('CzarCardDraw');
     };
 
     decrementTime();

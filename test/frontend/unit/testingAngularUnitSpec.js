@@ -1,12 +1,13 @@
-describe('Testing  AngularJS Test Suite', function () {
-  describe('Testing header Controller', function () {
-    it('should test scope object', function() {
+describe('Testing  AngularJS Test Suite', () => {
+  describe('Testing header Controller', () => {
+    it('should test scope object', () => {
       module('mean.system');
       const scope = {};
-      inject(function ($controller) {
-        // eslint-disable-line
-        const ctrl = $controller('HeaderController', { $scope: scope, Global: { test: 'test' } });
+      let ctrl;
+      inject(($controller) => {
+        ctrl = $controller('HeaderController', { $scope: scope, Global: { test: 'test' } });
       });
+      expect(ctrl).toBeDefined();
       expect(scope.menu.length).toBe(2);
       expect(typeof scope.global).toBe('object');
       expect(scope.global.test).toBe('test');

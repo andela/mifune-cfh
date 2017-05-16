@@ -1,3 +1,4 @@
+/* eslint-disable no-console, import/no-dynamic-require */
 const Game = require('./game');
 const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
@@ -9,24 +10,46 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = (io) => {
-  let game;
   const allGames = {};
   const allPlayers = {};
   const gamesNeedingPlayers = [];
   let gameID = 0;
+  let onlineUsers = [];
 
   io.sockets.on('connection', (socket) => {
+    console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
 
+    socket.emit('onlineUsers', onlineUsers);
+
+    socket.on('loggedIn', (data) => {
+      data.socketID = socket.id;
+      onlineUsers = addUser(data);
+      socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('loggedOut', () => {
+      onlineUsers = removeUser(socket.id);
+      socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('invite', (data) => {
+      socket.broadcast.to(data.to).emit('newInvite', data.gameID);
+    });
     socket.on('pickCards', (data) => {
+      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
+      } else {
+        console.log('Received pickCard from', socket.id, 'but game does not appear to exist!');
       }
     });
 
     socket.on('pickWinning', (data) => {
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickWinning(data.card, socket.id);
+      } else {
+        console.log('Received pickWinning from', socket.id, 'but game does not appear to exist!');
       }
     });
 
@@ -44,6 +67,7 @@ module.exports = (io) => {
     socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
+        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
           gamesNeedingPlayers.forEach((game, index) => {
@@ -62,14 +86,16 @@ module.exports = (io) => {
     });
 
     socket.on('disconnect', () => {
+      onlineUsers = removeUser(socket.id);
       exitGame(socket);
     });
+
     socket.on('CzarCardDraw', () => {
       allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
     });
   });
 
-  let joinGame = (socket, data) => {
+  const joinGame = (socket, data) => {
     const player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
@@ -87,9 +113,9 @@ module.exports = (io) => {
           player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
         } else {
           player.username = user.name;
+          player.email = user.email;
           player.premium = user.premium || 0;
-          player.avatar = user.avatar || avatars[Math.floor(Math.random()
-          * 4) + 12];
+          player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
         }
         getGame(player, socket, data.room, data.createPrivate);
       });
@@ -101,19 +127,22 @@ module.exports = (io) => {
     }
   };
 
-  let getGame = (player, socket, requestedGameId, createPrivate) => {
+  const getGame = (player, socket, requestedGameId, createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
+    console.log(socket.id, 'is requesting room', requestedGameId);
     if (requestedGameId.length && allGames[requestedGameId]) {
-      game = allGames[requestedGameId];
+      console.log('Room', requestedGameId, 'is valid');
+      const game = allGames[requestedGameId];
       // Ensure that the same socket doesn't try to join the same game
       // This can happen because we rewrite the browser's URL to reflect
       // the new game ID, causing the view to reload.
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
       if (game.state === 'awaiting players' && (!game.players.length ||
-        game.players[0].socket.id !== socket.id)) {
+          game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
+        console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
         game.players.push(player);
         socket.join(game.gameID);
@@ -132,6 +161,7 @@ module.exports = (io) => {
       }
     } else {
       // Put players into the general queue
+      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
         createGameWithFriends(player, socket);
       } else {
@@ -139,7 +169,9 @@ module.exports = (io) => {
       }
     }
   };
-  let fireGame = (player, socket) => {
+
+  const fireGame = (player, socket) => {
+    let game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
       const gameIDStr = gameID.toString();
@@ -150,6 +182,7 @@ module.exports = (io) => {
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
+      console.log(socket.id, 'has joined newly created game', game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
       game.sendUpdate();
@@ -157,6 +190,7 @@ module.exports = (io) => {
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
       game.players.push(player);
+      console.log(socket.id, 'has joined game', game.gameID);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
       game.assignPlayerColors();
@@ -169,7 +203,8 @@ module.exports = (io) => {
       }
     }
   };
-  let createGameWithFriends = (player, socket) => {
+
+  const createGameWithFriends = (player, socket) => {
     let isUniqueRoom = false;
     let uniqueRoom = '';
     // Generate a random 6-character game ID
@@ -182,7 +217,8 @@ module.exports = (io) => {
         isUniqueRoom = true;
       }
     }
-    game = new Game(uniqueRoom, io);
+    console.log(socket.id, 'has created unique game', uniqueRoom);
+    const game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
     allGames[uniqueRoom] = game;
@@ -193,16 +229,16 @@ module.exports = (io) => {
     game.sendUpdate();
   };
 
-  let exitGame = (socket) => {
+  const exitGame = (socket) => {
+    console.log(socket.id, 'has disconnected');
     if (allGames[socket.gameID]) { // Make sure game exists
-      game = allGames[socket.gameID];
+      const game = allGames[socket.gameID];
+      console.log(socket.id, 'has left game', game.gameID);
       delete allPlayers[socket.id];
       if (game.state === 'awaiting players' ||
         game.players.length - 1 >= game.playerMinLimit) {
+        game.state = 'awaiting players';
         game.removePlayer(socket.id);
-        if (game.state === 'waiting to start') {
-          game.state = 'awaiting players';
-        }
       } else {
         game.stateDissolveGame();
         for (let j = 0; j < game.players.length; j += 1) {
@@ -213,5 +249,18 @@ module.exports = (io) => {
       }
     }
     socket.leave(socket.gameID);
+  };
+
+  const removeUser = id => onlineUsers.filter(user => user.socketID !== id);
+
+  const addUser = (user) => {
+    const users = onlineUsers.slice();
+    const oldUserIndex = onlineUsers.findIndex(item => item.email === user.email);
+    if (oldUserIndex === -1) {
+      users.push(user);
+    } else {
+      users[oldUserIndex] = user;
+    }
+    return users;
   };
 };

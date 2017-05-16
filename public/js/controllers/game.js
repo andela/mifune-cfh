@@ -1,11 +1,19 @@
+/* global document, $ */
 angular.module('mean.system').controller('GameController', [
   '$scope',
   'game',
   '$timeout',
   '$location',
   'MakeAWishFactsService',
-  '$dialog',
-  function($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+  'userService',
+  function GameController(
+    $scope,
+    game,
+    $timeout,
+    $location,
+    MakeAWishFactsService,
+    userService
+  ) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -140,6 +148,52 @@ angular.module('mean.system').controller('GameController', [
       ) {
         $scope.showTable = true;
       }
+      if (game.state === 'game ended') {
+        if ($scope.global && game.playerIndex === 0) {
+          const { id } = JSON.parse($scope.global.user);
+          const { players, gameWinner } = game;
+          const gameWinnerUsername = players[gameWinner].username;
+          const playedGameData = {
+            gameOwnerId: id,
+            players,
+            gameWinner: gameWinnerUsername
+          };
+          userService.saveGame(playedGameData).then(
+            /* eslint-disable no-unused-vars, no-undef*/
+            (response) => {
+              // swal is sweetalert module used for custom alerts
+              swal({
+                title: 'Game Saved successfully!',
+                text: `<div>
+                        <b>Game Owner: </b> You; as ${players[0].username}</br>
+                        <b>Game Winner: </b>${gameWinnerUsername}</br>
+                        <b>Game Players: </b>${players.map((player, i) => {
+                          if (i === 0) {
+                            return player.username;
+                          }
+                          return ` ${player.username}`;
+                        })}</br></br>
+                        <b>Go for Next Round</b>
+                       </div>`,
+                type: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Close',
+                closeOnConfirm: true,
+                html: true
+              });
+            },
+            (err) => {
+              swal({
+                title: 'Game not saved!',
+                text: 'Your last game could not be saved due to an internal server error. If this continues, alert the support team.',
+                timer: 5000,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
+      }
     });
 
     $scope.$watch('game.gameID', () => {
@@ -171,19 +225,15 @@ angular.module('mean.system').controller('GameController', [
           }
         }
       }
+
+      if ($location.search().game && !/^\d+$/.test($location.search().game)) {
+        game.joinGame('joinGame', $location.search().game);
+      } else if ($location.search().custom) {
+        game.joinGame('joinGame', null, true);
+      } else {
+        game.joinGame();
+      }
     });
-
-    if ($location.search().game && !/^\d+$/.test($location.search().game)) {
-      game.joinGame('joinGame', $location.search().game);
-    } else if ($location.search().custom) {
-      game.joinGame('joinGame', null, true);
-    } else {
-      game.joinGame();
-    }
-
-    $scope.CzarCardDraw = () => {
-      game.CzarCardDraw();
-    };
 
     $scope.shuffleCards = () => {
       const card = $('#card');
