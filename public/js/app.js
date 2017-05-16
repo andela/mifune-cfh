@@ -1,5 +1,5 @@
 /* global window, angular */
-angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives', 'angular-intro', 'hl.sticky'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'ngRoute', 'mean.system', 'mean.directives', 'angular-intro'])
   .config(['$routeProvider',
     function RouteConfig($routeProvider) {
       $routeProvider
