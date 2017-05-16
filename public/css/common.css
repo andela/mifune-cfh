@@ -277,14 +277,19 @@ body {
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #timer-container #time {
           color: #ff1a56;
           font-size: 5em; }
-      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container {
-        margin-bottom: 1em;
-        border: 1px solid #555555; }
-        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container #czar-container {
-          padding: 1em;
-          background-color: #ff1a56; }
-          #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container #czar-container #the-czar {
-            font-weight: bold; }
+      #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container {
+        height: 300px;
+        position: relative;
+        overflow-y: scroll; }
+        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container {
+          margin-bottom: 1em;
+          margin-right: 0.5em;
+          border: 1px solid #555555; }
+          #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container #czar-container {
+            padding: 1em;
+            background-color: #ff1a56; }
+            #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container #czar-container #the-czar {
+              font-weight: bold; }
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container {
         float: right; }
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #questions-container-outer {

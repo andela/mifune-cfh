@@ -663,8 +663,13 @@ body {
                     }
                     
                     #players-container {
+                        height: 300px;
+                        position: relative;
+                        overflow-y: scroll;
+
                         .player-container {
                             margin-bottom: 1em;
+                            margin-right: 0.5em;
                             border: 1px solid #555555;
 
                             #czar-container {
@@ -677,6 +682,9 @@ body {
                             }
                         }
                     }
+                    // #players-container:hover {
+                    //     overflow-y: scroll;
+                    // }
                 }
 
                 #main-gameplay-container {
