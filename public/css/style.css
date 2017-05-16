@@ -75,6 +75,10 @@
    margin-top: 7px;
  }
 
+ .invite-button{
+   width: 96px !important;
+ }
+
  #facebook-share {
    font-size: 12px;
    padding: 3px;
