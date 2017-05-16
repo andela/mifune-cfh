@@ -33,6 +33,7 @@ angular.module('mean.system')
         setNotification();
       }
     };
+
     const setNotification = () => {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
         clearInterval(timeout);
@@ -46,6 +47,7 @@ angular.module('mean.system')
     };
 
     let timeSetViaUpdate = false;
+
     const decrementTime = () => {
       if (game.time > 0 && !timeSetViaUpdate) {
         game.time -= 1;
@@ -138,6 +140,14 @@ angular.module('mean.system')
       if (newState || game.curQuestion !== data.curQuestion) {
         game.state = data.state;
       }
+      if (data.state === 'Please wait for Czar to draw cards') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('You\'re the czar. Please wait!');
+        } else {
+          addToNotificationQueue('wait for czar to shuffle');
+        }
+      } else
 
       if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
@@ -160,6 +170,12 @@ angular.module('mean.system')
           addToNotificationQueue("Everyone's done. Choose the winner!");
         } else {
           addToNotificationQueue('The czar is contemplating...');
+        }
+      } else if (data.state === 'Please wait for Czar to draw cards') {
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('Click to Draw the Cards!');
+        } else {
+          addToNotificationQueue('The czar is drawing the cards...');
         }
       } else if (data.state === 'winner has been chosen' &&
               game.curQuestion.text.indexOf('<u></u>') > -1) {
@@ -202,6 +218,10 @@ angular.module('mean.system')
 
     game.pickWinning = (card) => {
       socket.emit('pickWinning', { card: card.id });
+    };
+
+    game.CzarCardDraw = () => {
+      socket.emit('CzarCardDraw');
     };
 
     decrementTime();
