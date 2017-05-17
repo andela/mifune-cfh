@@ -1575,10 +1575,6 @@
   padding:0 3%;
   background-color:#ff0e52; background-color:#ff0e52(0, 128, 128, 0.8);
   font-family: 'Tahoma', sans-serif;
-  
-  /*-webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
-  -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
-  transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;*/
 }
 #categories li h1{
   bottom:110%;
@@ -1587,6 +1583,10 @@
   font-size:1.5em;
   padding-top:50%;
   padding-bottom:50%;
+
+  -webkit-transition: top 2s ease-out, bottom 2s ease-out, 2s padding 2s ease-out;
+  -ms-transition: top 2s ease-out, bottom 2s ease-out, 2s padding 2s ease-out;
+  transition: top 2s ease-out, bottom 2s ease-out, 2s padding 2s ease-out;
 }
 #categories li h1:after{
 	content:'';
@@ -1604,7 +1604,7 @@
 
 #categories li div:hover h1 {
   top:50%;
-  padding-top:10%;
+  padding-top:5%;
 }
 
 .homeLink{
