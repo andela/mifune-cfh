@@ -33,6 +33,7 @@ module.exports = (io) => {
   io.sockets.on('connection', (socket) => {
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
+    socket.emit('onlineUsers', onlineUsers);
 
     // initialize chat when a new socket is connected
     socket.emit('initializeChat', chatMessages);
