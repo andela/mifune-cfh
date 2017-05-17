@@ -24,11 +24,25 @@
               target="_blank">Cards Against Humanity</a>, that gives you the opportunity to donate to children in need - all
             while remaining as despicable and awkward as you naturally are.
           </h5>
-          <div class="col-xs-12">
-            <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
-            <a href="#!/gametour"><button class="cfh-btn2 btn-white">How to Play</button></a>
-            <a><button ng-click="startGame('guest')" class="cfh-btn2 btn-pink">Play as Guest</button></a>
-            <a><button ng-click="startGame('player')" class="cfh-btn2 btn-white">Play with Friends</button></a>
+          <div class="row">
+            <div class="cfh-btn-group">
+              <a href="#">
+                <div class="col-xs-6 col-md-3 btn cfh-btn btn-pink">
+                  Donate
+                </div>
+              </a>
+              <a href="#!/gametour">
+                <div class="col-xs-6 col-md-3 btn cfh-btn btn-white">
+                  How to Play
+                </div>
+              </a>
+              <div class="col-xs-6 col-md-3 btn cfh-btn btn-pink" ng-click="startGame('guest')">
+                Play as Guest
+              </div>
+              <div class="col-xs-6 col-md-3 btn cfh-btn btn-white" ng-click="startGame('player')">
+                Play with Friends
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -46,66 +60,34 @@
     <div class="full-width-horizontal-rule"></div>
   </div>
   <div id="team" class="full-page-section">
-    <div class="col-md-7">
-      <ul id="categories" class="clr">
-        <li class="pusher"></li>
-        <li>
-          <div>
-            <img src="/img/folusho.jpeg" alt="" />
-            <h1>Folusho Oladipo</h1>
-          </div>
-        </li>
-        <li>
-          <div>
-            <img src="/img/Precious.png" alt="" />
-            <h1>Precious Ijege</h1>
-          </div>
-        </li>
-        <li>
-          <div>
-            <img src="img/chibujax.jpg" alt="" />
-            <h1>Uchendu Chibueze</h1>
-          </div>
-        </li>
-        <li>
-          <div>
-            <img src="/img/Hope.jpg" alt="" />
-            <h1>Hope Ngerebara</h1>
-          </div>
-        </li>
-        <li>
-          <div>
-            <img src="/img/jude.jpeg" alt="" />
-            <h1>Etanuwoma Jude </h1>
-          </div>
-        </li>
-        <li class="pusher"></li>
-        <li>
-          <div>
-            <img src="img/ifiok.jpeg" alt="" />
-            <h1>Eyo Ifiok</h1>
-          </div>
-        </li>
-
-        <li>
-          <div>
-            <img src="/img/Obinna.jpeg" alt="" />
-            <h1>Nnenanya Obinna </h1>
-          </div>
-        </li>
-      </ul>
+    <div class="row">
+      <h2 class="text-center white-centered-text">Meet the Team</h2>
     </div>
-    <div class="col-sm-4 team-text">
-      <div class="row txt">
-        <h1 class="team-name">Team Mifune</h1>
+    <div class="row">
+      <div class="col-xs-12 col-md-7">
+        <div>
+          <img class="img-responsive center-block" src="/img/placeholder.png"/>
+        </div>
       </div>
-      <div class="row">
-        <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
-          <a href="/donate"><b>give</b></a>. Have fun while playing.
-        </h5>
-        <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
+      <div class="col-xs-12 col-md-5 team-text">
+        <div class="row txt">
+          <h1 class="team-name text-center">Team Mifune</h1>
+        </div>
+        <div class="row">
+          <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
+            <a href="#"><b>give</b></a>. Have fun while playing!
+          </h5>
+          <div class="row cfh-btn2 btn-pink btn">
+            <div class="center-block">
+              Donate to Cards for Humanity
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="clearfix"></div>
+  <div>
+    <div class="full-width-horizontal-rule"></div>
+  </div>
 </div>
