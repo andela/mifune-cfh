@@ -2,13 +2,14 @@
 /* global window, angular */
 angular.module('mean.system')
   .controller('IndexController', ['$scope', 'Global', '$location', '$window',
-    'socket', 'game', 'AvatarService', 'userService',
+    'socket', 'game', 'AvatarService', 'RegionService', 'userService',
     function IndexController($scope, Global, $location, $window,
-      socket, game, AvatarService, userService) {
+      socket, game, AvatarService, RegionService, userService) {
       $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       const user =  $scope.global.user;
+      $scope.gameType = 'guest';
       $scope.startGame = (gameType) => {
         swal({
           title: 'Start a new Game?',
@@ -23,15 +24,20 @@ angular.module('mean.system')
         },
         (isConfirm) => {
           if (isConfirm) {
-            if (gameType === 'guest'){
-              game.joinGame();
-              $location.path('/app');
-            }else{
-              $location.path('/app').search('custom');
-            }
+              $scope.gameType = gameType;
+              displayMessage("#message-modal");
           }
         });
       };
+
+      $scope.gameOn = () => {
+        if ($scope.gameType === 'guest'){
+          game.joinGame();
+          $location.path('/app');
+        } else {
+          $location.path('/app').search('custom');
+        }
+      }
 
       $scope.showError = () => {
         if ($location.search().error) {
@@ -44,7 +50,7 @@ angular.module('mean.system')
         Global.removeTokenAndUser();
         $location.path('/#')
       };
-      
+
       $scope.signIn = () => {
         $location.path('/signin');
       };
@@ -57,7 +63,23 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+        $scope.countries = [];
 
+        RegionService.getCountries()
+          .then((data) => {
+            $scope.countries = data;
+          });
+
+        const displayMessage = (modalID) => {
+          $(modalID).modal();
+        };
+
+        $scope.$watch('selectedCountry', () =>{
+          if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
+
+             socket.emit('region', $scope.selectedCountry);
+          }
+        });
       socket.on('newInvite', (data) => {
         const { host, hash } = $window.location;
         const inviteLink = `${host}/${hash}app?game=${data}`
