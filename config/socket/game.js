@@ -248,7 +248,6 @@ class Game {
   }
 
   getQuestions(region, cb) {
-
     questions.allQuestionsForGame(region, (data) => {
       cb(null, data);
     });
