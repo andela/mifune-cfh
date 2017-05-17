@@ -1611,15 +1611,15 @@
   font-size: 2rem;
 }
 
-fieldset {
+.join-game-container {
     font-family: sans-serif;
-    border: 2px solid#ff0e52;
+    /*border: 2px solid#ff0e52;*/
     background:#ddd;
     border-radius: 5px;
     padding: 15px;
 }
 
-fieldset legend {
+.join-game-container .join-game-title {
     background:#ff0e52;
     color:#fff;
     padding: 5px 10px ;
@@ -1627,22 +1627,29 @@ fieldset legend {
     font-size: 32px;
     border-radius: 5px;
     box-shadow: 0 0 0 2px#ddd;
-    margin-left: 20px;
+    margin: -10% auto 10%;
+    text-align: center;
 }
-.gamename{
+.gamename {
   width: 45%;
   float: left;
 }
-.gamejoin{
+.gamejoin {
   width: 45%;
   float: right;
 }
-.btn-join{
+.btn-join {
   margin-top: -10px;
 }
-.gamejoinwrapper{
+.gamejoinwrapper {
   margin-bottom: 30px;
 }
-.top-section{
-  height: 100vh;
+.full-page-section {
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 720px) {
+  .full-page-section {
+    min-height: auto;
+  }
 }
