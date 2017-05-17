@@ -33,6 +33,10 @@ module.exports = (io) => {
       socket.broadcast.emit('onlineUsers', onlineUsers);
     });
 
+    socket.on('region', (data) => {
+      socket.regionId = data;
+    });
+
     socket.on('invite', (data) => {
       socket.broadcast.to(data.to).emit('newInvite', data.gameID);
     });
@@ -147,6 +151,7 @@ module.exports = (io) => {
         game.players.push(player);
         socket.join(game.gameID);
         socket.gameID = game.gameID;
+        game.region = socket.regionId;
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
@@ -165,12 +170,12 @@ module.exports = (io) => {
       if (createPrivate) {
         createGameWithFriends(player, socket);
       } else {
-        fireGame(player, socket);
+        fireGame(player, socket, socket.regionId);
       }
     }
   };
 
-  const fireGame = (player, socket) => {
+  const fireGame = (player, socket, region) => {
     let game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
@@ -182,6 +187,7 @@ module.exports = (io) => {
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
+      game.region = region;
       console.log(socket.id, 'has joined newly created game', game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
@@ -218,12 +224,14 @@ module.exports = (io) => {
       }
     }
     console.log(socket.id, 'has created unique game', uniqueRoom);
+
     const game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
     allGames[uniqueRoom] = game;
     socket.join(game.gameID);
     socket.gameID = game.gameID;
+    game.region = socket.regionId;
     game.assignPlayerColors();
     game.assignGuestNames();
     game.sendUpdate();

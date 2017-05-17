@@ -2,6 +2,7 @@ const users = require('../app/controllers/users');
 const answers = require('../app/controllers/answers');
 const questions = require('../app/controllers/questions');
 const avatars = require('../app/controllers/avatars');
+const region = require('../app/controllers/region');
 const index = require('../app/controllers/index');
 const game = require('../app/controllers/game');
 const checkToken = require('./jwt').checkToken;
@@ -102,6 +103,8 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
   // Avatar Routes
   app.get('/avatars', avatars.allJSON);
+  // Get countries
+  app.get('/countries', region.allJson);
   // Home route
   app.get('/play', index.play);
   // Intro route
