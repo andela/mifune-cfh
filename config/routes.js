@@ -34,6 +34,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
     // Donation Routes
   app.post('/donations', users.addDonation);
+  app.get('/donations', users.getDonation);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',

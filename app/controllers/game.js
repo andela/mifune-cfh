@@ -9,15 +9,21 @@ const Game = mongoose.model('Game');
  */
 
 exports.save = (req, res) => {
+  const { gameID, gameOwerName, gameOwnerId, players, gameWinner, rounds } = req.body;
   const newGame = new Game();
-  newGame.gameOwnerId = req.body.gameOwnerId;
-  newGame.players = req.body.players;
-  newGame.gameWinner = req.body.gameWinner;
+  newGame.gameID = gameID;
+  newGame.gameOwnerId = gameOwnerId;
+  newGame.gameOwerName = gameOwerName;
+  newGame.rounds = rounds;
+  newGame.players = players;
+  newGame.gameWinner = gameWinner;
   newGame.date = new Date();
+  Game.findOne({gameID}, )
   newGame.save((err, success) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
     } else {
+      console.log(newGame);
       res.status(200).json(success);
     }
   });

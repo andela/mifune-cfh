@@ -4,6 +4,7 @@ angular.module('mean.system').controller('GameController', [
   'game',
   '$timeout',
   '$location',
+  'Global',
   'MakeAWishFactsService',
   'userService',
   function GameController(
@@ -11,6 +12,7 @@ angular.module('mean.system').controller('GameController', [
     game,
     $timeout,
     $location,
+    Global,
     MakeAWishFactsService,
     userService
   ) {
@@ -22,6 +24,7 @@ angular.module('mean.system').controller('GameController', [
     $scope.pickedCards = [];
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
+    $scope.global = Global.getSavedUser();
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -149,15 +152,24 @@ angular.module('mean.system').controller('GameController', [
         $scope.showTable = true;
       }
       if (game.state === 'game ended') {
-        if ($scope.global && game.playerIndex === 0) {
-          const { id } = JSON.parse($scope.global.user);
+        if ($scope.global.authenticated) {
+          const index = game.playerIndex;
+          let id = '';
+          if (game.playerIndex === 0) {
+            id = JSON.parse($scope.global.user).id;
+          }
           const { players, gameWinner } = game;
           const gameWinnerUsername = players[gameWinner].username;
+          players[index].ref = id;
           const playedGameData = {
+            gameID: game.gameID,
             gameOwnerId: id,
+            gameOwerName: players[0].username,
+            rounds: game.round,
             players,
             gameWinner: gameWinnerUsername
           };
+          console.log('playedGameData', playedGameData);
           userService.saveGame(playedGameData).then(
             /* eslint-disable no-unused-vars, no-undef*/
             (response) => {
@@ -165,7 +177,7 @@ angular.module('mean.system').controller('GameController', [
               swal({
                 title: 'Game Saved successfully!',
                 text: `<div>
-                        <b>Game Owner: </b> You; as ${players[0].username}</br>
+                        <b>Game Owner: </b> ${id ? 'You' : players[0].username}</br>
                         <b>Game Winner: </b>${gameWinnerUsername}</br>
                         <b>Game Players: </b>${players.map((player, i) => {
                           if (i === 0) {
@@ -195,7 +207,6 @@ angular.module('mean.system').controller('GameController', [
         }
       }
     });
-
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {
         if (!$scope.isCustomGame() && $location.search().game) {

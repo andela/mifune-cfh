@@ -36,7 +36,8 @@ angular.module('mean.system')
       ])
       .then((results) => {
         console.log('userDonated success', results);
-      })
+      }),
+      getDonation: () => $http.get('/donations')
     };
   }])
   .factory('MakeAWishFactsService', [function MakeAWish () {

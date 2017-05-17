@@ -1,6 +1,6 @@
 /* global _, window */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function GameService (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', 'Global', function GameService (socket, $timeout, Global) {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -198,7 +198,8 @@ angular.module('mean.system')
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      const userID = window.user ? user._id : 'unauthenticated'; // eslint-disable-line
+      const user = JSON.parse(Global.getSavedUser().user || JSON.stringify({}));
+      const userID = user.id || 'unauthenticated'; // eslint-disable-line
       socket.emit(mode, { userID, room, createPrivate });
     };
 

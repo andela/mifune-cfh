@@ -29,7 +29,7 @@ class Game {
     this.czar = -1; // Index in this.players
     this.playerMinLimit = 3;
     this.playerMaxLimit = 12;
-    this.pointLimit = 5;
+    this.pointLimit = 1;
     this.state = 'awaiting players';
     this.round = 0;
     this.questions = null;
@@ -63,6 +63,8 @@ class Game {
         hand: player.hand,
         points: player.points,
         username: player.username,
+        email: player.email,
+        userID: player.userID,
         avatar: player.avatar,
         premium: player.premium,
         socketID: player.socket.id,

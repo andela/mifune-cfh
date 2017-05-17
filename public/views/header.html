@@ -5,6 +5,18 @@
   </div>
   <div class="cfh-nav-right">
     <span ng-show="$ctrl.showOptions" class="ng-hide">
+        <button type="button" class="cfh-btn btn-pink "
+          data-toggle="modal" data-target="#playedGames">
+          Played Games
+        </button>
+        <button type="button" class="cfh-btn btn-pink" 
+          data-toggle="modal" data-target="#leaderBoard">
+          Leaderboard
+        </button>
+        <button type="button" class="cfh-btn btn-pink"
+          data-toggle="modal" data-target="#donations">
+          Donations
+        </button>
         <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
     </span>
     <span ng-hide="$ctrl.showOptions">
