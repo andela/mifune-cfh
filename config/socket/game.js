@@ -27,7 +27,7 @@ class Game {
    * @param  {string} region
    * @return {void}
    */
-  constructor(gameID, io, region) {
+  constructor(gameID, io) {
     this.io = io;
     this.gameID = gameID;
     this.players = []; // Contains array of player models
@@ -36,7 +36,7 @@ class Game {
     this.gameWinner = -1; // Index in this.players
     this.winnerAutopicked = false;
     this.czar = -1; // Index in this.players
-    this.region = region;
+    this.region = '58f4de8ef08434413b6aec50';
     this.playerMinLimit = 3;
     this.playerMaxLimit = 12;
     this.pointLimit = 5;

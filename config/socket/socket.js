@@ -180,13 +180,14 @@ module.exports = (io) => {
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
       const gameIDStr = gameID.toString();
-      game = new Game(gameIDStr, io, region);
+      game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;
       game.players.push(player);
       allGames[gameID] = game;
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
+      game.region = region;
       console.log(socket.id, 'has joined newly created game', game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
@@ -224,8 +225,7 @@ module.exports = (io) => {
     }
     console.log(socket.id, 'has created unique game', uniqueRoom);
 
-    const region = socket.regionId;
-    const game = new Game(uniqueRoom, io, region);
+    const game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
     allGames[uniqueRoom] = game;
