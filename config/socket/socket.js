@@ -1,4 +1,5 @@
 /* eslint-disable no-console, import/no-dynamic-require */
+const firebase = require('firebase');
 const Game = require('./game');
 const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
@@ -9,18 +10,41 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
+// Initialize Firebase
+const config = {
+  apiKey: 'AIzaSyDnEqkmZeQ6JFpcIth3sljqSPG2OtIwEHU',
+  authDomain: 'mifunecfh.firebaseapp.com',
+  databaseURL: 'https://mifunecfh.firebaseio.com',
+  projectId: 'mifunecfh',
+  storageBucket: 'mifunecfh.appspot.com',
+  messagingSenderId: '443856725939'
+};
+firebase.initializeApp(config);
+const database = firebase.database();
+
 module.exports = (io) => {
   const allGames = {};
   const allPlayers = {};
   const gamesNeedingPlayers = [];
   let gameID = 0;
   let onlineUsers = [];
+  const chatMessages = [];
 
   io.sockets.on('connection', (socket) => {
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
 
-    socket.emit('onlineUsers', onlineUsers);
+    // initialize chat when a new socket is connected
+    socket.emit('initializeChat', chatMessages);
+
+    // send recieved chat message to all connected sockets
+    socket.on('chat message', (chat) => {
+      const game = allGames[gameID];
+      game.players.forEach(player => player.socket.emit('chat message', chat));
+      socket.emit('onlineUsers', onlineUsers);
+      chatMessages.push(chat);
+      database.ref(`chat/${gameID}`).set(chatMessages);
+    });
 
     socket.on('loggedIn', (data) => {
       data.socketID = socket.id;
@@ -140,7 +164,7 @@ module.exports = (io) => {
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
       if (game.state === 'awaiting players' && (!game.players.length ||
-          game.players[0].socket.id !== socket.id)) {
+        game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
