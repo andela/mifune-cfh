@@ -10,6 +10,17 @@ $mq-custom-wide : 1200px !default;
 $color-background: #fff;
 $site-deep-black: #252525;
 
+$deep-gray: #303030;
+$medium-gray: #959595;
+
+.scrollable-fixed-height {
+    overflow-y: scroll;
+}
+
+.flexbox {
+    display: flex;
+}
+
 .white-text {
     color: #ffffff;
 }
@@ -23,7 +34,7 @@ $site-deep-black: #252525;
 }
 
 .dark-grey-bg {
-    background-color: #333;
+    background-color: $deep-gray;
 }
 
 .light-pink-bg {
@@ -74,11 +85,35 @@ $site-deep-black: #252525;
 }
 
 .vertical-align-top {
-   vertical-align: top;
+    vertical-align: top;
 }
 
 .vertical-align-bottom {
-   vertical-align: bottom;
+    vertical-align: bottom;
+}
+
+.btns-container {
+    display: inline-block;
+    margin: 0.5em auto;
+}
+
+.pink-bg-btn {
+    display: inline-block;
+    background-color: #ff1a56;
+    color: white;
+    padding: 1em;
+    margin-right: 0.5em;
+}
+
+.medium-gray-bg-btn {
+    display: inline-block;
+    background-color: $medium-gray;
+    color: white;
+    padding: 1em;
+}
+
+.discouraged-action-btn:hover {
+    background:#F34444;
 }
 
 @mixin gradient-bg {
@@ -476,6 +511,7 @@ html {
         margin-top: 0px;
     }
 }
+
 body {
     font-family: $main-font;
     background: transparent;
@@ -511,7 +547,6 @@ body {
     margin-top:50px;
     width:70%
 }
-
 
 #main-container {
     height: 100%;
@@ -588,10 +623,6 @@ body {
                 }
             }
 
-            #abandon-game-button:hover {
-               background:#F34444;
-            }
-
             #tweet-container {
                 float: right;
                 padding-top: 17px;
@@ -665,7 +696,6 @@ body {
                     #players-container {
                         height: 300px;
                         position: relative;
-                        overflow-y: scroll;
 
                         .player-container {
                             margin-bottom: 1em;
@@ -682,9 +712,6 @@ body {
                             }
                         }
                     }
-                    // #players-container:hover {
-                    //     overflow-y: scroll;
-                    // }
                 }
 
                 #main-gameplay-container {
@@ -694,7 +721,7 @@ body {
                         border-bottom: 1px solid #ff1a56;
                     }
 
-                    #start-game-btn {
+                    #start-game-btn, .pink-bg-btn {
                         background-color: #ff1a56;
                         color: white;
                         margin-bottom: 1em;
@@ -731,8 +758,6 @@ body {
         font-size: 15px;
     }
 }
-
-
 
 //Attempt to Modify our Charity Banner
 .crDonateWidget {
@@ -781,8 +806,6 @@ body {
     }
 }
 
-
-
 .gradientButton {
     width: 80% !important;
     margin-top: 8px !important;
@@ -795,5 +818,3 @@ body {
         border-top: 0px solid black !important;
     }
 }
-
-

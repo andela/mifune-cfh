@@ -7,7 +7,7 @@
       f<span class="text-logo-icon pink-text">&hearts;</span>r&nbsp;
       Humanity
     </div>
-    <div id="abandon-game-button" ng-click="abandonGame()">
+    <div id="abandon-game-button" class="discouraged-action-btn" ng-click="abandonGame()">
       Abandon Game
     </div>
     <span id="tweet-container">
@@ -22,7 +22,7 @@
         <div id="timer-container" ng-show="game.state !== 'awaiting players'">
           <timer></timer>
         </div>
-        <div id="players-container" class="scrollable-fixed-height">
+        <div id="players-container" ng-class="game.players.length > 1 ? 'scrollable-fixed-height' : ''">
           <player></player>
         </div>
       </div>

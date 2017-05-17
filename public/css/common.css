@@ -1,3 +1,9 @@
+.scrollable-fixed-height {
+  overflow-y: scroll; }
+
+.flexbox {
+  display: flex; }
+
 .white-text {
   color: #ffffff; }
 
@@ -8,7 +14,7 @@
   background-color: #ff1a56; }
 
 .dark-grey-bg {
-  background-color: #333; }
+  background-color: #303030; }
 
 .light-pink-bg {
   background-color: #ffe8ee; }
@@ -50,6 +56,26 @@
 
 .vertical-align-bottom {
   vertical-align: bottom; }
+
+.btns-container {
+  display: inline-block;
+  margin: 0.5em auto; }
+
+.pink-bg-btn {
+  display: inline-block;
+  background-color: #ff1a56;
+  color: white;
+  padding: 1em;
+  margin-right: 0.5em; }
+
+.medium-gray-bg-btn {
+  display: inline-block;
+  background-color: #959595;
+  color: white;
+  padding: 1em; }
+
+.discouraged-action-btn:hover {
+  background: #F34444; }
 
 .card {
   position: relative;
@@ -227,8 +253,6 @@ body {
             margin-right: 1px;
             padding: 5px;
             width: 60px; } }
-      #main-container #app-container #menu-container #abandon-game-button:hover {
-        background: #F34444; }
       #main-container #app-container #menu-container #tweet-container {
         float: right;
         padding-top: 17px;
@@ -279,8 +303,7 @@ body {
           font-size: 5em; }
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container {
         height: 300px;
-        position: relative;
-        overflow-y: scroll; }
+        position: relative; }
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container {
           margin-bottom: 1em;
           margin-right: 0.5em;
@@ -294,7 +317,7 @@ body {
         float: right; }
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #questions-container-outer {
           border-bottom: 1px solid #ff1a56; }
-        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #start-game-btn {
+        #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #start-game-btn, #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container .pink-bg-btn {
           background-color: #ff1a56;
           color: white;
           margin-bottom: 1em;

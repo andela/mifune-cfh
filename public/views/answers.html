@@ -1,27 +1,35 @@
 <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="cards" class='hand'>
     <span ng-show="winnerPicked()"></span>
-    <div class="card smallest card-bg-img" ng-class="getBackgroundImage($index)" ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
-    ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-        <div class="card-icon">
-          <img ng-src="{{getCardIcon($index)}}" class="img-responsive"/>
-        </div>
-        <div class="card-main-content">
-          <span ng-bind-html="card.text" class="h4"></span>
-          <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-          <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
-        </div>
-        <div class="card-icon">
-          <img ng-src="{{getCardIcon($index)}}" class="img-responsive pull-right"/>
-        </div>
+    <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-click="pickCard(card, $index)" ng-hide="showTable || isCzar()"
+      ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+      <div class="card-icon">
+        <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
+      </div>
+      <div class="card-main-content">
+        <span ng-bind-html="card.text" class="h4"></span>
+        <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
+        <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+      </div>
+      <div class="card-icon">
+        <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive pull-right"/>
+      </div>
     </div>
     <span ng-repeat="answer in game.table">
-        <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+      <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}">
-            <span ng-bind-html="card.text"></span>
-            <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
-            <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+        <div class="card-icon">
+          <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
         </div>
+        <div class="card-main-content">
+          <span class="h4" ng-bind-html="card.text"></span>
+          <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+          <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+        </div>
+        <div class="card-icon">
+          <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive pull-right"/>
+        </div>
+      </div>
     </span>
   </div>
 </div>
@@ -34,7 +42,6 @@
         <ol class="carousel-indicators">
           <li data-target="#carousel-how-to-play" data-slide-to="0" class="active" />
           <li data-target="#carousel-how-to-play" data-slide-to="1" />
-          <li data-target="#carousel-how-to-play" data-slide-to="2" />
         </ol>
         <div class="carousel-inner" role="listbox">
           <div class="item active">
@@ -63,18 +70,6 @@
               <p>Other players then choose cards that answer the question for that round. So, choose wisely.</p>
             </div>
           </div>
-          <div class="item">
-            <img
-              class="center-block img-responsive"
-              src="/img/placeholder-slide.png"
-              alt="One player will win after a few rounds. Try your best to be that person."
-            />
-            <div class="carousel-caption">
-              <h3>Stand up for the Champion!</h3>
-              <p>After playing a couple of rounds, one of the players will
-                 win. It could be you, or do you want to be a loser? :D</p>
-            </div>
-          </div>
         </div>
         <a class="carousel-control left" href="#carousel-how-to-play" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" />
@@ -97,16 +92,19 @@
       <h2>What would you like to do now?</h2>
       Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
     </div>
-    <div id='inner-text-container'>
-      <a href='/#!/app'>
-      <div id="join-new-game" ng-click="game.joinGame('joinNewGame')">
-        Join a New Game
-      </div></a>
-      <a href='/'>
-        <div id="exit-match">
-        Return to Lobby
-        </div>
-      </a>
+    <div class="inner-text-container flexbox">
+      <div class="btns-container">
+        <a href="/#!/app">
+          <div id="join-new-game" class="pink-bg-btn" ng-click="game.joinGame('joinNewGame')">
+            Join a New Game
+          </div>
+        </a>
+        <a href="/">
+          <div id="exit-match" class="medium-gray-bg-btn discouraged-action-btn">
+            Return to Lobby
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 

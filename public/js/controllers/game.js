@@ -12,7 +12,8 @@ angular.module('mean.system')
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
-          $scope.pickedCards.push(card.id);
+          const cardId = card.id;
+          $scope.pickedCards.push(cardId);
           if (game.curQuestion.numAnswers === 1) {
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
@@ -70,7 +71,7 @@ angular.module('mean.system')
 
     $scope.getPlayerPosition = obj => obj.color + 1;
 
-    $scope.getBackgroundImage = (index) => {
+    $scope.getBackgroundImage = (id) => {
       const backgroundImageClasses = [
         'spade-on-white-bg',
         'heart-on-white-bg',
@@ -78,20 +79,20 @@ angular.module('mean.system')
         'club-on-white-bg',
       ];
       const numOfImageClasses = backgroundImageClasses.length;
-      const imgClassIndex = index % numOfImageClasses;
+      const imgClassIndex = id % numOfImageClasses;
       const imgClass = backgroundImageClasses[imgClassIndex];
 
       return imgClass;
     };
 
-    $scope.getCardIcon = (index) => {
+    $scope.getCardIcon = (id) => {
       const icons = [
         '/img/icons/spade-extra-small.png',
         '/img/icons/heart-extra-small.png',
         '/img/icons/diamond-extra-small.png',
         '/img/icons/club-extra-small.png',
       ];
-      const quotient = index % icons.length;
+      const quotient = id % icons.length;
       const cardIcon = icons[quotient];
       return cardIcon;
     };
