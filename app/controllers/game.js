@@ -18,15 +18,22 @@ exports.save = (req, res) => {
   newGame.players = players;
   newGame.gameWinner = gameWinner;
   newGame.date = new Date();
-  Game.findOne({gameID}, )
-  newGame.save((err, success) => {
-    if (err) {
-      res.status(500).send({ error: 'An error occured' });
-    } else {
-      console.log(newGame);
-      res.status(200).json(success);
-    }
-  });
+  Game.findOne({ gameID })
+    .exec((err, game) => {
+      if (err) {
+        res.status(500).send({ error: 'An error occured' });
+      } else if (game) {
+        res.status(200).json(game);
+      } else {
+        newGame.save((err, success) => {
+          if (err) {
+            res.status(500).send({ error: 'An error occured' });
+          } else {
+            res.status(200).json(success);
+          }
+        });
+      }
+    });
 };
 
 exports.retrieveGame = (req, res) => {
