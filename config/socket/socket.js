@@ -12,12 +12,12 @@ const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyDnEqkmZeQ6JFpcIth3sljqSPG2OtIwEHU',
-  authDomain: 'mifunecfh.firebaseapp.com',
-  databaseURL: 'https://mifunecfh.firebaseio.com',
-  projectId: 'mifunecfh',
-  storageBucket: 'mifunecfh.appspot.com',
-  messagingSenderId: '443856725939'
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  databaseURL: process.env.DATABASEURL,
+  projectId: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGIGSENDERID,
 };
 firebase.initializeApp(config);
 const database = firebase.database();
@@ -40,8 +40,8 @@ module.exports = (io) => {
 
     // send recieved chat message to all connected sockets
     socket.on('chat message', (chat) => {
-      const game = allGames[gameID];
-      game.players.forEach(player => player.socket.emit('chat message', chat));
+      // const game = allGames[gameID];
+      io.sockets.in(gameID).emit('chat message', chat);
       socket.emit('onlineUsers', onlineUsers);
       chatMessages.push(chat);
       database.ref(`chat/${gameID}`).set(chatMessages);
