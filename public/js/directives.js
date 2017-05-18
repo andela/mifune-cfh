@@ -1,4 +1,4 @@
-/* global $ */
+/* global $ window */
 /* eslint-disable func-names, prefer-arrow-callback */
 angular.module('mean.directives', [])
   .directive('player', function () {
@@ -140,4 +140,3 @@ angular.module('mean.directives', [])
       });
     },
   })]);
-

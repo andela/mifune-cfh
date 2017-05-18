@@ -43,21 +43,16 @@
                 Play with Friends
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section class="col-xs-12 col-md-5">
-        <div ng-show="showOptions">
-          <figure>
-            <img src="/img/cards_attack.png" class="card-attack">
-          </figure>
-        </div>
-        <div ng-hide="showOptions">
-          <img src="/img/heart-ace-large.png" class="img-responsive center-block hidden-xs hidden-sm">
-        </div>
-      </section>
-      <div class="clearfix"></div>
-    </div>
+            <div>
+              <div class="gamename">Game Spool</div>
+              <div class="gamejoin"><a><button class="cfh-btn btn-join btn-pink">Join</button></a></div>
+              <div class="clear"></div>
+            </div>
+          </fieldset>
+        </section>
+      </div>
+    </section>
+
   </div>
   <div>
     <div class="full-width-horizontal-rule"></div>
@@ -90,9 +85,6 @@
     </div>
   </div>
   <div class="clearfix"></div>
-  <div>
-    <div class="full-width-horizontal-rule"></div>
-  </div>
   <div id="message-modal" class="modal fade" role="dialog" >
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -108,9 +100,9 @@
           </select>
           </p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #B22222; border:none;">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-primary" style="width:30%; background-color: #B22222; border:none;" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" style="width:30%;" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
         </div>
       </div>
     </div>
