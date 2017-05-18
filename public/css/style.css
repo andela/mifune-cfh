@@ -14,6 +14,10 @@
    text-transform: uppercase;
 }
 
+.cfh-header{
+  background-color: #2D2D2D;
+}
+
 #landing-charity {
    width: 300px !important;
    margin-left: 15px !important;
@@ -1552,8 +1556,41 @@
   min-height: 100vh;
 }
 
+
 @media screen and (max-width: 720px) {
   .full-page-section {
     min-height: auto;
   }
+}
+
+
+.header-fix {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.left-side {
+  flex: 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .header-fix {
+    flex-wrap: wrap;
+  }
+ .left-side, .right-side {
+   flex: 1 0 100%;
+ }
+ .navbar-nav.navbar-right {
+   display: flex;
+   justify-content: flex-end;
+ }
+}
+
+
+.cfh-logo-text {
+  height: auto;
 }
