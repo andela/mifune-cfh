@@ -861,3 +861,6 @@ html {
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
 
+    .hideSweetAlert + .modal-backdrop.fade.in  {
+      display: none;
+    }
