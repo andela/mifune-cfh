@@ -74,15 +74,16 @@ describe("Game Server",function(){
       done();
     };
     const expectStartGame = function() {
+
       client1.emit('startGame');
       client1.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client2.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client3.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       setTimeout(disconnect,200);
     };
@@ -130,7 +131,7 @@ describe("Game Server",function(){
         data.state.should.equal("waiting for players to pick");
       });
       client6.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       setTimeout(disconnect,200);
     };

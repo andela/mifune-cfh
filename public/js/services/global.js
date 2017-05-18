@@ -29,6 +29,12 @@ angular.module('mean.system')
           .then(results => results[0].data)
     };
   }])
+  .factory('RegionService', ['$http', '$q', function RegionService($http, $q) {
+    return {
+      getCountries: () => $q.all([$http.get('/countries')])
+          .then(results => results[0].data)
+    };
+  }])
   .factory('DonationService', ['$http', '$q', function DonationService($http, $q) {
     return {
       userDonated: donationObject => $q.all([

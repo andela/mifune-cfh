@@ -21,6 +21,15 @@ const guestNames = [
 ];
 
 class Game {
+
+  /**
+   * constructor
+   *
+   * @param  {string} gameID
+   * @param  {Socket} io
+   * @param  {string} region
+   * @return {void}
+   */
   constructor(gameID, io) {
     this.io = io;
     this.gameID = gameID;
@@ -30,6 +39,7 @@ class Game {
     this.gameWinner = -1; // Index in this.players
     this.winnerAutopicked = false;
     this.czar = -1; // Index in this.players
+    this.region = '58f4de8ef08434413b6aec50';
     this.playerMinLimit = 3;
     this.playerMaxLimit = 12;
     this.pointLimit = 5;
@@ -84,7 +94,8 @@ class Game {
       winnerAutopicked: this.winnerAutopicked,
       table: this.table,
       pointLimit: this.pointLimit,
-      curQuestion: this.curQuestion
+      curQuestion: this.curQuestion,
+      region: this.region,
     };
   }
 
@@ -125,8 +136,11 @@ class Game {
       });
 
     const self = this;
+    console.log(this.region, 'region');
     async.parallel([
-      this.getQuestions,
+      (cb) => {
+        this.getQuestions(this.region, cb);
+      },
       this.getAnswers
     ],
       (err, results) => {
@@ -236,8 +250,8 @@ class Game {
     this.sendUpdate();
   }
 
-  getQuestions(cb) {
-    questions.allQuestionsForGame((data) => {
+  getQuestions(region, cb) {
+    questions.allQuestionsForGame(region, (data) => {
       cb(null, data);
     });
   }
