@@ -121,6 +121,7 @@ module.exports = (io) => {
     });
 
     socket.on('CzarCardDraw', () => {
+      console.log(allGames[socket.gameID]);
       allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
     });
   });
