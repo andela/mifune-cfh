@@ -1,19 +1,45 @@
-<div class="cfh-nav">
-  <div class="cfh-logo-text-container">
-    <div class="cfh-logo-text clickable" ng-click="$ctrl.home()">
-      <img src="/img/cards.png"/>
-      <span class="h3">Cards f<span class="pink-text">&hearts;</span>r Humanity</span>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header navbar-nav">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation bar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header navbar-left cfh-logo-text-container clickable">
+              <div class="cfh-logo-text navbar-brand" ng-click="$ctrl.home()">
+                <span class="h3 white-text">
+                  <img src="/img/cards.png"/>
+                  Cards f<span class="pink-text">&hearts;</span>r Humanity
+                </span>
+              </div>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-btn cfh-btn-container">
+                  <span ng-show="$ctrl.showOptions" class="ng-hide">
+                      <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+                  </span>
+                </li>
+                <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
+                  <span>
+                    <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
+                  </span>
+                </li>
+                <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
+                  <span>
+                    <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
+                  </span>
+                </li>
+                <li class="navbar-btn cfh-btn-container">
+                  <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
+                </li>
+                <li class="navbar-btn cfh-btn-container">
+                  <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
-  <div class="cfh-nav-right">
-    <span ng-show="$ctrl.showOptions" class="ng-hide">
-        <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-    </span>
-    <span ng-hide="$ctrl.showOptions">
-        <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
-        <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
-    </span>
-    <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
-    <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
-  </div>
-</div>
+</nav>
