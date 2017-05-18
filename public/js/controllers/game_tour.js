@@ -1,3 +1,4 @@
+/* global $ */
 /* global introJs */
 angular.module('mean.system')
   .controller('GameTourController', ['$scope', '$window', function($scope, $window) {

@@ -1,4 +1,5 @@
 /* eslint-disable no-console, import/no-dynamic-require */
+const firebase = require('firebase');
 const Game = require('./game');
 const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
@@ -9,18 +10,42 @@ const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
+// Initialize Firebase
+const config = {
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  databaseURL: process.env.DATABASEURL,
+  projectId: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGIGSENDERID,
+};
+firebase.initializeApp(config);
+const database = firebase.database();
+
 module.exports = (io) => {
   const allGames = {};
   const allPlayers = {};
   const gamesNeedingPlayers = [];
   let gameID = 0;
   let onlineUsers = [];
+  const chatMessages = [];
 
   io.sockets.on('connection', (socket) => {
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
-
     socket.emit('onlineUsers', onlineUsers);
+
+    // initialize chat when a new socket is connected
+    socket.emit('initializeChat', chatMessages);
+
+    // send recieved chat message to all connected sockets
+    socket.on('chat message', (chat) => {
+      // const game = allGames[gameID];
+      io.sockets.in(gameID).emit('chat message', chat);
+      socket.emit('onlineUsers', onlineUsers);
+      chatMessages.push(chat);
+      database.ref(`chat/${gameID}`).set(chatMessages);
+    });
 
     socket.on('loggedIn', (data) => {
       data.socketID = socket.id;
@@ -31,6 +56,10 @@ module.exports = (io) => {
     socket.on('loggedOut', () => {
       onlineUsers = removeUser(socket.id);
       socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
+
+    socket.on('region', (data) => {
+      socket.regionId = data;
     });
 
     socket.on('invite', (data) => {
@@ -140,13 +169,14 @@ module.exports = (io) => {
       // Also checking the number of players, so node doesn't crash when
       // no one is in this custom room.
       if (game.state === 'awaiting players' && (!game.players.length ||
-          game.players[0].socket.id !== socket.id)) {
+        game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
         console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
         game.players.push(player);
         socket.join(game.gameID);
         socket.gameID = game.gameID;
+        game.region = socket.regionId;
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
@@ -165,12 +195,12 @@ module.exports = (io) => {
       if (createPrivate) {
         createGameWithFriends(player, socket);
       } else {
-        fireGame(player, socket);
+        fireGame(player, socket, socket.regionId);
       }
     }
   };
 
-  const fireGame = (player, socket) => {
+  const fireGame = (player, socket, region) => {
     let game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
@@ -182,6 +212,7 @@ module.exports = (io) => {
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
+      game.region = region;
       console.log(socket.id, 'has joined newly created game', game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
@@ -218,12 +249,14 @@ module.exports = (io) => {
       }
     }
     console.log(socket.id, 'has created unique game', uniqueRoom);
+
     const game = new Game(uniqueRoom, io);
     allPlayers[socket.id] = true;
     game.players.push(player);
     allGames[uniqueRoom] = game;
     socket.join(game.gameID);
     socket.gameID = game.gameID;
+    game.region = socket.regionId;
     game.assignPlayerColors();
     game.assignGuestNames();
     game.sendUpdate();
