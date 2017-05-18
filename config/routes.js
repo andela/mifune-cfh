@@ -15,6 +15,8 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
   // Get saved game data
   app.get('/api/games/history', checkToken, game.retrieveGames);
 
+  // Leaderboard
+  app.get('/api/leaderboard', checkToken, game.getLeaderBoard);
   // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -34,7 +36,7 @@ module.exports = function (app, passport, auth) { // eslint-disable-line
 
     // Donation Routes
   app.post('/donations', users.addDonation);
-  app.get('/donations', users.getDonation);
+  app.get('/api/donations', users.getDonations);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',

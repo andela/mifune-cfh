@@ -9,9 +9,9 @@ angular.module('mean.system')
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       $scope.savedGames = [];
-      let allSavedGames = [];
       $scope.gameCounter = 0;
-      let donationCounter = 0;
+      $scope.donations = [];
+      $scope.donationCounter = 0;
       const user =  $scope.global.user;
       const userID = user;
       $scope.startGame = (gameType) => {
@@ -49,10 +49,10 @@ angular.module('mean.system')
           let gamesCollection = [];
           let chunk = 10;
           for (i=0,j=games.length; i<j; i+=chunk) {
-              gamesChunk = games.slice(i,i+chunk);
+              gamesChunk = games.slice(i, i+chunk);
               gamesCollection.push(gamesChunk);
           }
-          $scope.savedGames = gamesCollection[0];
+          $scope.savedGames = gamesCollection[0] || [];
           $scope.allSavedGames = gamesCollection;
         },
         (err) => {
@@ -60,11 +60,52 @@ angular.module('mean.system')
         });
       }
 
+      $scope.getDonations = () => {
+        userService.getDonations().then(
+          (success) => {
+          console.log(success.data)
+          const userDonations = success.data;
+          userDonations.reverse();
+          // slice the games into chuncks of game arrays for paginations
+          let i;
+          let j;
+          let donationChunk;
+          let donationCollection = [];
+          let chunk = 10;
+          for (i=0,j=userDonations.length; i<j; i+=chunk) {
+              donationChunk = userDonations.slice(i, i+chunk);
+              donationCollection.push(donationChunk);
+          }
+          $scope.donations = donationCollection[0] || [];
+          $scope.allDonations = donationCollection;
+          console.log($scope.donations.length)
+          },
+          (err) => {
+            console.log(err)
+          }
+        )
+      }
+
+      $scope.getLeaderBoard = () => {
+        userService.getLeaderBoard().then(
+          (success) => {
+            console.log(success.data)
+          },
+          (err) => {
+            console.log(err);
+          })
+      }
+
       $scope.nextPage = (item) => {
-        const lent = $scope.allSavedGames.length;
+        const lent = item === 'savedGames' ? $scope.allSavedGames.length : $scope.allDonations.length;
         if (item === 'savedGames' && $scope.gameCounter < lent-1) {
           $scope.gameCounter++;
           $scope.savedGames = $scope.allSavedGames[$scope.gameCounter];    
+        }
+
+        if (item === 'donations' && $scope.donationCounter < lent-1) {
+          $scope.donationCounter++;
+          $scope.donations = $scope.allDonations[$scope.donationCounter];    
         }
       }
 
@@ -72,6 +113,11 @@ angular.module('mean.system')
         if (item === 'savedGames' && $scope.gameCounter > 0) {
           $scope.gameCounter--;
           $scope.savedGames = $scope.allSavedGames[$scope.gameCounter];
+        }
+
+        if (item === 'donations' && $scope.donationCounter > 0) {
+          $scope.donationCounter--;
+          $scope.donations = $scope.allDonations[$scope.donationCounter];    
         }
       }
       

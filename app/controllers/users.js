@@ -251,7 +251,12 @@ exports.addDonation = (req, res) => {
           }
         }
         if (!duplicate) {
-          user.donations.push(req.body);
+          const donation = {
+            amount: req.body.amount,
+            donationID: req.body.crowdrise_donation_id,
+            data: new Date()
+          };
+          user.donations.push(donation);
           user.premium = 1;
           user.save();
         }
@@ -261,17 +266,20 @@ exports.addDonation = (req, res) => {
   res.send();
 };
 
-exports.getDonation = (req, res) => {
+exports.getDonations = (req, res) => {
   const userID = JSON.parse(req.cookies.user).id;
   console.log('getDonations', userID);
   if (userID) {
-    // Verify that the object contains crowdrise data
     User.findOne({
       _id: userID
     })
       .exec((err, user) => {
-        console.log('user', user.donations);
-        res.status(200).json(user);
+        if (err) {
+          res.status(500).json({ error: err });
+        } else {
+          console.log('user', user.donations);
+          res.status(200).json(user.donations);
+        }
       });
   }
 };

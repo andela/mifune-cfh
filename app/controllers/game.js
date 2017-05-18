@@ -50,3 +50,16 @@ exports.retrieveGames = (req, res) => {
     }
   });
 };
+
+exports.getLeaderBoard = (req, res) => {
+  Game.find({}, (err, data) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else if (data.length > 0) {
+      console.log(data);
+      res.status(200).json(data);
+    } else {
+      res.status(404).json('No Game found');
+    }
+  });
+};

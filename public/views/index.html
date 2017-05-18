@@ -158,8 +158,8 @@
         </div>
         <div class="modal-footer">
           <ul class="pager">
-            <li ng-class="{'disabled': gameCounter === 0}"><a ng-click="previousPage('savedGames')">Previous</a></li>
-            <li ng-class="{'disabled': gameCounter === allSavedGames.length - 1}"><a ng-click="nextPage('savedGames')">Next</a></li>
+            <li ng-class="{'disabled': gameCounter === 0 || savedGames.length === 0}"><a ng-click="previousPage('savedGames')">Previous</a></li>
+            <li ng-class="{'disabled': gameCounter === allSavedGames.length - 1 || savedGames.length === 0}"><a ng-click="nextPage('savedGames')">Next</a></li>
           </ul>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -202,11 +202,28 @@
           <h4 class="modal-title">View Your Donations</h4>
         </div>
         <div class="modal-body">
-          <ul>
-            <li></li>
-          </ul>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Donation ID Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="donation in donations" ng-class-odd="'striped'">
+                <td>{{donation.date.slice(0, 10)}}, {{donation.date.slice(11, -1)}}</td>
+                <td>{{donation.amount}}</td>
+                <td>{{game.donationID}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer">
+          <ul class="pager">
+            <li ng-class="{'disabled': donationCounter === 0 || donations.length === 0}"><a ng-click="previousPage('donations')">Previous</a></li>
+            <li ng-class="{'disabled': donationCounter === allDonations.length - 1 || donations.length === 0}"><a ng-click="nextPage('donations')">Next</a></li>
+          </ul>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
