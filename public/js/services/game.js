@@ -12,7 +12,7 @@ angular.module('mean.system')
       table: [],
       czar: null,
       playerMinLimit: 3,
-      playerMaxLimit: 6,
+      playerMaxLimit: 12,
       pointLimit: null,
       state: null,
       round: 0,
@@ -138,6 +138,14 @@ angular.module('mean.system')
       if (newState || game.curQuestion !== data.curQuestion) {
         game.state = data.state;
       }
+      if (data.state === 'Please wait for Czar to draw cards') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('You\'re the czar. Please wait!');
+        } else {
+          addToNotificationQueue('wait for czar to shuffle');
+        }
+      } else
 
       if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
@@ -160,6 +168,12 @@ angular.module('mean.system')
           addToNotificationQueue("Everyone's done. Choose the winner!");
         } else {
           addToNotificationQueue('The czar is contemplating...');
+        }
+      } else if (data.state === 'Please wait for Czar to draw cards') {
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue('Click to Draw the Cards!');
+        } else {
+          addToNotificationQueue('The czar is drawing the cards...');
         }
       } else if (data.state === 'winner has been chosen' &&
               game.curQuestion.text.indexOf('<u></u>') > -1) {
@@ -202,6 +216,10 @@ angular.module('mean.system')
 
     game.pickWinning = (card) => {
       socket.emit('pickWinning', { card: card.id });
+    };
+
+    game.CzarCardDraw = () => {
+      socket.emit('CzarCardDraw');
     };
 
     decrementTime();

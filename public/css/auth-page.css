@@ -4,6 +4,27 @@
   margin-bottom: 7%;
   font-weight: 400;
 }
+
+.vspace label{
+  color: #2D2D2D;
+  margin-left: 15%;
+}
+
+
+.login-wrapper{
+   border: solid 1.5px mintcream;
+   padding: 40px 40px;
+   border-radius: 8px;
+   background-color: #F2F3EE;   
+}
+
+.signup-wrapper{
+   border: solid 1.5px mintcream;
+   padding: 40px 40px;
+   border-radius: 8px;
+   background-color: #F2F3EE;
+}
+
 .wrapperInfo{
 	position:absolute;	z-index:1;
 	background:red;
@@ -65,8 +86,18 @@
 }
 .form-signin .checkbox {
   font-weight: normal;
+  text-align: center;
 }
+
+.form-signin .checkbox label{
+  color: #2D2D2D;
+}
+
 .form-signin .form-control {
+  border-radius: 0px;
+  margin-bottom: 10px;
+  width: 70%;
+  margin-left: 15%;
 	border: 1px solid #FF004E;
   position: relative;
   height: auto;
@@ -80,7 +111,6 @@
   z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -93,6 +123,8 @@
     color: #fff;
     background-color: #FF004E;
     border-color: #FF004E;
+    width: 70%;
+    margin-left: 15%;
 }
 .btn-primary:hover {
     color: #FF004E;
@@ -109,7 +141,8 @@ a {
   width:24%;
 }
 .bg {
-	margin-left: 35%;
+	text-align: center;
+  color: #2D2D2D;
 	display: block;
   width: 100%;
   line-height: 1.3333333;
@@ -126,6 +159,7 @@ li {
 
  #contain-avatars {
   margin-top: 25px;
+  padding-left: 20px;
 }
 
  .avatar-list {

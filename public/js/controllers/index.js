@@ -57,11 +57,5 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
-
-      socket.on('newInvite', (data) => {
-        const { host, hash } = $window.location;
-        const inviteLink = `${host}/${hash}app?game=${data}`
-        console.log(inviteLink);
-      })
     }
   ]);

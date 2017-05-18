@@ -14,30 +14,16 @@
 </script>
 
 <div id="container-fluid" class="top-section" ng-controller="IndexController">
-  <div class="cfh-nav">
-    <div class="cfh-nav-image">
-      <img src="/img/cards.png" />
-    </div>
-    <div class="cfh-nav-right">
-      <span ng-hide="showOptions">
-        <a ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-      </span>
-      <span ng-show="showOptions">
-        <a ng-click="signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
-        <a ng-click="signIn()"><button class="cfh-btn btn-white">Login</button></a>
-      </span>
-      <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
-    </div>
-  </div>
+  <header></header>
   <div class="row cfh-explanation">
-    <section class="col-sm-6">
+    <section class="col-sm-7">
       <div class="txt">
         <p>Cards<br />for <br/>Humanity</p>
         <h5> Cards for Humanity is a fast-paced online version of the popular card game, <a href="http://cardsagainsthumanity.com/"
             target="_blank">Cards Against Humanity</a>, that gives you the opportunity to donate to children in need - all
           while remaining as despicable and awkward as you naturally are.
         </h5>
-        <div>
+        <div class="col-xs-12">
           <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
           <a href="#!/gametour"><button class="cfh-btn2 btn-white">How to Play</button></a>
           <a><button ng-click="startGame('guest')" class="cfh-btn2 btn-pink">Play as Guest</button></a>
@@ -45,7 +31,7 @@
         </div>
       </div>
     </section>
-    <section class="col-sm-6">
+    <section class="col-sm-5">
       <div ng-show="showOptions">
         <figure>
           <img src="img/cards_attack.png" class="card-attack">
@@ -70,9 +56,10 @@
       </div>
     </section>
   </div>
-</div>
 <div id="team">
-  <div class="row cfh-team-row">
+  <div>
+<div class="full-width-horizontal-rule"></div>
+</div>
     <div class="col-md-7">
       <ul id="categories" class="clr">
         <li class="pusher"></li>
@@ -124,7 +111,7 @@
     </div>
     <div class="col-sm-4 team-text">
       <div class="row txt">
-        <h1>Team Mifune</h1>
+        <h1 class="team-name">Team Mifune</h1>
       </div>
       <div class="row">
         <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
@@ -134,4 +121,5 @@
       </div>
     </div>
   </div>
+  <div class="clearfix"></div>
 </div>

@@ -34,7 +34,8 @@ module.exports = (io) => {
     });
 
     socket.on('invite', (data) => {
-      socket.broadcast.to(data.to).emit('newInvite', data.gameID);
+      console.log(data, 'data');
+      socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
     });
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
@@ -88,6 +89,10 @@ module.exports = (io) => {
     socket.on('disconnect', () => {
       onlineUsers = removeUser(socket.id);
       exitGame(socket);
+    });
+
+    socket.on('CzarCardDraw', () => {
+      allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
     });
   });
 
@@ -149,10 +154,11 @@ module.exports = (io) => {
         game.sendNotification(`${player.username} has joined the game!`);
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
-          game.prepareGame();
+          game.state = 'waiting to start';
         }
       } else {
-        // TODO: Send an error message back to this user saying the game has already started
+        io.to(player.socket.id).emit('alert',
+          `Sorry, game ${game.gameID} already has ${game.playerMaxLimit} players.`);
       }
     } else {
       // Put players into the general queue
@@ -194,7 +200,7 @@ module.exports = (io) => {
       game.sendNotification(`${player.username} has joined the game!`);
       if (game.players.length >= game.playerMaxLimit) {
         gamesNeedingPlayers.shift();
-        game.prepareGame();
+        game.state = 'waiting to start';
       }
     }
   };
@@ -232,6 +238,7 @@ module.exports = (io) => {
       delete allPlayers[socket.id];
       if (game.state === 'awaiting players' ||
         game.players.length - 1 >= game.playerMinLimit) {
+        game.state = 'awaiting players';
         game.removePlayer(socket.id);
       } else {
         game.stateDissolveGame();

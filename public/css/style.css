@@ -18,6 +18,45 @@
    top: -65px;
  }
 
+ .button-notification{
+   width: 92px;
+   border: none;
+ }
+
+ .msg{
+   color: mintcream;
+ }
+
+ .invite-dropdwn li{
+   padding: 10px 10px;
+   width: 350px;
+ }
+
+ .invite-dropdwn>li>a{
+   padding: 0px;
+   display: inline;
+ }
+ 
+ .invite-dropdwn>li>span{
+   text-transform: capitalize;
+ }
+
+ .glyphicon-envelope{
+   font-size: 3em;
+   margin-top: 1%;
+ }
+
+ .dropdown.open .dropdown-menu{
+   display: block;
+   margin-left: -100%
+ }
+
+ .notify-badge{
+   margin-top: -22%;
+   background-color: mintcream;
+   color: #2D2D2D;
+ }
+
  #tweet-container-index {
    margin-top: 10px;
    display: inline-block;
@@ -73,6 +112,10 @@
    float: right;
    margin-right: 20px;
    margin-top: 7px;
+ }
+
+ .invite-button{
+   width: 96px !important;
  }
 
  #facebook-share {
@@ -539,8 +582,6 @@
 
  #team {
    max-width: 1400px;
-   background: white;
-
  }
 
  .floater {
@@ -1246,15 +1287,13 @@
    border: none;
    display: inline;
    text-decoration: none;
-   float: right;
-   margin-bottom: 0;
-   width: 118px;
-   height: 38px;
+   padding: 1.3rem 1.8rem;
+   width: 115px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-   font-size: 14px;
+   font-size: 12px;
    text-align: center;
    line-height: 120%;
-   margin: 15px 2px 1px 7px;
+   margin: 8px;
  }
 
  .cfh-btn2 {
@@ -1287,18 +1326,39 @@
 
  .cfh-nav {
   display: flex;
-  alight-items: center;
+  align-items: center;
   justify-content: space-between;
   align-content: center;
   padding: 2rem;
  }
-
- .cfh-nav-image {
-   float: left;
+ .cfh-nav > div {
+  flex: 1 auto;
  }
 
-.cfh-nav-right {
-   width:100%;
+ .cfh-nav-image {
+   display: flex;
+   align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+   color: #ff0e52;
+ }
+
+ .cfh-nav-image img {
+   width: 50px;
+   height: 50px;
+ }
+ .cfh-nav-image .text-logo-icon {
+   margin-left: 10px; 
+ }
+ .text-logo-icon .pink-text {
+   color: #ff0e52;
+ }
+
+ .cfh-nav-right{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+   align-items: center;
  }
  /* Cfh Team*/
 
@@ -1343,7 +1403,13 @@
  .card-attack {
    width: 500px;
    height: auto;
-   margin: 100px;
+ }
+
+ .full-width-horizontal-rule {
+   height: 1px;
+   width: 95%;
+   margin: 1em auto;
+   border: 0.5px solid #ff1a56;
  }
 
  .cfh-explanation .txt p {
@@ -1449,7 +1515,7 @@
    margin-top: 50px;
    border-radius: 8px
  }*/
- .team-text{
+ .team-text {
      margin-top: 7%;
 }
 .team-text p {
@@ -1457,6 +1523,11 @@
 }
 .team-text h5 {
   line-height: 8vh;
+  color: white;
+}
+
+.team-name {
+  color: #eeeeee;
 }
 
  .team-container {

@@ -191,43 +191,60 @@ angular.module('mean.system')
           );
           }
         }
-    // });
+      });
 
-        $scope.$watch('game.gameID', () => {
-          if (game.gameID && game.state === 'awaiting players') {
-            if (!$scope.isCustomGame() && $location.search().game) {
+      $scope.$watch('game.gameID', () => {
+        if (game.gameID && game.state === 'awaiting players') {
+          if (!$scope.isCustomGame() && $location.search().game) {
           // If the player didn't successfully enter the request room,
           // reset the URL so they don't think they're in the requested room.
-              $location.search({});
-            } else if ($scope.isCustomGame() && !$location.search().game) {
+            $location.search({});
+          } else if ($scope.isCustomGame() && !$location.search().game) {
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
-              $location.search({ game: game.gameID });
-              if (!$scope.modalShown) {
-                setTimeout(() => {
-                  const link = document.URL;
-                  const txt = 'Give the following link to your friends so they can join your game: ';
-                  $('#lobby-how-to-play').text(txt);
-                  $('#oh-el')
-                  .css({ 'text-align': 'center',
-                    'font-size': '22px',
-                    background: 'white',
-                    color: 'black' }).text(link);
-                }, 200);
-                $scope.modalShown = true;
-              }
+            $location.search({ game: game.gameID });
+            if (!$scope.modalShown) {
+              setTimeout(() => {
+                const link = document.URL;
+                const txt =
+                'Give the following link to your friends so they can join your game: ';
+                $('#lobby-how-to-play').text(txt);
+                $('#oh-el')
+                .css({
+                  'text-align': 'center',
+                  'font-size': '22px',
+                  background: 'white',
+                  color: 'black'
+                })
+                .text(link);
+              }, 200);
+              $scope.modalShown = true;
             }
           }
+        }
 
-          if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-            game.joinGame('joinGame', $location.search().game);
-          } else if ($location.search().custom) {
-            game.joinGame('joinGame', null, true);
-          } else {
-            game.joinGame();
-          }
-        });
+        if ($location.search().game && !/^\d+$/.test($location.search().game)) {
+          game.joinGame('joinGame', $location.search().game);
+        } else if ($location.search().custom) {
+          game.joinGame('joinGame', null, true);
+        } else {
+          game.joinGame();
+        }
       });
+
+      $scope.shuffleCards = () => {
+        const card = $('#card');
+        card.addClass('animated rotateOut');
+        $timeout(() => {
+          $scope.CzarCardDraw();
+        }, 1000);
+      };
+
+      $scope.CzarCardDraw = () => {
+        if ($scope.isCzar()) {
+          game.CzarCardDraw();
+        }
+      };
     }
   ]);
 
