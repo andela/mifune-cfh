@@ -85,5 +85,6 @@ angular.module('mean.system')
         const inviteLink = `${host}/${hash}app?game=${data}`
         console.log(inviteLink);
       })
+
     }
   ]);
