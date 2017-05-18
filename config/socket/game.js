@@ -136,10 +136,10 @@ class Game {
       });
 
     const self = this;
-    console.log(this.region, 'region');
+    const region = this.region;
     async.parallel([
       (cb) => {
-        this.getQuestions(this.region, cb);
+        this.getQuestions(region, cb);
       },
       this.getAnswers
     ],
@@ -328,7 +328,7 @@ class Game {
             }
             if (cardIndex !== null) {
               tableCard.push(this.players[playerIndex].hand.splice(cardIndex,
-              1)[0]);
+                1)[0]);
             }
           }
           if (tableCard.length === this.curQuestion.numAnswers) {
