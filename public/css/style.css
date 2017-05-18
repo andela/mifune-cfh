@@ -36,6 +36,49 @@
    margin-bottom: 10px;
  }
 
+ .notify-invite {
+   padding: 20px 0px;
+ }
+
+ .notify-invite ul{
+   width: 100% !important;
+   padding: 0 0;
+ }
+
+ .invite-ul{
+   background-color: #ffffff;
+  }
+  .invite-ul :nth-child(even){
+    background-color: #e5e5e5;
+  }
+  .user-list :nth-child(even){
+    background-color: #FF5A8C;
+  }
+
+.notify-invite ul li {
+  text-transform: capitalize !important;
+  width: 100% !important;
+  height: 50px;
+ }
+.notify-invite ul li :nth-child(even){
+ background-color: #FF5A8C;
+}
+ .notify-invite span{
+    display: inline-block;
+    padding-top: 12px;
+    margin-left: 20px;
+ }
+
+ .notify-invite ul button {
+   float: right;
+   margin-right: 20px;
+   margin-top: 7px;
+ }
+
+ .invite-button{
+   width: 96px !important;
+ }
+
  #facebook-share {
    font-size: 12px;
    padding: 3px;
@@ -86,6 +129,7 @@
  #wish {
    max-width: 25%;
  }
+
 
  @media(min-width: 400px) and (max-width: 950px) {
    .some-text {
@@ -499,8 +543,6 @@
 
  #team {
    max-width: 1400px;
-   background: white;
-
  }
 
  .floater {
@@ -1205,19 +1247,14 @@
  .cfh-btn {
    border: none;
    display: inline;
-   padding: 10px 20px;
    text-decoration: none;
-   float: right;
-   margin-bottom: 0;
-   width: 118px;
-   height: 38px;
+   padding: 1.3rem 1.8rem;
+   width: 115px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-   font-size: 14px;
+   font-size: 12px;
    text-align: center;
    line-height: 120%;
-   margin: 34px 20px 34px 34px;
-   margin-top: 50px;
-   border-radius: 0px
+   margin: 8px;
  }
 
  .cfh-btn2 {
@@ -1227,7 +1264,6 @@
    text-decoration: none;
    float: left;
    margin-right: 10px;
-   width: 150px;
    height: 38px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
    font-size: 14px;
@@ -1240,23 +1276,50 @@
  .btn-pink {
    background-color: #ff0e52;
    color: white;
-   margin:3%;
  }
 
  .btn-white {
    background-color: white;
    color: #ff0e52;
-   margin:3%
+   margin:1tem;
  }
  /*Cfh Nav*/
 
  .cfh-nav {
-   height: 50px;
-   margin: 30px 30px 30px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  padding: 2rem;
+ }
+ .cfh-nav > div {
+  flex: 1 auto;
  }
 
  .cfh-nav-image {
-   float: left;
+   display: flex;
+   align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+   color: #ff0e52;
+ }
+
+ .cfh-nav-image img {
+   width: 50px;
+   height: 50px;
+ }
+ .cfh-nav-image .text-logo-icon {
+   margin-left: 10px; 
+ }
+ .text-logo-icon .pink-text {
+   color: #ff0e52;
+ }
+
+ .cfh-nav-right{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-end;
+   align-items: center;
  }
  /* Cfh Team*/
 
@@ -1301,7 +1364,13 @@
  .card-attack {
    width: 500px;
    height: auto;
-   margin: 100px;
+ }
+
+ .full-width-horizontal-rule {
+   height: 1px;
+   width: 95%;
+   margin: 1em auto;
+   border: 0.5px solid #ff1a56;
  }
 
  .cfh-explanation .txt p {
@@ -1390,7 +1459,7 @@
    top: 47%;
  }
 
- .cfh-team {
+ /*.cfh-team {
    border-bottom: 0 solid white;
    display: inline;
    text-decoration: none;
@@ -1406,8 +1475,8 @@
    margin: 34px 20px 34px 34px;
    margin-top: 50px;
    border-radius: 8px
- }
- .team-text{
+ }*/
+ .team-text {
      margin-top: 7%;
 }
 .team-text p {
@@ -1415,6 +1484,11 @@
 }
 .team-text h5 {
   line-height: 8vh;
+  color: white;
+}
+
+.team-name {
+  color: #eeeeee;
 }
 
  .team-container {
@@ -1428,6 +1502,7 @@
 #categories{
   overflow:hidden;
   width:90%;
+  margin:3%;
 }
 .clr:after{
   content:"";
@@ -1527,3 +1602,42 @@
   padding-top:10%;
 }
 
+.homeLink{
+  font-size: 2rem;
+}
+
+fieldset {
+    font-family: sans-serif;
+    border: 2px solid #ff0e52;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+fieldset legend {
+    background: #ff0e52;
+    color: #fff;
+    padding: 5px 10px ;
+    width: 80%;
+    font-size: 32px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px #ddd;
+    margin-left: 20px;
+}
+.gamename{
+  width: 45%;
+  float: left;
+}
+.gamejoin{
+  width: 45%;
+  float: right;
+}
+.btn-join{
+  margin-top: -10px;
+}
+.gamejoinwrapper{
+  margin-bottom: 30px;
+}
+.top-section{
+  height: 100vh;
+}

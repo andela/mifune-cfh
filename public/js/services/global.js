@@ -9,7 +9,7 @@ angular.module('mean.system')
         $cookies.remove('XSRF-TOKEN');
         $cookies.remove('user');
       },
-      isAuthenticated: () => {
+      getSavedUser: () => {
         const authenticated = $cookies.get('XSRF-TOKEN') !== undefined;
         const user = $cookies.get('user');
         return {
@@ -26,6 +26,12 @@ angular.module('mean.system')
   .factory('AvatarService', ['$http', '$q', function AvatarService($http, $q) {
     return {
       getAvatars: () => $q.all([$http.get('/avatars')])
+          .then(results => results[0].data)
+    };
+  }])
+  .factory('RegionService', ['$http', '$q', function RegionService($http, $q) {
+    return {
+      getCountries: () => $q.all([$http.get('/countries')])
           .then(results => results[0].data)
     };
   }])

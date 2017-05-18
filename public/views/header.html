@@ -1,34 +1,17 @@
-<!-- Brand and toggle get grouped for better mobile display -->
-
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="navbar-brand" href="/">Cards For Humanity</a>
+<div class="cfh-nav">
+  <div class="cfh-nav-image">
+    <a ng-click="$ctrl.home()"><img src="/img/cards.png" /></a>
+    <a class="text-logo-icon" ng-click="$ctrl.home()"><span>Cards f<span class="pink-text">&hearts;</span>r Humanity</span></a>
+  </div>
+  <div class="cfh-nav-right">
+    <span ng-show="$ctrl.showOptions" class="ng-hide">
+        <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+    </span>
+    <span ng-hide="$ctrl.showOptions">
+        <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
+        <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
+    </span>
+    <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
+    <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
+  </div>
 </div>
-
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-  <ul class="nav navbar-nav">
-    <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}"><a href="#!/{{item.link}}">{{item.title}}</a></li>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right" data-ng-hide="global.authenticated">
-    <li><a href="signup">Sign up</a></li>
-    <li class="divider-vertical"></li>
-    <li><a href="signin">Sign in</a>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right" data-ng-show="global.authenticated">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{global.user.name}} <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a href="/signout">Sign out</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div><!-- /.navbar-collapse -->

@@ -1,14 +1,16 @@
 /*eslint-disable */
+/* global window, angular */
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location',
-    'socket', 'game', 'AvatarService', 'userService',
-    function IndexController($scope, Global, $location,
-      socket, game, AvatarService, userService) {
-      $scope.global = Global.isAuthenticated();
+  .controller('IndexController', ['$scope', 'Global', '$location', '$window',
+    'socket', 'game', 'AvatarService', 'RegionService', 'userService',
+    function IndexController($scope, Global, $location, $window,
+      socket, game, AvatarService, RegionService, userService) {
+      $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
       const user =  $scope.global.user;
-      $scope.startGame = () => {
+      $scope.gameType = 'guest';
+      $scope.startGame = (gameType) => {
         swal({
           title: 'Start a new Game?',
           text: 'You want to start the game now?',
@@ -22,24 +24,20 @@ angular.module('mean.system')
         },
         (isConfirm) => {
           if (isConfirm) {
-            const data = {
-              gameOwnerId: user.id,
-              players: [user.id]
-            };
-            userService.startGame(data).then(({ data }) => {
-              Global.setCurrentGameId(data._id);
-              $location.path('/app');
-            });
-          } else {
-            swal('Cancelled', 'You are off! Shitty you!!!', 'error');
+              $scope.gameType = gameType;
+              displayMessage("#message-modal");
           }
         });
       };
 
-      $scope.playAsGuest = () => {
-        game.joinGame();
-        $location.path('/app');
-      };
+      $scope.gameOn = () => {
+        if ($scope.gameType === 'guest'){
+          game.joinGame();
+          $location.path('/app');
+        } else {
+          $location.path('/app').search('custom');
+        }
+      }
 
       $scope.showError = () => {
         if ($location.search().error) {
@@ -52,7 +50,7 @@ angular.module('mean.system')
         Global.removeTokenAndUser();
         $location.path('/#')
       };
-      
+
       $scope.signIn = () => {
         $location.path('/signin');
       };
@@ -65,5 +63,27 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+        $scope.countries = [];
+
+        RegionService.getCountries()
+          .then((data) => {
+            $scope.countries = data;
+          });
+
+        const displayMessage = (modalID) => {
+          $(modalID).modal();
+        };
+
+        $scope.$watch('selectedCountry', () =>{
+          if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
+
+             socket.emit('region', $scope.selectedCountry);
+          }
+        });
+      socket.on('newInvite', (data) => {
+        const { host, hash } = $window.location;
+        const inviteLink = `${host}/${hash}app?game=${data}`
+        console.log(inviteLink);
+      })
     }
   ]);

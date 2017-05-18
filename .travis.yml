@@ -6,6 +6,6 @@ before_script:
   - npm install -g bower
   - bower install
   - sleep 15
-services: 
+services:
   - mongodb
 

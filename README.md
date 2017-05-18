@@ -26,7 +26,7 @@ The game is simple - each player is given 10 answer cards which are used to fill
 
 Cards Against Humanity is open-source and licensed under Creative Commons. The idea for Cards for Humanity was to create a web version of the game we love so much, while still doing something good for humanity. To achieve this we integrated the option to donate to the Make a Wish Foundation.
 
-The app is completely functional across all devices - from iPhone to full-sized desktop. We used Socket.io to create rooms which hold up 6 players at a time, and also included the functionality to create private rooms once logged in. Passport handles authentication with Local, Twitter, Facebook, Google and Github strategies implemented. 
+The app is completely functional across all devices - from iPhone to full-sized desktop. We used Socket.io to create rooms which hold up 6 players at a time, and also included the functionality to create private rooms once logged in. Passport handles authentication with Local, Twitter, Facebook, Google and Github strategies implemented.
 
 ![alt-text](https://dl.dropboxusercontent.com/u/7390609/CFHforGit.png "Cards for Humanity views")
 
@@ -42,10 +42,10 @@ Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Expres
 
 Setting up this project on your local machine is easy. All you need to do is follow these instructions:
 
-- **Install NodeJS**: You may find the appropriate installation instructions for your computer 
+- **Install NodeJS**: You may find the appropriate installation instructions for your computer
 [at this link](https://nodejs.org/en/download/). Skip this step if you already have a recent version of Node on your computer.
 
-- **Install MongoDB**: Follow the instructions [at this link](https://www.mongodb.com/download-center?jmp=nav#community) 
+- **Install MongoDB**: Follow the instructions [at this link](https://www.mongodb.com/download-center?jmp=nav#community)
 to set up MongoDB on your computer. Skip this step if you previously installed MongoDB.
 
 - **Clone this repo**: Open a terminal (Mac and Linux) or a command prompt (Windows) and enter this command:
@@ -55,15 +55,15 @@ to set up MongoDB on your computer. Skip this step if you previously installed M
 - **Install project dependencies**: In the terminal/command prompt, enter this command:
 
     `npm install`
-    
+
 - **Install Bower components**: Enter each of these commands in the terminal/command prompt:
     ```bash
     npm install -g bower
-    
+
     bower install
     ```
 
-- **Configure MongoDB**: You need to configure your MongoDB to make it work with this app. In the root of this 
+- **Configure MongoDB**: You need to configure your MongoDB to make it work with this app. In the root of this
 project, create a file named `.env` and add the following configuration rules to it:
     ```bash
     MONGOHQ_URL=mongodb://localhost:27017/mifune
@@ -76,7 +76,7 @@ project, create a file named `.env` and add the following configuration rules to
 
       `brew services start mongodb`
 
-  - For other operating systems or a Mac without Homebrew, please consult 
+  - For other operating systems or a Mac without Homebrew, please consult
   [this link](https://docs.mongodb.com/v3.2/administration/install-community/).
 
 - **Run the App**: Enter the following in your terminal/command prompt:
@@ -87,7 +87,7 @@ project, create a file named `.env` and add the following configuration rules to
 
     `npm run test:dev`
 
-- **Open the Live App in a browser**: Launch your favorite web browser and navigate 
+- **Open the Live App in a browser**: Launch your favorite web browser and navigate
 to `http://localhost:3000`. You should see a live version of the app that's running on your machine. Voila!
 
 ## License

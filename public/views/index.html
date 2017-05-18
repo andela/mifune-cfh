@@ -13,58 +13,135 @@
 
 </script>
 
-
-<div landing id="container-fluid" >
-  <div class="cfh-nav" ng-controller="IndexController">
-    <div class="cfh-nav-image" >
-      <img src="/img/cards.png" />
-    </div>
-    <div>
-      <span ng-hide="showOptions">
-            <a ng-click="logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-            <a href="#!/team" class="cfh-team">Meet the team</a>
-        </span>
-      <span ng-show="showOptions">
-            <a ng-click="signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
-            <a ng-click="signIn()"><button class="cfh-btn btn-white">Login</button></a>
-             <a href="#!/team" class="cfh-team">Meet the team</a>
-        </span>
-    </div>
-  </div>
+<div id="container-fluid" class="top-section" ng-controller="IndexController">
+  <header></header>
   <div class="row cfh-explanation">
-    <section class="col-sm-6">
+    <section class="col-sm-7">
       <div class="txt">
         <p>Cards<br />for <br/>Humanity</p>
         <h5> Cards for Humanity is a fast-paced online version of the popular card game, <a href="http://cardsagainsthumanity.com/"
             target="_blank">Cards Against Humanity</a>, that gives you the opportunity to donate to children in need - all
           while remaining as despicable and awkward as you naturally are.
         </h5>
-        <div>
+        <div class="col-xs-12">
           <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
           <a href="#!/gametour"><button class="cfh-btn2 btn-white">How to Play</button></a>
+          <a><button ng-click="startGame('guest')" class="cfh-btn2 btn-pink">Play as Guest</button></a>
+          <a><button ng-click="startGame('player')" class="cfh-btn2 btn-white">Play with Friends</button></a>
         </div>
       </div>
     </section>
-    <section class="col-sm-6">
+    <section class="col-sm-5">
       <div ng-show="showOptions">
         <figure>
           <img src="img/cards_attack.png" class="card-attack">
         </figure>
       </div>
       <div ng-hide="showOptions">
-        <div class="row start-game-button">
-        <button>Play as Guest</button>
-        <button>Play With Friends</button>
-        <div>
-        </div>
-        <div class="flat-button">Join a Game</div>
-        <div class="row game-list">
-          <div class="avail-game">
-            <h3 class="align-middle"> Game Scrum</h3>
-            <button>Join</button>
+        <section style="margin: 10px;">
+          <fieldset style="min-height:100px;">
+            <legend><b> Join Game </b> </legend>
+            <div class="gamejoinwrapper">
+              <div class="gamename">Game Scrum</div>
+              <div class="gamejoin"><a><button class="cfh-btn btn-join btn-pink">Join</button></a></div>
+              <div class="clear"></div>
+            </div>
+            <div>
+              <div class="gamename">Game Spool</div>
+              <div class="gamejoin"><a><button class="cfh-btn btn-join btn-pink">Join</button></a></div>
+              <div class="clear"></div>
+            </div>
+          </fieldset>
+        </section>
+      </div>
+    </section>
+  </div>
+<div id="team">
+  <div>
+<div class="full-width-horizontal-rule"></div>
+</div>
+    <div class="col-md-7">
+      <ul id="categories" class="clr">
+        <li class="pusher"></li>
+        <li>
+          <div>
+            <img src="/img/folusho.jpeg" alt="" />
+            <h1>Folusho Oladipo</h1>
           </div>
+        </li>
+        <li>
+          <div>
+            <img src="/img/Precious.png" alt="" />
+            <h1>Precious Ijege</h1>
+          </div>
+        </li>
+        <li>
+          <div>
+            <img src="img/chibujax.jpg" alt="" />
+            <h1>Uchendu Chibueze</h1>
+          </div>
+        </li>
+        <li>
+          <div>
+            <img src="/img/Hope.jpg" alt="" />
+            <h1>Hope Ngerebara</h1>
+          </div>
+        </li>
+        <li>
+          <div>
+            <img src="/img/jude.jpeg" alt="" />
+            <h1>Etanuwoma Jude </h1>
+          </div>
+        </li>
+        <li class="pusher"></li>
+        <li>
+          <div>
+            <img src="img/ifiok.jpeg" alt="" />
+            <h1>Eyo Ifiok</h1>
+          </div>
+        </li>
+
+        <li>
+          <div>
+            <img src="/img/Obinna.jpeg" alt="" />
+            <h1>Nnenanya Obinna </h1>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-4 team-text">
+      <div class="row txt">
+        <h1 class="team-name">Team Mifune</h1>
+      </div>
+      <div class="row">
+        <h5> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
+          <a href="/donate"><b>give</b></a>. Have fun while playing.
+        </h5>
+        <a href="#"><button class="cfh-btn2 btn-pink">Donate</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="message-modal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: #800000">Diversity is Good, But Simplicity is the Best</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{message}}</p><br>
+          <p>Kindly select a region&nbsp;&nbsp;
+          <select id="selectedCountry" style="text-align:center;" ng-model="selectedCountry" >
+            <option ng-repeat="country in countries" value={{country.regionId}} >{{country.country}}</option>
+          </select>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #B22222; border:none;">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
         </div>
       </div>
+    </div>
   </div>
-  </section>
 </div>
