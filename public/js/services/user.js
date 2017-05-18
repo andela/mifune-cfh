@@ -5,6 +5,6 @@ angular.module('mean.system')
       signIn: data => $http.post('/api/auth/login', data),
       retrieveUsers: () => $http.get('/api/search/users'),
       saveGame: data => $http.post('/api/games', data),
-      retrieveGame: gameOwnerId => $http.get(`/api/users/${gameOwnerId}/games`)
+      retrieveGames: () => $http.get('/api/games/history')
     };
   }]);

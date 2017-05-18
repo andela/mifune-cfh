@@ -8,7 +8,12 @@ angular.module('mean.system')
       $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
+      $scope.savedGames = [];
+      let allSavedGames = [];
+      $scope.gameCounter = 0;
+      let donationCounter = 0;
       const user =  $scope.global.user;
+      const userID = user;
       $scope.startGame = (gameType) => {
         swal({
           title: 'Start a new Game?',
@@ -32,6 +37,44 @@ angular.module('mean.system')
           }
         });
       };
+
+      $scope.retrieveGames = () => {
+        userService.retrieveGames(userID).then((success) => {
+          const games = success.data;
+          games.reverse();
+          // slice the games into chuncks of game arrays for paginations
+          let i;
+          let j;
+          let gamesChunk;
+          let gamesCollection = [];
+          let chunk = 10;
+          for (i=0,j=games.length; i<j; i+=chunk) {
+              gamesChunk = games.slice(i,i+chunk);
+              gamesCollection.push(gamesChunk);
+          }
+          $scope.savedGames = gamesCollection[0];
+          $scope.allSavedGames = gamesCollection;
+        },
+        (err) => {
+          console.log(err);
+        });
+      }
+
+      $scope.nextPage = (item) => {
+        const lent = $scope.allSavedGames.length;
+        if (item === 'savedGames' && $scope.gameCounter < lent-1) {
+          $scope.gameCounter++;
+          $scope.savedGames = $scope.allSavedGames[$scope.gameCounter];    
+        }
+      }
+
+      $scope.previousPage = (item) => {
+        if (item === 'savedGames' && $scope.gameCounter > 0) {
+          $scope.gameCounter--;
+          $scope.savedGames = $scope.allSavedGames[$scope.gameCounter];
+        }
+      }
+      
 
       $scope.showError = () => {
         if ($location.search().error) {
@@ -63,5 +106,17 @@ angular.module('mean.system')
         const inviteLink = `${host}/${hash}app?game=${data}`
         console.log(inviteLink);
       })
+
+      socket.on('savedGames', (data) => {
+        $scope.retrieveGames();
+      });
+
+      socket.on('getDonations', (data) => {
+        $scope.getDonations();
+      });
+
+      socket.on('getLeaderBoard', (data) => {
+        $scope.getLeaderBoard();
+      });
     }
   ]);

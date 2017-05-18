@@ -36,9 +36,11 @@ exports.save = (req, res) => {
     });
 };
 
-exports.retrieveGame = (req, res) => {
-  const { gameOwnerId } = req.params;
-  Game.find({ gameOwnerId }, (err, data) => {
+exports.retrieveGames = (req, res) => {
+  const user = JSON.parse(req.cookies.user);
+  const userID = user.id;
+  console.log(userID);
+  Game.find({ players: { $elemMatch: { userID } } }, (err, data) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
     } else if (data.length > 0) {

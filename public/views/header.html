@@ -6,15 +6,15 @@
   <div class="cfh-nav-right">
     <span ng-show="$ctrl.showOptions" class="ng-hide">
         <button type="button" class="cfh-btn btn-pink "
-          data-toggle="modal" data-target="#playedGames">
+          data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
           Played Games
         </button>
         <button type="button" class="cfh-btn btn-pink" 
-          data-toggle="modal" data-target="#leaderBoard">
+          data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
           Leaderboard
         </button>
         <button type="button" class="cfh-btn btn-pink"
-          data-toggle="modal" data-target="#donations">
+          data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
           Donations
         </button>
         <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>

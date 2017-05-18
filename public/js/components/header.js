@@ -3,15 +3,16 @@ angular.module('mean').component('header', {
   controller: HeaderController
 });
 
-HeaderController.inject = ['$location', 'Global', 'game'];
+HeaderController.inject = ['$location', 'Global', 'game', 'socket'];
 
 /**
  * @param {*} $location
  * @param {*} Global
  * @param {*} game
+ * @param {*} socket
  * @returns {void}
  */
-function HeaderController($location, Global, game) {
+function HeaderController($location, Global, game, socket) {
   const ctrl = this;
   ctrl.showOptions = Global.getSavedUser().authenticated;
   ctrl.location = () => {
@@ -42,5 +43,16 @@ function HeaderController($location, Global, game) {
   ctrl.abandonGame = () => {
     game.leaveGame();
     $location.path('/');
+  };
+  ctrl.getSavedGames = () => {
+    socket.emit('getSavedGames', true);
+  };
+
+  ctrl.getDonations = () => {
+    socket.emit('getDonations', true);
+  };
+
+  ctrl.getLeaderBoard = () => {
+    socket.emit('getLeaderBoard', true);
   };
 }

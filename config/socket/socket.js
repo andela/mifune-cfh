@@ -33,9 +33,22 @@ module.exports = (io) => {
       socket.broadcast.emit('onlineUsers', onlineUsers);
     });
 
+    socket.on('getSavedGames', () => {
+      socket.emit('savedGames', '');
+    });
+
+    socket.on('getDonations', () => {
+      socket.emit('getDonations', '');
+    });
+
+    socket.on('getSavedGames', () => {
+      socket.emit('getLeaderBoard', '');
+    });
+
     socket.on('invite', (data) => {
       socket.broadcast.to(data.to).emit('newInvite', data.gameID);
     });
+
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
@@ -177,7 +190,7 @@ module.exports = (io) => {
         + Math.round(new Date().getTime())
         + chars[Math.floor(Math.random() * chars.length)];
       gameID = 1 + chars[Math.floor(Math.random() * chars.length)] + uniqueGameID;
-      console.log('gameID', gameID)
+      console.log('gameID', gameID);
       const gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;

@@ -1641,3 +1641,23 @@ fieldset legend {
 .top-section{
   height: 100vh;
 }
+.modal-body{
+  padding: 0px;
+}
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th{
+  padding: 8px 8px 8px 30px;
+}
+.modal-header {
+      background-color: #ff0e52;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .striped{
+    background-color: #fdd
+  }

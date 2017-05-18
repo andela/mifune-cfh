@@ -123,11 +123,10 @@
     </div>
   </div>
   <div class="clearfix"></div>
-</div>
 
   <!--Played Games Modal-->
   <div class="modal fade" id="playedGames" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -136,11 +135,32 @@
           <h4 class="modal-title">Your Played Games</h4>
         </div>
         <div class="modal-body">
-          <ul>
-            <li></li>
-          </ul>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Game Owner</th>
+                <th>Players</th>
+                <th>Rounds</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="game in savedGames" ng-class-odd="'striped'">
+                <td>{{game.date.slice(0, 10)}}, {{game.date.slice(11, -1)}}</td>
+                <td>{{game.gameOwerName}}</td>
+                <td><span ng-repeat="player in game.players">{{player.username}}</br></span></td>
+                <td>{{game.rounds}}</td>
+                <td>{{game.gameWinner}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer">
+          <ul class="pager">
+            <li ng-class="{'disabled': gameCounter === 0}"><a ng-click="previousPage('savedGames')">Previous</a></li>
+            <li ng-class="{'disabled': gameCounter === allSavedGames.length - 1}"><a ng-click="nextPage('savedGames')">Next</a></li>
+          </ul>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -194,3 +214,6 @@
     </div>
   </div>
   <!--Donation Modal Ends-->
+</div>
+
+  
