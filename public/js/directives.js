@@ -6,7 +6,7 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       templateUrl: '/views/player.html',
       link(scope) {
-        scope.colors = ['#333', '#333', '#333', '#333', '#333', '#333'];
+        scope.colors = ['#7CE4E8', '#FFFFa5', '#FC575E', '#F2ADFF', '#398EC4', '#8CFF95'];
       }
     };
   })
@@ -16,11 +16,11 @@ angular.module('mean.directives', [])
       templateUrl: '/views/answers.html',
       link(scope) {
         scope.$watch('game.state', () => {
-          const curQ = scope.game.curQuestion;
-          const startStyle = `<span style="color: ${scope.colors[scope.game.players[scope.game.winningCardPlayer].color]}">`;
-          const endStyle = '</span>';
           if (scope.game.state === 'winner has been chosen') {
+            const curQ = scope.game.curQuestion;
             const curQuestionArr = curQ.text.split('_');
+            const startStyle = `<span style="color: ${scope.colors[scope.game.players[scope.game.winningCardPlayer].color]}">`;
+            const endStyle = '</span>';
             let shouldRemoveQuestionPunctuation = false;
             const removePunctuation = function (cardIndex) {
               let cardText = scope.game.table[scope.game.winningCard].card[cardIndex].text;
@@ -51,8 +51,6 @@ angular.module('mean.directives', [])
             } else {
               curQ.text += ` ${startStyle}${scope.game.table[scope.game.winningCard].card[0].text}${endStyle}`;
             }
-          } else {
-            curQ.text += ` ${startStyle}${scope.game.table[scope.game.winningCard].card[0].text}${endStyle}`;
           }
         });
       }
