@@ -12,7 +12,7 @@ const Game = new Schema({
   gameOwnerId: String,
   players: [],
   gameWinner: String,
-  rounds: String,
+  rounds: Number,
   date: Date
 });
 

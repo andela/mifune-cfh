@@ -14,7 +14,7 @@ exports.save = (req, res) => {
   newGame.gameID = gameID;
   newGame.gameOwnerId = gameOwnerId;
   newGame.gameOwerName = gameOwerName;
-  newGame.rounds = rounds;
+  newGame.rounds = Number(rounds);
   newGame.players = players;
   newGame.gameWinner = gameWinner;
   newGame.date = new Date();
@@ -52,14 +52,15 @@ exports.retrieveGames = (req, res) => {
 };
 
 exports.getLeaderBoard = (req, res) => {
-  Game.find({}, (err, data) => {
+  Game.find({})
+  .sort('-rounds')
+  .sort('-date')
+  .limit(10)
+  .exec((err, game) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
-    } else if (data.length > 0) {
-      console.log(data);
-      res.status(200).json(data);
     } else {
-      res.status(404).json('No Game found');
+      res.status(200).json(game);
     }
   });
 };

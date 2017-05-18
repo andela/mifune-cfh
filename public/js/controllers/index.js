@@ -89,7 +89,7 @@ angular.module('mean.system')
       $scope.getLeaderBoard = () => {
         userService.getLeaderBoard().then(
           (success) => {
-            console.log(success.data)
+            $scope.leaderBoard = success.data;
           },
           (err) => {
             console.log(err);

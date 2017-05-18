@@ -41,7 +41,7 @@ module.exports = (io) => {
       socket.emit('getDonations', '');
     });
 
-    socket.on('getSavedGames', () => {
+    socket.on('getLeaderBoard', () => {
       socket.emit('getLeaderBoard', '');
     });
 
