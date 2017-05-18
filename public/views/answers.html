@@ -1,38 +1,29 @@
 <link rel = "stylesheet" type = 'text/css' href = "/css/modal.css">
 
 <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
-  <div id="cards" class='hand'>
+  <div id="social-bar-container">
+    <player></player>
+  </div>
+  <div id="cards" class='hand' ng-hide="game.state === 'Please wait for Czar to draw cards'">
+
     <span ng-show="winnerPicked()"></span>
-    <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-click="pickCard(card, $index)" ng-hide="showTable || isCzar()"
-      ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-      <div class="card-icon">
-        <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
-      </div>
-      <div class="card-main-content">
-        <span ng-bind-html="card.text" class="h4"></span>
+
+    <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+    ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+        <span ng-bind-html="card.text"></span>
         <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
         <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
-      </div>
-      <div class="card-icon">
-        <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive pull-right"/>
-      </div>
     </div>
+
     <span ng-repeat="answer in game.table">
-      <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
-        ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}">
-        <div class="card-icon">
-          <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
+        <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+        ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
+            <span ng-bind-html="card.text"></span>
+            <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+            <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
         </div>
-        <div class="card-main-content">
-          <span class="h4" ng-bind-html="card.text"></span>
-          <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
-          <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
-        </div>
-        <div class="card-icon">
-          <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive pull-right"/>
-        </div>
-      </div>
     </span>
+
   </div>
 </div>
 
@@ -67,51 +58,15 @@
 
 <div id="info-container" ng-show="game.state === 'awaiting players'">
   <div id="inner-info">
-    <h3 id="text-how-to-play" class="text-center pink-text">How To Play</h3>
-    <div id="carousel-how-to-play-container" class="col-xs-12">
-      <div id="carousel-how-to-play" class="carousel slide">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-how-to-play" data-slide-to="0" class="active" />
-          <li data-target="#carousel-how-to-play" data-slide-to="1" />
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img
-              class="center-block img-responsive"
-              src="/img/how-to-play-slide1.png"
-              alt="Each round has a Czar, who decides whether the cards
-               chosen by other players are right or wrongf."
-              />
-            <div class="carousel-caption">
-              <h3>All hail the Czar!</h3>
-              <p>During each round of the game, a player is chosen at random
-                as the game master. He/She decides whether other players
-                chose rightly or not.</p>
-            </div>
-          </div>
-          <div class="item">
-            <img
-              class="center-block img-responsive"
-              src="/img/how-to-play-slide2.png"
-              alt="When you're not the Czar, you get to choose cards for the
-              Czar to accept or fail. So choose wisely."
-            />
-            <div class="carousel-caption">
-              <h3>#YOLO...</h3>
-              <p>Other players then choose cards that answer the question for that round. So, choose wisely.</p>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control left" href="#carousel-how-to-play" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" />
-        </a>
-        <a class="carousel-control right" href="#carousel-how-to-play" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" />
-        </a>
-      </div>
-    </div>
+    <div id="lobby-how-to-play">How To Play</div>
+    <ol id="oh-el">
+      <li>Each player begins with, and will always have, 10 white answer cards.</li>
+      <li>For each round, one player is randomly chosen as the Card Czar.</li>
+      <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
+      <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
+      <li>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+    </ol>
   </div>
-  <div class="clearfix"></div>
 </div>
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="inner-info-exit">
@@ -123,19 +78,16 @@
       <h2>What would you like to do now?</h2>
       Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
     </div>
-    <div class="inner-text-container flexbox">
-      <div class="btns-container">
-        <a href="/#!/app">
-          <div id="join-new-game" class="pink-bg-btn" ng-click="game.joinGame('joinNewGame')">
-            Join a New Game
-          </div>
-        </a>
-        <a href="/">
-          <div id="exit-match" class="medium-gray-bg-btn discouraged-action-btn">
-            Return to Lobby
-          </div>
-        </a>
-      </div>
+    <div id='inner-text-container'>
+      <a href='/#!/app'>
+      <div id="join-new-game" ng-click="game.joinGame('joinNewGame')">
+        Join a New Game
+      </div></a>
+      <a href='/'>
+        <div id="exit-match">
+        Return to Lobby
+        </div>
+      </a>
     </div>
   </div>
 
@@ -143,6 +95,9 @@
       <!-- This is real -->
       <a href="http://www.crowdrise.com" id="crowdriseStaticLink-fundraiser-121142" title="Fundraising Websites on Crowdrise">Fundraising Websites - Crowdrise</a>
       <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
+      <!-- This is for testing -->
+      <!-- <a href="http://www.crowdrise.com" id="crowdriseStaticLink-project-36715" title="Fundraising Websites on Crowdrise">Fundraising Websites - Crowdrise</a> -->
+      <!-- <script type="text/javascript" src="https://apisandbox.crowdrise.com/widgets/donate/project/36715/?callback=userDonationCb"></script> -->
   </div>
 </div>
 
