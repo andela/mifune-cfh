@@ -232,18 +232,8 @@ angular.module('mean.system')
         }
       });
 
-      $scope.shuffleCards = () => {
-        const card = $('#card');
-        card.addClass('animated rotateOut');
-        $timeout(() => {
-          $scope.CzarCardDraw();
-        }, 1000);
-      };
-
       $scope.CzarCardDraw = () => {
-        if ($scope.isCzar()) {
-          game.CzarCardDraw();
-        }
+        game.CzarCardDraw();
       };
     }
   ]);
