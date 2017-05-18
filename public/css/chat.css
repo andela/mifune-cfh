@@ -26,9 +26,9 @@
 }
 .chatbox .chat-content {
   padding: 15px 5px;
-  max-height: 150px;
   overflow: auto;
   display: none;
+  min-height: 200px;
 }
 .chatbox .chat .chat-meta {
   display: block;
@@ -88,4 +88,29 @@
   margin: 5px 0px 20px 20px;
   background-color: #f9f9f9;
   padding: 5px;
+}
+
+.emojionearea .emojionearea-editor {
+    display: block;
+    height: auto;
+    min-height: 20px;;
+    max-height: 15em;
+    overflow: auto;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    font-size: inherit;
+    color: #555;
+    background-color: transparent;
+    border: 0;
+    cursor: text;
+    margin-right: 1px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
