@@ -43,7 +43,7 @@ exports.all = (req, res) => {
  * List of Questions (for Game class)
  */
 exports.allQuestionsForGame = (region, cb) => {
-  Question.find({ official: true, numAnswers: { $lt: 3 } }).select('-_id').exec((err, questions) => {
+  Question.find({ official: true, numAnswers: { $lt: 3 }, regionId: region, }).select('-_id').exec((err, questions) => {
     if (err) {
       console.log(err);
     } else {
