@@ -179,7 +179,7 @@ module.exports = (io) => {
         game.players.push(player);
         socket.join(game.gameID);
         socket.gameID = game.gameID;
-        game.region = socket.regionId;
+        game.region = socket.regionId || game.region;
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
@@ -259,7 +259,7 @@ module.exports = (io) => {
     allGames[uniqueRoom] = game;
     socket.join(game.gameID);
     socket.gameID = game.gameID;
-    game.region = socket.regionId;
+    game.region = socket.regionId || game.region;
     game.assignPlayerColors();
     game.assignGuestNames();
     game.sendUpdate();
