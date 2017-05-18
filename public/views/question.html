@@ -1,6 +1,6 @@
 <!-- modal to retrieve all users -->
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
 ng-controller="InviteController">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,7 +13,8 @@ ng-controller="InviteController">
          
           <li class="user-list" ng-repeat="user in searchResult | orderBy:'socketID'">
             <span>{{ user.name }} </span>
-            <button type="button" class="btn btn-primary invite-button" ng-disabled="user.disabled" ng-click="inviteUsers(user.socketID)">Send Invite
+            <button type="button" class="btn btn-primary invite-button" ng-disabled="user.disabled" 
+            ng-click="inviteUsers(user.socketID)">Send Invite
             </button>
           </li>
          
@@ -36,7 +37,7 @@ ng-controller="InviteController">
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>
       <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / 6 </div>
+        <div id="player-count">{{game.players.length}} / 12 </div>
         <div id="the-word-players"> Players </div>
       </div>
       <div id="loading-container">

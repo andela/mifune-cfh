@@ -14,6 +14,10 @@
    text-transform: uppercase;
 }
 
+.cfh-header{
+  background-color: #2D2D2D;
+}
+
 #landing-charity {
    width: 300px !important;
    margin-left: 15px !important;
@@ -23,7 +27,46 @@
    top: -65px;
 }
 
-#tweet-container-index {
+ .button-notification{
+   width: 92px;
+   border: none;
+ }
+
+ .msg{
+   color: mintcream;
+ }
+
+ .invite-dropdwn li{
+   padding: 10px 10px;
+   width: 350px;
+ }
+
+ .invite-dropdwn>li>a{
+   padding: 0px;
+   display: inline;
+ }
+ 
+ .invite-dropdwn>li>span{
+   text-transform: capitalize;
+ }
+
+ .glyphicon-envelope{
+   font-size: 3em;
+   margin-top: 1%;
+ }
+
+ .dropdown.open .dropdown-menu{
+   display: block;
+   margin-left: -100%
+ }
+
+ .notify-badge{
+   margin-top: -22%;
+   background-color: mintcream;
+   color: #2D2D2D;
+ }
+
+ #tweet-container-index {
    margin-top: 10px;
    display: inline-block;
    position: relative;
@@ -1513,8 +1556,41 @@
   min-height: 100vh;
 }
 
+
 @media screen and (max-width: 720px) {
   .full-page-section {
     min-height: auto;
   }
+}
+
+
+.header-fix {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.left-side {
+  flex: 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .header-fix {
+    flex-wrap: wrap;
+  }
+ .left-side, .right-side {
+   flex: 1 0 100%;
+ }
+ .navbar-nav.navbar-right {
+   display: flex;
+   justify-content: flex-end;
+ }
+}
+
+
+.cfh-logo-text {
+  height: auto;
 }

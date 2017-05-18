@@ -1,9 +1,10 @@
+/* eslint-disable valid-jsdoc */
 angular.module('mean').component('header', {
   templateUrl: 'views/header.html',
   controller: HeaderController
 });
 
-HeaderController.inject = ['$location', 'Global', 'game'];
+HeaderController.inject = ['$location', 'Global', 'game', '$window', 'socket'];
 
 /**
  * @param {*} $location
@@ -11,8 +12,9 @@ HeaderController.inject = ['$location', 'Global', 'game'];
  * @param {*} game
  * @returns {void}
  */
-function HeaderController($location, Global, game) {
+function HeaderController($location, Global, game, $window, socket) {
   const ctrl = this;
+  ctrl.inviteTray = [];
   ctrl.showOptions = Global.getSavedUser().authenticated;
   ctrl.location = () => {
     const currentLocation = $location.path();
@@ -42,5 +44,16 @@ function HeaderController($location, Global, game) {
   ctrl.abandonGame = () => {
     game.leaveGame();
     $location.path('/');
+  };
+
+  socket.on('newInvite', (data) => {
+    // const { host, hash } = $window.location;
+    const inviteLink = `/#!/app?game=${data.gameID}`;
+    ctrl.inviteTray.push({ link: inviteLink, from: data.gameOwner });
+  });
+
+  ctrl.openGame = (link, index) => {
+    $window.open(link, '_blank');
+    ctrl.inviteTray.splice(index, 1);
   };
 }

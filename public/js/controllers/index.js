@@ -80,10 +80,5 @@ angular.module('mean.system')
              socket.emit('region', $scope.selectedCountry);
           }
         });
-      socket.on('newInvite', (data) => {
-        const { host, hash } = $window.location;
-        const inviteLink = `${host}/${hash}app?game=${data}`
-        console.log(inviteLink);
-      })
     }
   ]);

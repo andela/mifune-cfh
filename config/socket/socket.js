@@ -63,7 +63,8 @@ module.exports = (io) => {
     });
 
     socket.on('invite', (data) => {
-      socket.broadcast.to(data.to).emit('newInvite', data.gameID);
+      console.log(data, 'data');
+      socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
     });
     socket.on('pickCards', (data) => {
       console.log(socket.id, 'picked', data);
