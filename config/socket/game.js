@@ -1,3 +1,6 @@
+/* eslint-disable import/no-dynamic-require, require-jsdoc, no-console,
+no-underscore-dangle, class-methods-use-this */
+
 const async = require('async');
 const _ = require('underscore');
 const questions = require(`${__dirname}/../../app/controllers/questions.js`);
