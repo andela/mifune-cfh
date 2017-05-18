@@ -1,3 +1,4 @@
+/* global $ */
 /* eslint-disable func-names, prefer-arrow-callback */
 angular.module('mean.directives', [])
   .directive('player', function () {
