@@ -39,18 +39,29 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-btn cfh-btn-container">
             <span ng-show="$ctrl.showOptions" class="ng-hide">
-              <button type="button" class="cfh-btn btn-pink "
-                data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
-                Played Games
-              </button>
-              <button type="button" class="cfh-btn btn-pink" 
-                data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
-                Leaderboard
-              </button>
-              <button type="button" class="cfh-btn btn-pink"
-                data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
-                Donations
-              </button>
+              <span class="dropdown">
+                <button class="cfh-btn btn-pink dropdown-toggle" 
+                  type="button"  
+                  data-toggle="dropdown" 
+                  aria-haspopup="true" 
+                  aria-expanded="true">
+                More
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <button type="button" class="cfh-btn btn-pink "
+                    data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
+                    Played Games
+                  </button>
+                  <button type="button" class="cfh-btn btn-pink" 
+                    data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
+                    Leaderboard
+                  </button>
+                  <button type="button" class="cfh-btn btn-pink"
+                    data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
+                    Donations
+                  </button>
+                </ul>
+              </span>
               <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
             </span>
           </li>

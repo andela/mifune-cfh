@@ -180,7 +180,7 @@
               <tr ng-repeat="leader in leaderBoard" ng-class-odd="'striped'">
                 <td>{{leader.date.slice(0, 10)}} / {{leader.date.slice(11, -1)}}</td>
                 <td>{{leader.gameOwerName}}</td>
-                <td><span ng-repeat="player in game.players">{{player.username}}</br></span></td>
+                <td><span ng-repeat="player in leader.players">{{player.username}}</br></span></td>
                 <td>{{leader.rounds}}</td>
                 <td>{{leader.gameWinner}}</td>
               </tr>
