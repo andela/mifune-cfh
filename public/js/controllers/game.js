@@ -73,6 +73,34 @@ angular.module('mean.system')
         return false;
       };
 
+      $scope.getPlayerPosition = obj => obj.color + 1;
+
+      $scope.getBackgroundImage = (id) => {
+        const backgroundImageClasses = [
+          'spade-on-white-bg',
+          'heart-on-white-bg',
+          'diamond-on-white-bg',
+          'club-on-white-bg',
+        ];
+        const numOfImageClasses = backgroundImageClasses.length;
+        const imgClassIndex = id % numOfImageClasses;
+        const imgClass = backgroundImageClasses[imgClassIndex];
+
+        return imgClass;
+      };
+
+      $scope.getCardIcon = (id) => {
+        const icons = [
+          '/img/icons/spade-extra-small.png',
+          '/img/icons/heart-extra-small.png',
+          '/img/icons/diamond-extra-small.png',
+          '/img/icons/club-extra-small.png',
+        ];
+        const quotient = id % icons.length;
+        const cardIcon = icons[quotient];
+        return cardIcon;
+      };
+
       $scope.showFirst = card =>
         game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
@@ -237,4 +265,3 @@ angular.module('mean.system')
       };
     }
   ]);
-
