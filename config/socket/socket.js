@@ -31,8 +31,6 @@ module.exports = (io) => {
   const chatMessages = [];
 
   io.sockets.on('connection', (socket) => {
-    console.log(allGames, 'ongoing games');
-    console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
     socket.emit('onlineUsers', onlineUsers);
 
@@ -64,11 +62,12 @@ module.exports = (io) => {
     });
 
     socket.on('invite', (data) => {
-      console.log(data, 'data');
-      socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
+      if (data.to) {
+        socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
+      }
+      console.log(`To be implemented ${data.email}`);
     });
     socket.on('pickCards', (data) => {
-      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
@@ -98,7 +97,6 @@ module.exports = (io) => {
     socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
-        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
           gamesNeedingPlayers.forEach((game, index) => {
@@ -122,8 +120,9 @@ module.exports = (io) => {
     });
 
     socket.on('CzarCardDraw', () => {
-      console.log(allGames[socket.gameID]);
-      allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
+      if (allGames[socket.gameID]) {
+        allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
+      }
     });
   });
 

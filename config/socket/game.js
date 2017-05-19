@@ -174,7 +174,7 @@ class Game {
     self.winnerAutopicked = false;
     self.curQuestion = self.questions.pop();
     if (!self.questions.length) {
-      self.getQuestions((err, data) => {
+      self.getQuestions(self.region, (err, data) => {
         self.questions = data;
       });
     }
@@ -438,6 +438,7 @@ class Game {
   CzarCardDraw(self) {
     if (self.state === 'Please wait for Czar to draw cards') {
       self.stateChoosing(self);
+      // self.prepareGame();
     }
   }
 
