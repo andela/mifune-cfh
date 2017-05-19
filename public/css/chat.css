@@ -5,7 +5,11 @@
   border: 1px solid #fff;
   bottom: 10px;
   right: 10px;
+<<<<<<< Updated upstream
   z-index: 1003;
+=======
+  z-index: 1300;
+>>>>>>> Stashed changes
 }
 .chatbox .chat-header {
   background-color: #ff0e52;
