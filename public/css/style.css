@@ -157,16 +157,16 @@
    color:#333;
 }
 
- .some-text {
-   text-align: center;
-   color: white;
-   max-width: 800px;
-   margin: 0 30px;
+.some-text {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  margin: 0 30px;
 }
 
 #give, .white-centered-text {
-   color: white;
-   text-align: center;
+  color: white;
+  text-align: center;
 }
 
 .white-text {
@@ -1292,33 +1292,18 @@
  /*Cfh buttons*/
 
  .cfh-btn {
+   display: inline;
    border: none;
    border-radius: 0;
-   display: inline;
+   box-sizing: content-box;
    text-decoration: none;
-   padding: 1.3rem 1.8rem;
+   padding: 1em 0.3em;
    width: 115px;
    font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-   font-size: 12px;
+   font-size: 15px;
    text-align: center;
    line-height: 120%;
    margin: 8px;
-}
-
- .cfh-btn2 {
-   border: none;
-   display: inline;
-   padding: 10px 20px;
-   text-decoration: none;
-   float: left;
-   margin-right: 10px;
-   height: 38px;
-   font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-   font-size: 14px;
-   text-align: center;
-   line-height: 120%;
-   margin-top: 20px;
-   border-radius: 0px
 }
 
  .btn-pink {
@@ -1555,7 +1540,6 @@
 .full-page-section {
   min-height: 100vh;
 }
-
 
 @media screen and (max-width: 720px) {
   .full-page-section {

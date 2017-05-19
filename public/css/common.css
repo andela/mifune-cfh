@@ -4,6 +4,9 @@
 .scrollable-fixed-height {
   overflow-y: scroll; }
 
+.horizontally-centered {
+  margin: 0px auto; }
+
 .flexbox {
   display: flex; }
 

@@ -21,6 +21,10 @@ $medium-gray: #959595;
     overflow-y: scroll;
 }
 
+.horizontally-centered {
+    margin: 0px auto;
+}
+
 .flexbox {
     display: flex;
 }
@@ -520,7 +524,7 @@ body {
       margin-bottom: 2.5%;
     }
 
-    @include tablet-portrait-only{
+    @include tablet-portrait-only {
         margin: 5px;
     }
 
