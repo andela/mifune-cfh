@@ -181,10 +181,10 @@ angular.module('mean.system')
         };
 
       $scope.$watch('selectedCountry', () =>{
-        if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
+          if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
 
-            socket.emit('region', $scope.selectedCountry);
-        }
+             socket.emit('region', $scope.selectedCountry);
+          }
         });
     }
   ]);
