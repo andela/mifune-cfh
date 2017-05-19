@@ -56,7 +56,9 @@
             <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
           </li>
           <li class="navbar-btn cfh-btn-container">
-            <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Leave Game</button></a>
+            <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()">
+              <button class="cfh-btn leave-game-btn">Leave Game</button>
+            </a>
           </li>
         </ul>
       </div>

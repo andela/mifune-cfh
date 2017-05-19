@@ -195,86 +195,47 @@ body {
 
 #main-container {
   height: 100%; }
+  #main-container .leave-game-btn {
+    font-size: 20px;
+    font-size: 1.25rem;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    background: #959595; }
+    @media (max-width: 520px) {
+      #main-container .leave-game-btn {
+        font-size: 0.7rem;
+        margin-top: 5px;
+        margin-right: 1px;
+        padding: 5px;
+        width: 60px; } }
+  #main-container .leave-game-btn:hover {
+    background: #F34444; }
+  #main-container #tweet-container {
+    float: right;
+    padding-top: 17px;
+    width: 77px;
+    margin-right: 10px; }
+    @media (max-width: 520px) {
+      #main-container #tweet-container {
+        float: right;
+        padding-top: 6px;
+        width: 55px;
+        overflow: hidden;
+        margin-right: 11px; } }
+    #main-container #tweet-container .hcount .count-o {
+      display: none !important;
+      width: 0 !important; }
+    #main-container #tweet-container .count-0 {
+      width: 0 !important; }
+    #main-container #tweet-container .count-ready .count-o {
+      visibility: visible;
+      visibility: hidden !important; }
   #main-container #app-container {
     height: 100%;
     max-width: 1200px;
     margin: 0px auto;
     position: relative; }
-    #main-container #app-container #menu-container {
-      width: 100%;
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      border-radius: 8px;
-      background: #252525;
-      margin-bottom: 10px;
-      margin-top: 5px;
-      padding: 5px; }
-      @media (max-width: 520px) {
-        #main-container #app-container #menu-container {
-          margin-bottom: 1px;
-          margin-top: 0px; } }
-      #main-container #app-container #menu-container #cfh-text-logo {
-        display: inline-block;
-        margin: 12px 0 0;
-        font-size: 28px;
-        font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
-        cursor: pointer; }
-        @media (max-width: 520px) {
-          #main-container #app-container #menu-container #cfh-text-logo {
-            font-size: 20px; } }
-        #main-container #app-container #menu-container #cfh-text-logo .cfh-text-logo {
-          display: inline-block;
-          color: white;
-          font-style: normal; }
-        #main-container #app-container #menu-container #cfh-text-logo .cfh-img-logo {
-          display: inline;
-          width: 30px;
-          vertical-align: text-top; }
-      #main-container #app-container #menu-container #abandon-game-button {
-        display: inline-block;
-        float: right;
-        border-radius: 8px;
-        -moz-border-radius: 8px;
-        -webkit-border-radius: 8px;
-        font-size: 20px;
-        font-size: 1.25rem;
-        font-weight: 400;
-        text-align: center;
-        color: white;
-        background: #959595;
-        margin: 10px 10px 10px 10px;
-        padding: 0.65em 20px;
-        width: 140px;
-        cursor: pointer; }
-        @media (max-width: 520px) {
-          #main-container #app-container #menu-container #abandon-game-button {
-            font-size: 0.7rem;
-            margin-top: 5px;
-            margin-right: 1px;
-            padding: 5px;
-            width: 60px; } }
-      #main-container #app-container #menu-container #abandon-game-button:hover {
-        background: #F34444; }
-      #main-container #app-container #menu-container #tweet-container {
-        float: right;
-        padding-top: 17px;
-        width: 77px;
-        margin-right: 10px; }
-        @media (max-width: 520px) {
-          #main-container #app-container #menu-container #tweet-container {
-            float: right;
-            padding-top: 6px;
-            width: 55px;
-            overflow: hidden;
-            margin-right: 11px; } }
-        #main-container #app-container #menu-container #tweet-container .hcount .count-o {
-          display: none !important;
-          width: 0 !important; }
-        #main-container #app-container #menu-container #tweet-container .count-0 {
-          width: 0 !important; }
-        #main-container #app-container #menu-container #tweet-container .count-ready .count-o {
-          visibility: visible;
-          visibility: hidden !important; }
     #main-container #app-container #social-bar-container {
       width: 20%;
       height: 63%;

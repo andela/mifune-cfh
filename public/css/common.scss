@@ -542,110 +542,62 @@ body {
 
 #main-container{
     height: 100%;
+
+    .leave-game-btn {
+        font-size: 20px;
+        font-size: 1.25rem;
+        font-weight: 400;
+        text-align: center;
+        color: white;
+        background: #959595;
+
+        @include mobile-only {
+            font-size: 0.7rem;
+            margin-top: 5px;
+            margin-right: 1px;
+            padding: 5px;
+            width: 60px;
+        }
+    }
+
+    .leave-game-btn:hover{
+        background:#F34444;
+    }
+
+    #tweet-container {
+        float: right;
+        padding-top: 17px;
+        width: 77px;
+        margin-right: 10px;
+
+        @include mobile-only {
+            float: right;
+            padding-top: 6px;
+            width: 55px;
+            overflow: hidden;
+            margin-right: 11px;
+        }
+
+        .hcount .count-o {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        .count-0{
+            width: 0 !important;
+        }
+
+        .count-ready .count-o {
+            visibility: visible;
+            visibility: hidden !important;
+        }
+    }
     #app-container {
         height: 100%;
         max-width: 1200px;
         margin: 0px auto;
         position: relative;
 
-        #menu-container {
-            width: 100%;
-            -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
-            border-radius: 8px;
-            background: $site-deep-black;
-            margin-bottom: 10px;
-            margin-top: 5px;
-            padding: 5px;
-
-            @include mobile-only{
-                margin-bottom: 1px;
-                margin-top: 0px;
-            }
-
-            #cfh-text-logo {
-                display: inline-block;
-                margin: 12px 0 0;
-                font-size: 28px;
-                font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
-                cursor: pointer;
-
-                @include mobile-only {
-                    font-size: 20px;
-                }
-
-                .cfh-text-logo {
-                    display: inline-block;
-                    color: white;
-                    font-style: normal;
-                }
-
-                .cfh-img-logo {
-                    display: inline;
-                    width: 30px;
-                    vertical-align: text-top;
-                }
-            }
-
-            #abandon-game-button {
-                display: inline-block;
-                float: right;
-                border-radius: 8px;
-                -moz-border-radius: 8px;
-                -webkit-border-radius: 8px;
-                font-size: 20px;
-                font-size: 1.25rem;
-                font-weight: 400;
-                text-align: center;
-                color: white;
-                background: #959595;
-                margin: 10px 10px 10px 10px;
-                padding: 0.65em 20px;
-                width: 140px;
-                cursor: pointer;
-
-                @include mobile-only {
-                    font-size: 0.7rem;
-                    margin-top: 5px;
-                    margin-right: 1px;
-                    padding: 5px;
-                    width: 60px;
-                }
-            }
-
-            #abandon-game-button:hover{
-               background:#F34444;
-            }
-
-            #tweet-container {
-                float: right;
-                padding-top: 17px;
-                width: 77px;
-                margin-right: 10px;
-
-                @include mobile-only {
-                    float: right;
-                    padding-top: 6px;
-                    width: 55px;
-                    overflow: hidden;
-                    margin-right: 11px;
-                }
-
-                .hcount .count-o {
-                    display: none !important;
-                    width: 0 !important;
-                }
-
-                .count-0{
-                    width: 0 !important;
-                }
-
-                .count-ready .count-o {
-                    visibility: visible;
-                    visibility: hidden !important;
-                }
-            }
-        }
 
         #social-bar-container {
             width: 20%;
@@ -662,194 +614,6 @@ body {
                 top: 0;
                 left: 0;
             }
-
-            // #player-container{
-            //     height: 13.166667%;
-            //     position: relative;
-            //     padding-top: 4%;
-            //     padding-bottom: 4%;
-            //     min-height: 85px;
-            //     background: #7CE4E8;
-            //     margin: 0 0 6% 8%;
-            //     @include br;
-
-            //     @include mobile-only{
-            //         min-height: 0;
-            //         display: inline-block;
-            //         margin: 0px .5%;
-            //         width: 15.5%;
-            //         height: 48px;
-            //         padding-top: 1%;
-            //         padding-bottom: 0;
-            //     }
-
-            //     #above-czar-container{
-            //         height: 65%;
-            //         width: 100%;
-
-            //         @include mobile-only{
-            //             height: 100%;
-            //         }
-
-            //         #avatar_ {
-            //             height: 100%;
-            //             width: 38%;
-            //             float: left;
-            //             position: relative;
-            //             z-index: 999;
-
-            //             #king {
-            //                position: absolute;
-            //                max-width: 80%;
-            //                bottom: 20px;
-            //                -webkit-transform: rotate(-18deg);
-            //                left: -5px;
-
-            //                @include tablet-portrait-only {
-            //                     max-width: 80%;
-            //                     bottom: 27px;
-            //                }
-
-            //                @include mobile-only {
-            //                     max-width: 80%;
-            //                     bottom: 31px;
-            //                     left: -3px;
-            //                }
-            //              }
-
-
-            //             img {
-            //                 width: 100%;
-            //                 height: 140%;
-            //                 float: left;
-            //                 @include br;
-            //                 min-width: 40px;
-            //                 min-height: 40px;
-
-            //                 @include tablet-portrait-only{
-            //                     width: 100%;
-            //                     height: 100%;
-            //                     margin-left: 3px;
-            //                 }
-
-            //                 @include mobile-only{
-            //                     height: 69%;
-            //                     width: 100%;
-            //                     min-height: 0;
-            //                     min-width: 0;
-            //                     margin: 0;
-            //                 }
-            //             }
-            //         }
-            //         #player-container-inner{
-            //             float: left;
-            //             position: relative;
-            //             bottom: 8px;
-            //             left: 2px;
-            //             max-width: 62%;
-            //             overflow: hidden;
-
-            //             @include tablet-portrait-only{
-            //                 left: 3px;
-            //             }
-
-            //             @include mobile-only{
-            //                 bottom: 0;
-            //                 left: 0;
-            //                 height: 100%;
-            //                 width: 60%;
-            //             }
-
-            //             #player-name{
-
-            //                 h4{
-            //                     font-family: 'Lobster', cursive;
-            //                     margin-bottom: 0px;
-            //                 }
-            //                 h4{
-
-            //                     @include tablet-portrait-only{
-            //                         font-size: 14px;
-            //                     }
-
-            //                     @include mobile-only{
-            //                         font-family: 'Lobster', cursive;
-            //                         font-size: 10px;
-            //                         margin-top: 3px;
-            //                         margin-bottom: 5px;
-            //                     }
-            //                 }
-            //             }
-
-            //             #player-score{
-            //                 float: left;
-
-            //                 h2{
-
-            //                     font-size: 26px;
-            //                     margin-top: 0;
-            //                     margin-bottom: 0;
-
-            //                     @include tablet-portrait-only{
-            //                         font-size: 21px;
-            //                     }
-
-            //                     @include mobile-only{
-            //                         font-size: 17px;
-            //                         line-height: 40%;
-            //                     }
-            //                 }
-            //             }
-
-            //             #player-star{
-            //             float: left;
-            //             margin-top: 3px;
-            //             margin-left: 10px;
-
-            //             @include tablet-portrait-only{
-            //                 margin-top: 1px;
-            //                 margin-left: 5px;
-            //             }
-
-            //             @include mobile-only{
-            //                 display: none;
-            //             }
-
-            //                 img {
-            //                     width: 22px;
-
-            //                     @include tablet-portrait-only{
-            //                         width: 18px;
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            //     #czar-container {
-            //         position: absolute;
-            //         bottom: 0;
-            //         text-align: center;
-            //         width: 100%;
-            //         @include br-bottom;
-            //         background: black;
-            //         opacity:0.4;
-
-            //         @include mobile-only{
-            //             overflow: auto;
-            //         }
-
-            //         #the-czar{
-            //             color: #fff;
-            //             font-weight: bold;
-            //             font-size: 20px;
-
-            //             @include mobile-only{
-            //                 display: none;
-            //             }
-            //         }
-            //     }
-            // }
         }
 
         #gameplay-container-outer {
