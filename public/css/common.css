@@ -94,7 +94,6 @@
   font-family: Arial;
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
   vertical-align: top; }
   @media (max-width: 520px) {
     .card {

@@ -100,7 +100,6 @@ angular.module('mean.system')
         const cardIcon = icons[quotient];
         return cardIcon;
       };
-
       $scope.showFirst = card =>
         game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 

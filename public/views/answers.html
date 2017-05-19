@@ -1,7 +1,7 @@
 <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="cards" class="hand">
     <span ng-show="winnerPicked()"></span>
-    <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-click="pickCard(card, $index)" ng-hide="showTable || isCzar()"
+    <div class="card smallest card-bg-img clickable" ng-class="getBackgroundImage(card.id)" ng-click="pickCard(card, $index)" ng-hide="showTable || isCzar()"
       ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
       <div class="card-icon">
         <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <span ng-repeat="answer in game.table">
-      <div class="card smallest card-bg-img" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id="table" ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+      <div class="card smallest card-bg-img clickable" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}">
         <div class="card-icon">
           <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>
@@ -99,12 +99,12 @@
             </div>
           </div>
         </div>
-        <a class="carousel-control left" href="#carousel-how-to-play" data-slide="prev">
+        <span class="carousel-control left clickable" href="#carousel-how-to-play" ng-non-bindable data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" />
-        </a>
-        <a class="carousel-control right" href="#carousel-how-to-play" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" />
-        </a>
+        </span>
+        <span class="carousel-control right clickable" href="#carousel-how-to-play" ng-non-bindable data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right " />
+        </span>
       </div>
     </div>
   </div>
