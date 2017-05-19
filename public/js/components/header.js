@@ -1,9 +1,10 @@
+/* eslint-disable valid-jsdoc */
 angular.module('mean').component('header', {
   templateUrl: 'views/header.html',
   controller: HeaderController
 });
 
-HeaderController.inject = ['$location', 'Global', 'game', 'socket'];
+HeaderController.inject = ['$location', 'Global', 'game', '$window', 'socket'];
 
 /**
  * @param {*} $location
@@ -12,8 +13,10 @@ HeaderController.inject = ['$location', 'Global', 'game', 'socket'];
  * @param {*} socket
  * @returns {void}
  */
-function HeaderController($location, Global, game, socket) {
+
+function HeaderController($location, Global, game, $window, socket) {
   const ctrl = this;
+  ctrl.inviteTray = [];
   ctrl.showOptions = Global.getSavedUser().authenticated;
   ctrl.location = () => {
     const currentLocation = $location.path();
@@ -44,6 +47,7 @@ function HeaderController($location, Global, game, socket) {
     game.leaveGame();
     $location.path('/');
   };
+
   ctrl.getSavedGames = () => {
     socket.emit('getSavedGames', true);
   };
@@ -54,5 +58,16 @@ function HeaderController($location, Global, game, socket) {
 
   ctrl.getLeaderBoard = () => {
     socket.emit('getLeaderBoard', true);
+  };
+
+  socket.on('newInvite', (data) => {
+    // const { host, hash } = $window.location;
+    const inviteLink = `/#!/app?game=${data.gameID}`;
+    ctrl.inviteTray.push({ link: inviteLink, from: data.gameOwner });
+  });
+
+  ctrl.openGame = (link, index) => {
+    $window.open(link, '_blank');
+    ctrl.inviteTray.splice(index, 1);
   };
 }

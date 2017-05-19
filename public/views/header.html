@@ -1,29 +1,66 @@
-<div class="cfh-nav">
-  <div class="cfh-nav-image">
-    <a ng-click="$ctrl.home()"><img src="/img/cards.png" /></a>
-    <a class="text-logo-icon" ng-click="$ctrl.home()"><span>Cards f<span class="pink-text">&hearts;</span>r Humanity</span></a>
+<nav class="navbar navbar-inverse navbar-static-top cfh-header" role="navigation">
+  <div class="header-fix container">
+    <div class="left-side">
+      <div class="navbar-header navbar-nav">
+        <div class="navbar-header navbar-left cfh-logo-text-container clickable">
+          <div class="cfh-logo-text navbar-brand" ng-click="$ctrl.home()">
+            <span class="h3 white-text">
+                  <img src="/img/cards.png"/>
+                  Cards f<span class="pink-text">&hearts;</span>r Humanity
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div class="dropdown">
+        <div class="button-notification dropdown-toggle" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="true">
+          <span class="glyphicon glyphicon-envelope msg" aria-hidden="true"></span>
+          <span class="badge notify-badge">{{$ctrl.inviteTray.length}}</span>
+          <ul class="dropdown-menu invite-dropdwn" aria-labelledby="dropdownMenu1">
+            <li ng-repeat="invite in $ctrl.inviteTray">
+              <span>{{invite.from}}</span> invited you to a game,
+              <a href="{{invite.link}}" target="_blank" ng-click="$ctrl.openGame(invite.link, $index)"> 
+              Click to join game.</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation bar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+    </div>
+
+    <div class="right-side">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="navbar-btn cfh-btn-container">
+            <span ng-show="$ctrl.showOptions" class="ng-hide">
+                      <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+                  </span>
+          </li>
+          <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
+            <span>
+                    <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
+                  </span>
+          </li>
+          <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
+            <span>
+                    <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
+                  </span>
+          </li>
+          <li class="navbar-btn cfh-btn-container">
+            <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
+          </li>
+          <li class="navbar-btn cfh-btn-container">
+            <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
-  <div class="cfh-nav-right">
-    <span ng-show="$ctrl.showOptions" class="ng-hide">
-        <button type="button" class="cfh-btn btn-pink "
-          data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
-          Played Games
-        </button>
-        <button type="button" class="cfh-btn btn-pink" 
-          data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
-          Leaderboard
-        </button>
-        <button type="button" class="cfh-btn btn-pink"
-          data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
-          Donations
-        </button>
-        <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-    </span>
-    <span ng-hide="$ctrl.showOptions">
-        <a ng-show="$ctrl.location().signup" ng-click="$ctrl.signUp()"><button class="cfh-btn btn-pink">Sign Up</button></a>
-        <a ng-show="$ctrl.location().signin" ng-click="$ctrl.signIn()"><button class="cfh-btn btn-white">Login</button></a>
-    </span>
-    <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
-    <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
-  </div>
-</div>
+</nav>

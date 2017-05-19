@@ -1,3 +1,6 @@
+/* eslint-disable import/no-dynamic-require, require-jsdoc, no-console,
+no-underscore-dangle, class-methods-use-this */
+
 const async = require('async');
 const _ = require('underscore');
 const questions = require(`${__dirname}/../../app/controllers/questions.js`);
@@ -18,6 +21,15 @@ const guestNames = [
 ];
 
 class Game {
+
+  /**
+   * constructor
+   *
+   * @param  {string} gameID
+   * @param  {Socket} io
+   * @param  {string} region
+   * @return {void}
+   */
   constructor(gameID, io) {
     this.io = io;
     this.gameID = gameID;
@@ -27,6 +39,7 @@ class Game {
     this.gameWinner = -1; // Index in this.players
     this.winnerAutopicked = false;
     this.czar = -1; // Index in this.players
+    this.region = '58f4de8ef08434413b6aec50';
     this.playerMinLimit = 3;
     this.playerMaxLimit = 12;
     this.pointLimit = 1;
@@ -83,7 +96,8 @@ class Game {
       winnerAutopicked: this.winnerAutopicked,
       table: this.table,
       pointLimit: this.pointLimit,
-      curQuestion: this.curQuestion
+      curQuestion: this.curQuestion,
+      region: this.region,
     };
   }
 
@@ -124,8 +138,11 @@ class Game {
       });
 
     const self = this;
+    const region = this.region;
     async.parallel([
-      this.getQuestions,
+      (cb) => {
+        this.getQuestions(region, cb);
+      },
       this.getAnswers
     ],
       (err, results) => {
@@ -235,8 +252,8 @@ class Game {
     this.sendUpdate();
   }
 
-  getQuestions(cb) {
-    questions.allQuestionsForGame((data) => {
+  getQuestions(region, cb) {
+    questions.allQuestionsForGame(region, (data) => {
       cb(null, data);
     });
   }
@@ -313,7 +330,7 @@ class Game {
             }
             if (cardIndex !== null) {
               tableCard.push(this.players[playerIndex].hand.splice(cardIndex,
-              1)[0]);
+                1)[0]);
             }
           }
           if (tableCard.length === this.curQuestion.numAnswers) {

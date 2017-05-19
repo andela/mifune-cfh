@@ -42,6 +42,7 @@ exports.login = (req, res) => {
 
       const user = {
         id: existingUser._id,
+        username: existingUser.name,
         email: existingUser.email
       };
       // Create the token
@@ -186,6 +187,7 @@ exports.createUserApi = (req, res) => {
 
           const user = {
             id: savedUser._id,
+            username: savedUser.name,
             email: savedUser.email
           };
           // Otherwise, return a JWT for the newly created user.

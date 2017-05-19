@@ -12,7 +12,7 @@ angular.module('mean.system')
       table: [],
       czar: null,
       playerMinLimit: 3,
-      playerMaxLimit: 6,
+      playerMaxLimit: 12,
       pointLimit: null,
       state: null,
       round: 0,
@@ -33,7 +33,6 @@ angular.module('mean.system')
         setNotification();
       }
     };
-
     const setNotification = () => {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
         clearInterval(timeout);
@@ -47,7 +46,6 @@ angular.module('mean.system')
     };
 
     let timeSetViaUpdate = false;
-
     const decrementTime = () => {
       if (game.time > 0 && !timeSetViaUpdate) {
         game.time -= 1;

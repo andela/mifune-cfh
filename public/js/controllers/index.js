@@ -2,9 +2,9 @@
 /* global window, angular */
 angular.module('mean.system')
   .controller('IndexController', ['$scope', 'Global', '$location', '$window',
-    'socket', 'game', 'AvatarService', 'userService',
+    'socket', 'game', 'AvatarService', 'RegionService', 'userService',
     function IndexController($scope, Global, $location, $window,
-      socket, game, AvatarService, userService) {
+      socket, game, AvatarService, RegionService, userService) {
       $scope.global = Global.getSavedUser();
       $scope.errorMsg = '';
       $scope.showOptions = !$scope.global.authenticated;
@@ -14,6 +14,7 @@ angular.module('mean.system')
       $scope.donationCounter = 0;
       const user =  $scope.global.user;
       const userID = user;
+      $scope.gameType = 'guest';
       $scope.startGame = (gameType) => {
         swal({
           title: 'Start a new Game?',
@@ -28,12 +29,8 @@ angular.module('mean.system')
         },
         (isConfirm) => {
           if (isConfirm) {
-            if (gameType === 'guest'){
-              game.joinGame();
-              $location.path('/app');
-            }else{
-              $location.path('/app').search('custom');
-            }
+              $scope.gameType = gameType;
+              displayMessage("#message-modal");
           }
         });
       };
@@ -120,7 +117,15 @@ angular.module('mean.system')
           $scope.donations = $scope.allDonations[$scope.donationCounter];    
         }
       }
-      
+
+      $scope.gameOn = () => {
+        if ($scope.gameType === 'guest'){
+          game.joinGame();
+          $location.path('/app');
+        } else {
+          $location.path('/app').search('custom');
+        }
+      }
 
       $scope.showError = () => {
         if ($location.search().error) {
@@ -133,7 +138,7 @@ angular.module('mean.system')
         Global.removeTokenAndUser();
         $location.path('/#')
       };
-      
+
       $scope.signIn = () => {
         $location.path('/signin');
       };
@@ -146,6 +151,12 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+        $scope.countries = [];
+
+        RegionService.getCountries()
+          .then((data) => {
+            $scope.countries = data;
+          });
 
       socket.on('newInvite', (data) => {
         const { host, hash } = $window.location;
@@ -164,5 +175,16 @@ angular.module('mean.system')
       socket.on('getLeaderBoard', (data) => {
         $scope.getLeaderBoard();
       });
+
+      const displayMessage = (modalID) => {
+          $(modalID).modal();
+        };
+
+      $scope.$watch('selectedCountry', () =>{
+        if ($scope.selectedCountry !== null && $scope.selectedCountry !== undefined){
+
+            socket.emit('region', $scope.selectedCountry);
+        }
+        });
     }
   ]);
