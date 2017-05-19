@@ -39,8 +39,20 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-btn cfh-btn-container">
             <span ng-show="$ctrl.showOptions" class="ng-hide">
-                      <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
-                  </span>
+              <button type="button" class="cfh-btn btn-pink "
+                data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
+                Played Games
+              </button>
+              <button type="button" class="cfh-btn btn-pink" 
+                data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
+                Leaderboard
+              </button>
+              <button type="button" class="cfh-btn btn-pink"
+                data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
+                Donations
+              </button>
+              <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+            </span>
           </li>
           <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
             <span>

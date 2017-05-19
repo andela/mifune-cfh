@@ -110,4 +110,129 @@
       </div>
     </div>
   </div>
+
+  <!--Played Games Modal-->
+  <div class="modal fade" id="playedGames" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Your Played Games</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Game Owner</th>
+                <th>Players</th>
+                <th>Rounds</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="game in savedGames" ng-class-odd="'striped'">
+                <td>{{game.date.slice(0, 10)}} / {{game.date.slice(11, -1)}}</td>
+                <td>{{game.gameOwerName}}</td>
+                <td><span ng-repeat="player in game.players">{{player.username}}</br></span></td>
+                <td>{{game.rounds}}</td>
+                <td>{{game.gameWinner}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <ul class="pager">
+            <li ng-class="{'disabled': gameCounter === 0 || savedGames.length === 0}"><a ng-click="previousPage('savedGames')">Previous</a></li>
+            <li ng-class="{'disabled': gameCounter === allSavedGames.length - 1 || savedGames.length === 0}"><a ng-click="nextPage('savedGames')">Next</a></li>
+          </ul>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!--LeaderBoard Modal-->
+  <div class="modal fade" id="leaderBoard" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">The Hall Of Fame</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Game Owner</th>
+                <th>Players</th>
+                <th>Rounds</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="leader in leaderBoard" ng-class-odd="'striped'">
+                <td>{{leader.date.slice(0, 10)}} / {{leader.date.slice(11, -1)}}</td>
+                <td>{{leader.gameOwerName}}</td>
+                <td><span ng-repeat="player in game.players">{{player.username}}</br></span></td>
+                <td>{{leader.rounds}}</td>
+                <td>{{leader.gameWinner}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!--Donations Modal-->
+  <div class="modal fade" id="donations" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">View Your Donations</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Amount</th>
+                <th>Donation ID Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="donation in donations" ng-class-odd="'striped'">
+                <td>{{donation.date.slice(0, 10)}} / {{donation.date.slice(11, -1)}}</td>
+                <td>{{donation.amount}}</td>
+                <td>{{game.donationID}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <ul class="pager">
+            <li ng-class="{'disabled': donationCounter === 0 || donations.length === 0}"><a ng-click="previousPage('donations')">Previous</a></li>
+            <li ng-class="{'disabled': donationCounter === allDonations.length - 1 || donations.length === 0}"><a ng-click="nextPage('donations')">Next</a></li>
+          </ul>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!--Donation Modal Ends-->
 </div>
