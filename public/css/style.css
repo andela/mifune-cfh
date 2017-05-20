@@ -1565,13 +1565,27 @@
 }
 
 .modal-header {
-  background-color: #303030;
-  color:white !important;
+  background-color: #ffffff;
+  color:#ff1a56 !important;
   text-align: center;
   font-size: 30px;
 }
 
-.striped{
+.select-region-header {
+  background-color: #ffffff;
+}
+
+#select-region-close {
+  border: none;
+  width: 30%;
+  background-color: #B22222;
+}
+
+#select-region-game-on {
+  width: 30%;
+}
+
+.striped {
   background-color: #fdd
 }
 
@@ -1579,25 +1593,23 @@
   min-height: 100vh;
 }
 
-
 @media screen and (max-width: 720px) {
   .full-page-section {
     min-height: auto;
   }
 }
 
-
 .header-fix {
   display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .left-side {
   flex: 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 768px) {
@@ -1612,7 +1624,6 @@
    justify-content: flex-end;
  }
 }
-
 
 .cfh-logo-text {
   height: auto;

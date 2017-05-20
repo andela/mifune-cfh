@@ -30,7 +30,7 @@ angular.module('mean.system')
         (isConfirm) => {
           if (isConfirm) {
               $scope.gameType = gameType;
-              displayMessage("#message-modal");
+              displayMessage('#select-region-modal');
           }
         });
       };
