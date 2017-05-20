@@ -28,13 +28,13 @@
     $scope.searchInput = [];
 
     userService.retrieveUsers().then((response) => {
-      retrievedUsers = test(response.data.data);
+      retrievedUsers = filterRegUsers(response.data.data);
       $scope.searchResult = retrievedUsers;
     }, (err) => {
       $scope.errorMsg = 'An error occured!!! '.concat(err.error);
     });
 
-    const test = data =>
+    const filterRegUsers = data =>
       data.filter(user => user._id !== $scope.user.id) // eslint-disable-line
       .map((regUser) => {
         regUser.online = false;
@@ -68,7 +68,6 @@
           (isConfirm) => {
             if (isConfirm) {
               $scope.openInviteModal(true);
-              // swal.resetDefaults();
             } else {
               swal('Cancelled', 'You chose not to invite players', 'error');
               swal.close();
