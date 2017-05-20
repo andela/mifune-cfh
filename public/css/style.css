@@ -1064,10 +1064,6 @@
    margin-right: 9px;
 }
 
-#donations {
-   margin-top: 160px;
-}
-
  @media (min-width: 1430px) {
    .row {
      margin: 0 0 -9px 0;
@@ -1552,8 +1548,12 @@
   margin-bottom: 30px;
 }
 
-.modal-body{
-  padding: 0px;
+.modal-container {
+  border: 1px solid #555555;
+}
+
+.modal-body {
+  padding: 1em;
 }
 .table>tbody>tr>td,
 .table>tbody>tr>th,
@@ -1563,12 +1563,14 @@
 .table>thead>tr>th{
   padding: 8px 8px 8px 30px;
 }
+
 .modal-header {
-      background-color: #ff0e52;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
+  background-color: #303030;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
 .striped{
   background-color: #fdd
 }

@@ -142,8 +142,13 @@ angular.module('mean.system')
       $scope.signIn = () => {
         $location.path('/signin');
       };
+
       $scope.signUp = () => {
         $location.path('/signup');
+      };
+
+      $scope.dashboard = () => {
+        $location.path('/dashboard');
       };
 
       $scope.avatars = [];

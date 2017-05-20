@@ -1,91 +1,99 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    var ChroMo = '(Chrome)/(\d+)\.(\d+)\.(\d+)\.(\d+) Mobile';
-    if (/Android|webOS|CriOs|ChroMo|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) === false && location.href !== "http://localhost:3000/#!/app") {
-    }
-    //Twitter buttons
-    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
-  });
-</script>
-
 <div id="container-fluid" ng-controller="IndexController">
+  <header></header>
   <div class="full-page-section">
-    <header></header>
-    <div class="row cfh-explanation">
-      <section class="col-xs-12 col-md-7">
-        <div class="txt">
-          <p>Cards<br />for <br/>Humanity</p>
-          <h5> Cards for Humanity is a fast-paced online version of the popular card game, <a href="http://cardsagainsthumanity.com/"
-              target="_blank">Cards Against Humanity</a>, that gives you the opportunity to donate to children in need - all
-            while remaining as despicable and awkward as you naturally are.
-          </h5>
-          <div class="row">
-            <div class="cfh-btn-group">
-              <a href="#">
-                <div class="col-xs-6 col-md-3 btn cfh-btn btn-pink">
-                  Donate
-                </div>
-              </a>
-              <a href="#!/gametour">
-                <div class="col-xs-6 col-md-3 btn cfh-btn btn-white">
-                  How to Play
-                </div>
-              </a>
-              <div class="col-xs-6 col-md-3 btn cfh-btn btn-pink" ng-click="startGame('guest')">
-                Play as Guest
-              </div>
-              <div class="col-xs-6 col-md-3 btn cfh-btn btn-white" ng-click="startGame('player')">
-                Play with Friends
-              </div>
-            </div>
-          </div>
+  <!--Played Games Modal-->
+  <div id="playedGames">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content modal-container">
+        <div class="modal-header">
+          <h4 class="modal-title">Your Played Games</h4>
         </div>
-      </section>
-      <section class="col-xs-12 col-md-5">
-        <div ng-show="showOptions">
-          <figure>
-            <img src="/img/cards_attack.png" class="card-attack">
-          </figure>
-        </div>
-        <div ng-hide="showOptions">
-          <img src="/img/heart-ace-large.png" class="img-responsive center-block hidden-xs hidden-sm">
-        </div>
-      </section>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-  <div>
-    <div class="full-width-horizontal-rule"></div>
-  </div>
-  <div id="team" class="full-page-section">
-    <div class="row">
-      <h1 class="text-center white-centered-text">Meet the Team</h1>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-7">
-        <div class="img-thumbnail">
-          <img class="img-responsive center-block" src="/img/mifune-team.jpg"/>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-5 team-text">
-        <div class="row txt">
-          <h1 class="team-name text-center">Team Mifune</h1>
-        </div>
-        <div class="row">
-          <h3 class="white-text"> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
-            <a href="#"><b>give</b></a>. Have fun while playing!
-          </h3 cl>
-          <div class="row cfh-btn2 btn-pink btn">
-            <div class="center-block">
-              Donate to Cards for Humanity
-            </div>
-          </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Game Owner</th>
+                <th>Players</th>
+                <th>Rounds</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="game in savedGames" ng-class-odd="'striped'">
+                <td>{{game.date.slice(0, 10)}} / {{game.date.slice(11, -1)}}</td>
+                <td>{{game.gameOwerName}}</td>
+                <td><span ng-repeat="player in game.players">{{player.username}}<br></span></td>
+                <td>{{game.rounds}}</td>
+                <td>{{game.gameWinner}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-  <div class="clearfix"></div>
-  <div>
-    <div class="full-width-horizontal-rule"></div>
+
+  <!--LeaderBoard Modal-->
+  <div id="leaderBoard">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content modal-container">
+        <div class="modal-header">
+          <h4 class="modal-title">Hall Of Fame</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Game Owner</th>
+                <th>Players</th>
+                <th>Rounds</th>
+                <th>Winner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="leader in leaderBoard" ng-class-odd="'striped'">
+                <td>{{leader.date.slice(0, 10)}} / {{leader.date.slice(11, -1)}}</td>
+                <td>{{leader.gameOwerName}}</td>
+                <td><span ng-repeat="player in leader.players">{{player.username}}<br></span></td>
+                <td>{{leader.rounds}}</td>
+                <td>{{leader.gameWinner}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <!--Donations Modal-->
+  <div id="donations">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content modal-container">
+        <div class="modal-header">
+          <h4 class="modal-title">Your Donations</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date/Time</th>
+                <th>Amount</th>
+                <th>Donation ID Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="donation in donations" ng-class-odd="'striped'">
+                <td>{{donation.date.slice(0, 10)}} / {{donation.date.slice(11, -1)}}</td>
+                <td>{{donation.amount}}</td>
+                <td>{{game.donationID}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

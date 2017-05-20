@@ -9,6 +9,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap',
       .when('/app', {
         templateUrl: '/views/app.html',
       })
+      .when('/dashboard', {
+        templateUrl: '/views/dashboard.html',
+      })
       .when('/privacy', {
         templateUrl: '/views/privacy.html',
       })

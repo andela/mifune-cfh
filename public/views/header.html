@@ -37,32 +37,11 @@
     <div class="right-side">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li class="navbar-btn cfh-btn-container">
-            <span ng-show="$ctrl.showOptions" class="ng-hide">
-              <span class="dropdown">
-                <button class="cfh-btn btn-pink dropdown-toggle" 
-                  type="button"  
-                  data-toggle="dropdown" 
-                  aria-haspopup="true" 
-                  aria-expanded="true">
-                More
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <button type="button" class="cfh-btn btn-pink "
-                    data-toggle="modal" ng-click="$ctrl.getSavedGames()" data-target="#playedGames">
-                    Played Games
-                  </button>
-                  <button type="button" class="cfh-btn btn-pink" 
-                    data-toggle="modal" ng-click="$ctrl.getLeaderBoard()" data-target="#leaderBoard">
-                    Leaderboard
-                  </button>
-                  <button type="button" class="cfh-btn btn-pink"
-                    data-toggle="modal" ng-click="$ctrl.getDonations()" data-target="#donations">
-                    Donations
-                  </button>
-                </ul>
-              </span>
-              <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
+          <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
+            <span>
+              <a ng-hide="$ctrl.location().dashboard" ng-click="$ctrl.dashboard()">
+                <button class="cfh-btn btn-pink">Dashboard</button>
+              </a>
             </span>
           </li>
           <li ng-hide="$ctrl.showOptions" class="navbar-btn cfh-btn-container">
