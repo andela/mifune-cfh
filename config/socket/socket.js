@@ -5,6 +5,7 @@ const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const sendMail = require('../mailer');
 
 const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
@@ -63,9 +64,10 @@ module.exports = (io) => {
 
     socket.on('invite', (data) => {
       if (data.to) {
-        socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
+        socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, link: data.link });
       }
-      console.log(`To be implemented ${data.email}`);
+      console.log(`sent ${data.link} to ${data.email}`);
+      sendMail(data.email, data.link);
     });
     socket.on('pickCards', (data) => {
       if (allGames[socket.gameID]) {

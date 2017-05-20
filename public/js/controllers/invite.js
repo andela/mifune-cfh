@@ -3,7 +3,7 @@
   angular.module('mean.system')
     .controller('InviteController', InviteController);
 
-  InviteController.$inject = ['$scope', '$location', 'game', 'userService', 'Global', 'socket'];
+  InviteController.$inject = ['$scope', '$location', 'game', 'userService', 'Global', 'socket', '$window'];
 
   /**
    *
@@ -13,9 +13,10 @@
    * @param {object} userService
    * @param {object} Global
    * @param {object} socket
+   * @param {object} $window
    * @return {void}
    */
-  function InviteController($scope, $location, game, userService, Global, socket) {
+  function InviteController($scope, $location, game, userService, Global, socket, $window) {
     const {
       user,
       authenticated
@@ -78,10 +79,12 @@
 
     $scope.inviteUsers = (iUser) => {
       if ($scope.allInvitees.length < 11) {
+        const { host, protocol } = $window.location;
         const gameOwner = $scope.user.username;
+        const inviteLink = `${protocol}//${host}/#!/app?game=${game.gameID}`;
         socket.emit('invite', {
           gameOwner,
-          gameID: game.gameID,
+          link: inviteLink,
           to: iUser.socketID,
           email: iUser.email
         });
