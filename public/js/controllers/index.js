@@ -147,10 +147,6 @@ angular.module('mean.system')
         $location.path('/signup');
       };
 
-      $scope.dashboard = () => {
-        $location.path('/dashboard');
-      };
-
       $scope.avatars = [];
       AvatarService.getAvatars()
         .then((data) => {

@@ -1317,18 +1317,22 @@
    border-radius: 0px
 }
 
- .btn-pink {
-   background-color:#ff0e52;
-   color: white;
+.btn-pink {
+  background-color:#ff0e52;
+  color: white;
 }
 
- .btn-white {
-   background-color: white;
-   color:#ff0e52;
+.btn-white {
+  background-color: white;
+  color:#ff0e52;
+}
+
+.btn-medium-grey {
+  background-color: #959595;
+  color: white;
 }
 
  /*Cfh Nav*/
-
  .cfh-nav {
   display: flex;
   align-items: center;
@@ -1569,6 +1573,11 @@
   color:#ff1a56 !important;
   text-align: center;
   font-size: 30px;
+}
+
+.new-user-games,
+.leaderboard {
+  text-align: center;
 }
 
 .select-region-header {

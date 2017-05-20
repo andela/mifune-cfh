@@ -13,7 +13,6 @@ HeaderController.inject = ['$location', 'Global', 'game', '$window', 'socket'];
  * @param {*} socket
  * @returns {void}
  */
-
 function HeaderController($location, Global, game, $window, socket) {
   const ctrl = this;
   ctrl.inviteTray = [];
@@ -23,6 +22,7 @@ function HeaderController($location, Global, game, $window, socket) {
     return {
       signin: currentLocation !== '/signin',
       signup: currentLocation !== '/signup',
+      dashboard: currentLocation !== '/dashboard',
       app: currentLocation.indexOf('/app') > -1
     };
   };
@@ -37,6 +37,10 @@ function HeaderController($location, Global, game, $window, socket) {
 
   ctrl.signIn = () => {
     $location.path('/signin');
+  };
+
+  ctrl.dashboard = () => {
+    $location.path('/dashboard');
   };
 
   ctrl.logout = () => {
@@ -61,7 +65,6 @@ function HeaderController($location, Global, game, $window, socket) {
   };
 
   socket.on('newInvite', (data) => {
-    // const { host, hash } = $window.location;
     const inviteLink = `/#!/app?game=${data.gameID}`;
     ctrl.inviteTray.push({ link: inviteLink, from: data.gameOwner });
   });
