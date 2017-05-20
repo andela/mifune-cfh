@@ -1493,6 +1493,9 @@
 .lastNode {
   margin: 0px 70px 0px 0px;
 }
+.cfh-bg {
+  background-color: #24282e;
+}
 
 .flat-button {
   border: none;
@@ -1513,9 +1516,31 @@
   top: 47%;
 }
 
-.team-text {
-  margin-top: 7%;
+.team-overlay {
+    background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)), url("../img/mifune-team.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    min-height: 100vh;
+    text-align: center;
 }
+.team-txt {
+  margin-top: 11%;
+  font-size: 20px;
+    padding: 0 20%;
+    line-height: 25px;
+}
+
+.team-header {
+    padding: 60px 0;
+}
+.btn-team {
+  padding: 15px 40px;
+    width: auto;
+    margin:0;
+}
+
 .team-text p {
   font-size: 22px;
 }
