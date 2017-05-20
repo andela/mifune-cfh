@@ -21,8 +21,8 @@
   });
 </script>
 
-<div id="container-fluid" ng-controller="IndexController" class="cfh-bg">
-  <div class="full-page-section">
+<div id="container-fluid" ng-controller="IndexController">
+  <div class="cfh-bg">
     <header></header>
     <div class="row cfh-explanation">
       <section class="col-xs-12 col-md-7">
@@ -72,15 +72,17 @@
     </div>
     <div class="team-txt">
       <p> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
-        <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank"><b>give</b></a>. Have fun while playing!
+        <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank"><b>give</b></a>. Please, have fun while playing!
+      </p>
+Don't forget to give to charity to save the people in desperate situations.
       </p>
       <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
         <button class="btn btn-lg btn-primary btn-team">
-        Donate to Cards for Humanity
+        Donate to charity
       </button></a>
     </div>
   </div>
-  <div id="donate" class="full-page-section col-md-12 donate cfh-bg">
+  <div id="donate" class="col-md-12 donate cfh-bg">
       <div class="donate-header">
         <h1> Donate now </h1>
         <p>"If you don't give back, no one will like you™" - <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">crowdrise.com</a></p>
@@ -105,7 +107,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" style="color: #800000">Diversity is Good, But Simplicity is the Best</h4>
+          <h4 class="modal-title">Diversity is Good, But Simplicity is the Best</h4>
         </div>
         <div class="modal-body">
           <p>{{message}}</p><br>
@@ -116,8 +118,8 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" style="width:30%; background-color: #B22222; border:none;" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" style="width:30%;" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
+          <button type="button" class="btn btn-primary button2"  data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
         </div>
       </div>
     </div>
