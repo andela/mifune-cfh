@@ -32,6 +32,33 @@
    border: none;
  }
 
+ .cfh-title{
+   color: #2D2D2D;
+ }
+
+ .cfh-search{
+   width: 100%;
+   border: 1px solid silver;
+ }
+
+ .cfh-div-input{
+   margin: 10px 20% 20px 20%
+ }
+
+ .cfh-light{
+   border-radius: 20px;
+   width: 12px;
+   height: 1px;
+   margin-right: 5%;
+   margin-top: 3%;
+   float: right;
+   background-color: #c5c5c5 !important;
+ }
+
+.online{
+  background-color: lightgreen !important;
+}
+
  .msg{
    color: mintcream;
  }
@@ -119,7 +146,6 @@
 
 .notify-invite ul button {
    float: right;
-   margin-right: 20px;
    margin-top: 7px;
 }
 
