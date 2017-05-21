@@ -1717,9 +1717,9 @@ h1.team-h1 {
 .team-photo {
   border-radius: 100%;
   max-width: 100%;
-  width: 150px;
-  height: 150px;
-  border: 1px solid blue;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #B22222;
 }
 
 .team-photo:hover {
