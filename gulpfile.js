@@ -63,7 +63,7 @@ gulp.task('test-frontend', ['test-backend'], done =>
     done();
   }).start());
 
-gulp.task('test-dev', ['test-frontend', 'test-backend'], () => {
+gulp.task('test-dev', ['test-backend'], () => {
   process.exit();
 });
 
