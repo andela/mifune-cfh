@@ -49,11 +49,6 @@ ng-controller="InviteController">
       <div class="cfh-btn-invite" ng-controller="InviteController">
          <button type="button" class="btn btn-default" ng-click="openInviteModal()">Invite Player</button>
       </div>
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
-        <div id="start-game-button">
-          Start Game<br/>with {{game.players.length}} players
-        </div>
-      </div>
       </div>
     </div>
   </div>
