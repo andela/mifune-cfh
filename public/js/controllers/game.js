@@ -137,8 +137,6 @@ angular.module('mean.system')
       };
 
       $scope.highlightWinningSet = (winningSet) => {
-        console.log('got here');
-        console.log(game.state);
         console.log($scope.winningCardPicked);
         if (game.state === 'waiting for czar to decide' &&
         $scope.winningCardPicked === false) {
