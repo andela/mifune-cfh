@@ -10,8 +10,16 @@
       <div id="player-name">
         <h4>{{player.username | upperFirstLetter}}</h4>
       </div>
-      <div id="player-score">
-        <h2>{{getPlayerPosition(player)}}/{{game.players.length}}</h2>
+      <div id="player-position">
+        <h4>{{getPlayerPosition(player)}}/{{game.players.length}}</h4>
+      </div>
+      <div id="player-score" ng-show="game.state !== 'awaiting players'">
+        <h3>
+          Score: 
+          <span class="pink-text">{{player.points}}</span>
+          /
+          <span class="pink-text">{{game.pointLimit}}</span>
+        </h3>
       </div>
     </div>
   </div>

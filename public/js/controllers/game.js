@@ -129,7 +129,7 @@ angular.module('mean.system')
       };
 
       $scope.pickWinning = (winningSet) => {
-        if ($scope.isCzar()) {
+        if ($scope.isCzar() && game.state === 'waiting for czar to decide') {
           $scope.highlightWinningSet(winningSet);
           game.pickWinning(winningSet.card[0]);
           $scope.winningCardPicked = true;
@@ -137,11 +137,17 @@ angular.module('mean.system')
       };
 
       $scope.highlightWinningSet = (winningSet) => {
-        const cards = winningSet.card;
-        for (let i = 0; i < cards.length; i += 1) {
-          const card = cards[i];
-          const cardElement = angular.element(document.querySelector(`#card-${card.id}`));
-          cardElement.addClass('card-winning-answer');
+        console.log('got here');
+        console.log(game.state);
+        console.log($scope.winningCardPicked);
+        if (game.state === 'waiting for czar to decide' &&
+        $scope.winningCardPicked === false) {
+          const cards = winningSet.card;
+          for (let i = 0; i < cards.length; i += 1) {
+            const card = cards[i];
+            const cardElement = angular.element(document.querySelector(`#card-${card.id}`));
+            cardElement.addClass('card-winning-answer');
+          }
         }
       };
 

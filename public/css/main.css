@@ -296,19 +296,6 @@ html {
                 font-size: 10px;
                 margin-top: 3px;
                 margin-bottom: 5px; } }
-            #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score {
-              float: left; }
-              #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                font-size: 26px;
-                margin-top: 0;
-                margin-bottom: 0; }
-                @media only screen and (min-width: 521px) and (max-width: 768px) {
-                  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                    font-size: 21px; } }
-                @media (max-width: 520px) {
-                  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                    font-size: 17px;
-                    line-height: 40%; } }
             #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-star {
               float: left;
               margin-top: 3px;
