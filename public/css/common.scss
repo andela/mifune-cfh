@@ -492,7 +492,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
     }
 }
 
-html, body, .main-container, .cont, #first-section, #inner-container{
+html, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
 }
 
@@ -508,10 +508,6 @@ html{
     }
 }
 body {
-    font-family: $main-font;
-    background: $site-deep-black;
-    margin: 10px;
-
     .full-horizontal-whitespace {
       margin-bottom: 10%;
     }
@@ -548,9 +544,6 @@ body {
     height: 100%;
 
     .leave-game-btn {
-        font-size: 20px;
-        font-size: 1.25rem;
-        font-weight: 400;
         text-align: center;
         color: white;
         background: #959595;
@@ -644,7 +637,7 @@ body {
                     }
                     
                     #players-container {
-                        height: 300px;
+                        height: 400px;
                         position: relative;
 
                         .player-container {
@@ -680,7 +673,6 @@ body {
 
                     #answers-container-outer {
                         #info-container {
-                            background-color: $site-deep-black;
                             border-radius: 5px;
                             margin: 1em;
                             padding: 1em;

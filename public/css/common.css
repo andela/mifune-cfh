@@ -148,7 +148,7 @@
       display: inline-block;
       content: '.'; }
 
-html, body, .main-container, .cont, #first-section, #inner-container {
+html, .main-container, .cont, #first-section, #inner-container {
   height: 100%; }
 
 html {
@@ -171,22 +171,22 @@ html {
     html {
       margin-top: 0px; } }
 
-body {
-  font-family: "helvetica neue", helvetica, sans-serif;
-  background: #252525;
-  margin: 10px; }
-  body .full-horizontal-whitespace {
-    margin-bottom: 10%; }
-  body .half-horizontal-whitespace {
-    margin-bottom: 5%; }
-  body .quarter-horizontal-whitespace {
-    margin-bottom: 2.5%; }
-  @media only screen and (min-width: 521px) and (max-width: 768px) {
-    body {
-      margin: 5px; } }
-  @media (max-width: 520px) {
-    body {
-      margin: 1px; } }
+body .full-horizontal-whitespace {
+  margin-bottom: 10%; }
+
+body .half-horizontal-whitespace {
+  margin-bottom: 5%; }
+
+body .quarter-horizontal-whitespace {
+  margin-bottom: 2.5%; }
+
+@media only screen and (min-width: 521px) and (max-width: 768px) {
+  body {
+    margin: 5px; } }
+
+@media (max-width: 520px) {
+  body {
+    margin: 1px; } }
 
 .navbar .nav > li > a.brand {
   padding-left: 20px;
@@ -199,9 +199,6 @@ body {
 #main-container {
   height: 100%; }
   #main-container .leave-game-btn {
-    font-size: 20px;
-    font-size: 1.25rem;
-    font-weight: 400;
     text-align: center;
     color: white;
     background: #959595; }
@@ -268,7 +265,7 @@ body {
           color: #ff1a56;
           font-size: 5em; }
       #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container {
-        height: 300px;
+        height: 400px;
         position: relative; }
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #left-gameplay-container #players-container .player-container {
           margin-bottom: 1em;
@@ -289,7 +286,6 @@ body {
           margin-bottom: 1em;
           margin-top: 1em; }
         #main-container #app-container #gameplay-container-outer #gameplay-container-inner #main-gameplay-container #answers-container-outer #info-container {
-          background-color: #252525;
           border-radius: 5px;
           margin: 1em;
           padding: 1em; }
