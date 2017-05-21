@@ -65,6 +65,18 @@ module.exports = (io) => {
       socket.broadcast.emit('onlineUsers', onlineUsers);
     });
 
+    socket.on('getSavedGames', () => {
+      socket.emit('savedGames', '');
+    });
+
+    socket.on('getDonations', () => {
+      socket.emit('getDonations', '');
+    });
+
+    socket.on('getLeaderBoard', () => {
+      socket.emit('getLeaderBoard', '');
+    });
+
     socket.on('region', (data) => {
       socket.regionId = data;
     });

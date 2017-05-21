@@ -42,7 +42,7 @@ class Game {
     this.region = '58f4de8ef08434413b6aec50';
     this.playerMinLimit = 3;
     this.playerMaxLimit = 12;
-    this.pointLimit = 5;
+    this.pointLimit = 1;
     this.state = 'awaiting players';
     this.round = 0;
     this.questions = null;
@@ -76,6 +76,8 @@ class Game {
         hand: player.hand,
         points: player.points,
         username: player.username,
+        email: player.email,
+        userID: player.userID,
         avatar: player.avatar,
         premium: player.premium,
         socketID: player.socket.id,
@@ -157,7 +159,7 @@ class Game {
   startGame() {
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
-    // this.stateChoosing(this);
+    this.stateChoosing(this);
     this.changeCzars(this);
   }
 
@@ -174,7 +176,7 @@ class Game {
     self.winnerAutopicked = false;
     self.curQuestion = self.questions.pop();
     if (!self.questions.length) {
-      self.getQuestions(self.region, (err, data) => {
+      self.getQuestions((err, data) => {
         self.questions = data;
       });
     }

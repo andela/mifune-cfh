@@ -10,6 +10,7 @@ HeaderController.inject = ['$location', 'Global', 'game', '$window', 'socket'];
  * @param {*} $location
  * @param {*} Global
  * @param {*} game
+ * @param {*} socket
  * @returns {void}
  */
 function HeaderController($location, Global, game, $window, socket) {
@@ -21,6 +22,7 @@ function HeaderController($location, Global, game, $window, socket) {
     return {
       signin: currentLocation !== '/signin',
       signup: currentLocation !== '/signup',
+      dashboard: currentLocation !== '/dashboard',
       app: currentLocation.indexOf('/app') > -1
     };
   };
@@ -37,6 +39,13 @@ function HeaderController($location, Global, game, $window, socket) {
     $location.path('/signin');
   };
 
+  ctrl.dashboard = () => {
+    ctrl.getSavedGames();
+    ctrl.getLeaderBoard();
+    ctrl.getDonations();
+    $location.path('/dashboard');
+  };
+
   ctrl.logout = () => {
     Global.removeTokenAndUser();
     $location.path('/#');
@@ -46,8 +55,22 @@ function HeaderController($location, Global, game, $window, socket) {
     $location.path('/');
   };
 
+  ctrl.getSavedGames = () => {
+    console.log('savedgames');
+    socket.emit('getSavedGames', true);
+  };
+
+  ctrl.getDonations = () => {
+    socket.emit('getDonations', true);
+  };
+
+  ctrl.getLeaderBoard = () => {
+    socket.emit('getLeaderBoard', true);
+  };
+
   socket.on('newInvite', (data) => {
-    ctrl.inviteTray.push({ link: data.link, from: data.gameOwner });
+    const inviteLink = `/#!/app?game=${data.gameID}`;
+    ctrl.inviteTray.push({ link: inviteLink, from: data.gameOwner });
   });
 
   ctrl.openGame = (link, index) => {

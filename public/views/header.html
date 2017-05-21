@@ -39,6 +39,11 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-btn cfh-btn-container">
             <span ng-show="$ctrl.showOptions" class="ng-hide">
+               <span>
+              <a ng-show="$ctrl.location().dashboard" ng-click="$ctrl.dashboard()">
+                <button class="cfh-btn btn-pink">Dashboard</button>
+              </a>
+            </span>
                       <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
                   </span>
           </li>
