@@ -14,6 +14,27 @@
     },
     "MONGODB_URI": {
       "required": true
+    },
+    "HS256_SECRET": {
+      "required": true
+    },
+    "APIKEY": {
+      "required": true
+    },
+    "AUTHDOMAIN": {
+      "required": true
+    },
+    "DATABASEURL": {
+      "required": true
+    },
+    "PROJECTID": {
+      "required": true
+    },
+    "STORAGEBUCKET": {
+      "required": true
+    },
+    "MESSAGINGSENDERID": {
+      "required": true
     }
   },
   "addons": [
