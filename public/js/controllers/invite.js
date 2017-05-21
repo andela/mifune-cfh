@@ -25,7 +25,8 @@
     let retrievedUsers = [];
     $scope.user = JSON.parse(user || JSON.stringify({}));
     $scope.allInvitees = [];
-    $scope.searchInput = [];
+    $scope.searchInput = '';
+    $scope.authenticated = authenticated;
 
     userService.retrieveUsers().then((response) => {
       retrievedUsers = filterRegUsers(response.data.data);
@@ -87,9 +88,7 @@
           to: iUser.socketID,
           email: iUser.email
         });
-        $scope.allInvitees.push({
-          gameID: game.gameID
-        });
+        $scope.allInvitees.push(iUser);
       } else {
         swal({
           title: 'Maximum number of Invites',
@@ -108,5 +107,13 @@
           return name.indexOf($scope.searchInput.toLowerCase()) !== -1;
         });
     };
+
+    $scope.inviteSent = invitedUser =>
+      $scope.allInvitees.find(invUser => invUser.email === invitedUser.email);
+
+    $scope.$watch('game.onlineUsers', () => {
+      retrievedUsers = filterRegUsers(retrievedUsers.slice());
+      $scope.filterUser();
+    }, true);
   }
 }());

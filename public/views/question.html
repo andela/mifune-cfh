@@ -47,7 +47,9 @@ ng-controller="InviteController">
         </button>
       </div>
       <div class="cfh-btn-invite" ng-controller="InviteController">
-         <button type="button" class="btn btn-default" ng-click="openInviteModal()">Invite Player</button>
+         <button type="button" class="btn btn-default" 
+         ng-click="openInviteModal()" ng-show="authenticated && game.playerIndex === 0">
+         Invite Player</button>
       </div>
     </div>
   </div>

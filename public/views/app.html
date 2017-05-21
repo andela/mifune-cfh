@@ -63,7 +63,7 @@ ng-controller="InviteController">
             <span>{{ user.name }} </span>
             <span class="cfh-light" ng-class="{online: user.online}"></span>
             <button type="button" class="btn btn-primary invite-button" 
-            ng-click="inviteUsers(user)">Send Invite
+            ng-click="inviteUsers(user)" ng-disabled="inviteSent(user)">Send Invite
             </button>
           </li>
          
