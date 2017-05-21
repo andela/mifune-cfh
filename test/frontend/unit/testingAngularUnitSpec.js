@@ -1,6 +1,7 @@
-describe('Testing  AngularJS Test Suite', () => {
-  describe('Testing header Controller', () => {
-    it('should test scope object', () => {
+/* eslint-disable prefer-arrow-callback */
+describe('Testing  AngularJS Test Suite', function () {
+  describe('Testing header Controller', function () {
+    it('should test scope object', function () {
       module('mean.system');
       const scope = {};
       let ctrl;
