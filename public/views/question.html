@@ -56,19 +56,19 @@ ng-controller="InviteController">
 <!-- Game Over Stuff -->
 <div id="game-end-info">
   <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
-    <div class="game-end-headline">Oh no!? The game ended because too many people left! </div>
+    <h2 class="game-end-headline">Oh no!? The game ended because too many people left!</h2>
     Our sincere apologies.
   </div>
   <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
-    <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>
+    <h2 class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</h2>
     We hope you feel special. You really should. So, don't horde that 
     special feeling all to youself. Share that it with the world 
     by donating to charity!
   </div>
   <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
-    <div class="game-end-headline">
+    <h2 class="game-end-headline">
       Aw no, a disaster! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!
-    </div>
+    </h2>
     That makes you one of the losers. Sorry. :(
   </div>
 </div>

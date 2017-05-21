@@ -76,6 +76,10 @@ $medium-gray: #959595;
     height: 69%;
 }
 
+.card-winning-answer {
+    border: 5px solid #ff1a56;
+}
+
 .spade-on-white-bg {
     background-image: url(/img/icons/spade-shape-only.png);
 }
@@ -432,7 +436,7 @@ background-image: linear-gradient(to bottom right, #000 0%, #101010 100%);
         font-size: 1.4rem;
     }
 
-    #selection-number {
+    .selection-number {
         position: absolute;
         bottom: 1px;
         left: 7px;

@@ -35,7 +35,7 @@
       word-wrap: break-word; } }
   .card.how-to {
     font-size: 1.4rem; }
-  .card #selection-number {
+  .card .selection-number {
     position: absolute;
     bottom: 1px;
     left: 7px;
@@ -548,11 +548,7 @@ html {
                   #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info {
                     font-size: 13px; } }
                 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info .game-end-headline {
-                  font-size: 24px;
                   margin-bottom: 10px; }
-                  @media (max-width: 520px) {
-                    #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info .game-end-headline {
-                      font-size: 18px; } }
       #main-container #app-container #gameplay-container #info-container {
         width: 100%;
         background: #252525;

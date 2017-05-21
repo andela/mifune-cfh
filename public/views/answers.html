@@ -16,7 +16,7 @@
       </div>
     </div>
     <span ng-repeat="answer in game.table">
-      <div class="card smallest card-bg-img clickable" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+      <div class="card smallest card-bg-img clickable" ng-class="getBackgroundImage(card.id)" ng-style="pointerCursorStyle()" id="card-{{card.id}}" ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}">
         <div class="card-icon">
           <img ng-src="{{getCardIcon(card.id)}}" class="img-responsive"/>

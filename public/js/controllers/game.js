@@ -130,8 +130,18 @@ angular.module('mean.system')
 
       $scope.pickWinning = (winningSet) => {
         if ($scope.isCzar()) {
+          $scope.highlightWinningSet(winningSet);
           game.pickWinning(winningSet.card[0]);
           $scope.winningCardPicked = true;
+        }
+      };
+
+      $scope.highlightWinningSet = (winningSet) => {
+        const cards = winningSet.card;
+        for (let i = 0; i < cards.length; i += 1) {
+          const card = cards[i];
+          const cardElement = angular.element(document.querySelector(`#card-${card.id}`));
+          cardElement.addClass('card-winning-answer');
         }
       };
 
