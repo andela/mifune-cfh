@@ -7,6 +7,10 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const sendMail = require('../mailer');
 
+
+let database;
+const envCheck = process.env.NODE_ENV;
+
 const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
@@ -20,8 +24,12 @@ const config = {
   storageBucket: process.env.STORAGEBUCKET,
   messagingSenderId: process.env.MESSAGIGSENDERID,
 };
-firebase.initializeApp(config);
-const database = firebase.database();
+if (envCheck !== 'travis') {
+  firebase.initializeApp(config);
+  database = firebase.database();
+}
+// firebase.initializeApp(config);
+// const database = firebase.database();
 
 module.exports = (io) => {
   const allGames = {};
@@ -45,7 +53,9 @@ module.exports = (io) => {
       io.sockets.in(gameID).emit('chat message', chat);
       socket.emit('onlineUsers', onlineUsers);
       chatMessages.push(chat);
-      database.ref(`chat/${gameID}`).set(chatMessages);
+      if (envCheck !== 'travis') {
+        database.ref(`chat/${gameID}`).set(chatMessages);
+      }
     });
 
     socket.on('loggedIn', (data) => {
