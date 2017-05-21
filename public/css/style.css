@@ -1349,7 +1349,8 @@ li {
 }
 
 .main-section {
-  height: 100vh;
+  min-height: 100vh;
+  margin-bottom: 1%;
 }
 
 
@@ -1439,7 +1440,7 @@ li {
 .cfh-explanation {
   margin: 0 0 40px 0;
   position: relative;
-  padding: 60px 0 0 0;
+  padding: 60px 5% 5% 5%;
 }
 
 .cfh-explanation .txt {
@@ -1614,6 +1615,7 @@ li {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: 10px;
 }
 
 .left-side {
@@ -1633,8 +1635,8 @@ li {
 .donate {
   color: #FFF;
   text-align: center;
-  margin: 1%;
   padding: 5%;
+  margin-bottom: 2%;
 }
 
 .section-txt {
@@ -1681,6 +1683,8 @@ li {
 .team {
   color: #FFF;
   text-align: center;
+  padding: 5%;
+  padding-top: 4%;
 }
 
 h1.team-h1 {
@@ -1694,7 +1698,7 @@ h1.team-h1 {
 }
 
 .team-photos {
-  padding: 50px;
+  padding: 4% 15%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1702,11 +1706,12 @@ h1.team-h1 {
 }
 
 .team-member {
-  padding: 10px 40px;
+  padding: 10px 20px;
 }
 
 .team-member h3 {
   max-width: 200px;
+  font-size: 16px;
 }
 
 .team-photo {
@@ -1770,7 +1775,6 @@ h1.team-h1 {
   .team-member {
     float: none;
     display: block;
-    margin: 50px auto;
     width: 100%;
     text-align: center;
   }
