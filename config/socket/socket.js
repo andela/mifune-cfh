@@ -20,8 +20,14 @@ const config = {
   storageBucket: process.env.STORAGEBUCKET,
   messagingSenderId: process.env.MESSAGIGSENDERID,
 };
-firebase.initializeApp(config);
-const database = firebase.database();
+let database;
+
+const nodeEnv = process.env.NODE_ENV;
+const isTestEnv = (nodeEnv === 'travis') || (nodeEnv === 'test');
+if (!isTestEnv) {
+  firebase.initializeApp(config);
+  database = firebase.database();
+}
 
 module.exports = (io) => {
   const allGames = {};
@@ -45,7 +51,7 @@ module.exports = (io) => {
       io.sockets.in(gameID).emit('chat message', chat);
       socket.emit('onlineUsers', onlineUsers);
       chatMessages.push(chat);
-      database.ref(`chat/${gameID}`).set(chatMessages);
+      if (!isTestEnv) database.ref(`chat/${gameID}`).set(chatMessages);
     });
 
     socket.on('loggedIn', (data) => {
