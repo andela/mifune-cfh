@@ -76,6 +76,8 @@ class Game {
         hand: player.hand,
         points: player.points,
         username: player.username,
+        email: player.email,
+        userID: player.userID,
         avatar: player.avatar,
         premium: player.premium,
         socketID: player.socket.id,
@@ -157,7 +159,7 @@ class Game {
   startGame() {
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
-    // this.stateChoosing(this);
+    this.stateChoosing(this);
     this.changeCzars(this);
   }
 

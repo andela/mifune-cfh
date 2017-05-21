@@ -1,8 +1,9 @@
 /* global document, $ */
 angular.module('mean.system')
   .controller('GameController', ['$scope', 'game', '$timeout', '$location',
-    'MakeAWishFactsService', 'userService',
-    function GameController($scope, game, $timeout, $location, MakeAWishFactsService, userService) {
+    'MakeAWishFactsService', 'userService', 'Global',
+    function GameController($scope, game, $timeout, $location,
+      MakeAWishFactsService, userService, Global) {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
@@ -11,6 +12,7 @@ angular.module('mean.system')
       $scope.pickedCards = [];
       let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
       $scope.makeAWishFact = makeAWishFacts.pop();
+      $scope.global = Global.getSavedUser();
 
       $scope.pickCard = (card) => {
         if (!$scope.hasPickedCards) {
@@ -73,33 +75,6 @@ angular.module('mean.system')
         return false;
       };
 
-      $scope.getPlayerPosition = obj => obj.color + 1;
-
-      $scope.getBackgroundImage = (id) => {
-        const backgroundImageClasses = [
-          'spade-on-white-bg',
-          'heart-on-white-bg',
-          'diamond-on-white-bg',
-          'club-on-white-bg',
-        ];
-        const numOfImageClasses = backgroundImageClasses.length;
-        const imgClassIndex = id % numOfImageClasses;
-        const imgClass = backgroundImageClasses[imgClassIndex];
-
-        return imgClass;
-      };
-
-      $scope.getCardIcon = (id) => {
-        const icons = [
-          '/img/icons/spade-extra-small.png',
-          '/img/icons/heart-extra-small.png',
-          '/img/icons/diamond-extra-small.png',
-          '/img/icons/club-extra-small.png',
-        ];
-        const quotient = id % icons.length;
-        const cardIcon = icons[quotient];
-        return cardIcon;
-      };
       $scope.showFirst = card =>
         game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
@@ -129,23 +104,9 @@ angular.module('mean.system')
       };
 
       $scope.pickWinning = (winningSet) => {
-        if ($scope.isCzar() && game.state === 'waiting for czar to decide') {
-          $scope.highlightWinningSet(winningSet);
+        if ($scope.isCzar()) {
           game.pickWinning(winningSet.card[0]);
           $scope.winningCardPicked = true;
-        }
-      };
-
-      $scope.highlightWinningSet = (winningSet) => {
-        console.log($scope.winningCardPicked);
-        if (game.state === 'waiting for czar to decide' &&
-        $scope.winningCardPicked === false) {
-          const cards = winningSet.card;
-          for (let i = 0; i < cards.length; i += 1) {
-            const card = cards[i];
-            const cardElement = angular.element(document.querySelector(`#card-${card.id}`));
-            cardElement.addClass('card-winning-answer');
-          }
         }
       };
 
@@ -174,55 +135,70 @@ angular.module('mean.system')
         $scope.pickedCards = [];
       });
 
+      // In case player doesn't pick a card in time, show the table
+      $scope.$watch('game.state', () => {
+        if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
+          $scope.showTable = true;
+        }
+      });
+
     // In case player doesn't pick a card in time, show the table
       $scope.$watch('game.state', () => {
         if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
           $scope.showTable = true;
         }
         if (game.state === 'game ended') {
-          if ($scope.global && game.playerIndex === 0) {
-            const { id } = JSON.parse($scope.global.user);
-            const { players, gameWinner, } = game;
+          if ($scope.global.authenticated) {
+            const index = game.playerIndex;
+            let id = '';
+            if (index === 0) {
+              id = JSON.parse($scope.global.user).id;
+            }
+            const { players, gameWinner } = game;
             const gameWinnerUsername = players[gameWinner].username;
             const playedGameData = {
-              gameOwnerId: id,
+              gameID: game.gameID,
+              gameOwnerId: players[0].userID,
+              gameOwerName: players[0].username,
+              rounds: game.round,
               players,
-              gameWinner: gameWinnerUsername,
+              gameWinner: gameWinnerUsername
             };
+            console.log('playedGameData', playedGameData);
             userService.saveGame(playedGameData).then(
-            /* eslint-disable no-unused-vars, no-undef*/
-            (response) => {
-              // swal is sweetalert module used for custom alerts
-              swal({
-                title: 'Game Saved successfully!',
-                text: `<div>
-                        <b>Game Owner: </b> You; as ${players[0].username}</br>
-                        <b>Game Winner: </b>${gameWinnerUsername}</br>
-                        <b>Game Players: </b>${players.map((player, i) => {
-                          if (i === 0) {
-                            return player.username;
-                          }
-                          return ` ${player.username}`;
-                        })}</br></br>
-                        <b>Go for Next Round</b>
-                       </div>`,
-                type: 'info',
-                showCancelButton: false,
-                confirmButtonColor: '#DD6B55',
-                confirmButtonText: 'Close',
-                closeOnConfirm: true,
-                html: true
-              });
-            },
-            (err) => {
-              swal({
-                title: 'Game not saved!',
-                text: 'Your last game could not be saved due to an internal server error. If this continues, alert the support team.',
-                timer: 5000,
-                showConfirmButton: false
-              });
-            }
-          );
+              /* eslint-disable no-unused-vars, no-undef*/
+              (response) => {
+                // swal is sweetalert module used for custom alerts
+                swal({
+                  title: 'Game Saved successfully!',
+                  text: `<div>
+                          <b>Game Owner: </b> ${id ? 'You' : players[0].username}</br>
+                          <b>Game Winner: </b>${gameWinnerUsername}</br>
+                          <b>Game Players: </b>${players.map((player, i) => {
+                            if (i === 0) {
+                              return player.username;
+                            }
+                            return ` ${player.username}`;
+                          })}</br></br>
+                          <b>Go for Next Round</b>
+                        </div>`,
+                  type: 'info',
+                  showCancelButton: false,
+                  confirmButtonColor: '#DD6B55',
+                  confirmButtonText: 'Close',
+                  closeOnConfirm: true,
+                  html: true
+                });
+              },
+              (err) => {
+                swal({
+                  title: 'Game not saved!',
+                  text: 'Your last game could not be saved due to an internal server error. If this continues, alert the support team.',
+                  timer: 5000,
+                  showConfirmButton: false
+                });
+              }
+            );
           }
         }
       });
