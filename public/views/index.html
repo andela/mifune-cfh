@@ -3,18 +3,26 @@
 
     var ChroMo = '(Chrome)/(\d+)\.(\d+)\.(\d+)\.(\d+) Mobile';
 
-    if (/Android|webOS|CriOs|ChroMo|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) === false && location.href !== "http://localhost:3000/#!/app") {
-    }
+    if (/Android|webOS|CriOs|ChroMo|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ===
+      false && location.href !== "http://localhost:3000/#!/app") {}
 
     //Twitter buttons
-    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
+    ! function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        p = /^http:/.test(d.location) ? 'http' : 'https';
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }(document, 'script', 'twitter-wjs');
 
   });
-
 </script>
 
 <div id="container-fluid" ng-controller="IndexController">
-  <div class="full-page-section">
+  <div class="cfh-bg">
     <header></header>
     <div class="row cfh-explanation">
       <section class="col-xs-12 col-md-7">
@@ -26,7 +34,7 @@
           </h5>
           <div class="row">
             <div class="cfh-btn-group">
-              <a href="#">
+              <a href="#donate">
                 <div class="col-xs-6 col-md-3 btn cfh-btn btn-pink">
                   Donate
                 </div>
@@ -56,61 +64,62 @@
           <img src="/img/heart-ace-large.png" class="img-responsive center-block hidden-xs hidden-sm">
         </div>
       </section>
-      <div class="clearfix"></div>
     </div>
   </div>
-  <div>
-    <div class="full-width-horizontal-rule"></div>
-  </div>
-  <div id="team" class="full-page-section">
+  <div id="team" class="team-overlay">
     <div class="row">
-      <h1 class="text-center white-centered-text">Meet the Team</h1>
+      <h1 class="team-header">Meet the Team - Team Mifune</h1>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-7">
-        <div class="img-thumbnail">
-          <img class="img-responsive center-block" src="/img/mifune-team.jpg"/>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-5 team-text">
-        <div class="row txt">
-          <h1 class="team-name text-center">Team Mifune</h1>
-        </div>
-        <div class="row">
-          <h3 class="white-text"> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
-            <a href="#"><b>give</b></a>. Have fun while playing!
-          </h3 cl>
-          <div class="row cfh-btn2 btn-pink btn">
-            <div class="center-block">
-              Donate to Cards for Humanity
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="team-txt">
+      <p> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
+        <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank"><b>give</b></a>. Please, have fun while playing!
+      </p>
+Don't forget to give to charity to save the people in desperate situations.
+      </p>
+      <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
+        <button class="btn btn-lg btn-primary btn-team">
+        Donate to charity
+      </button></a>
     </div>
   </div>
-  <div class="clearfix"></div>
-  <div>
-    <div class="full-width-horizontal-rule"></div>
+  <div id="donate" class="col-md-12 donate cfh-bg">
+      <div class="donate-header">
+        <h1> Donate now </h1>
+        <p>"If you don't give back, no one will like you™" - <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">crowdrise.com</a></p>
+      </div>
+      <div class="donate-txt">
+        <p>We're quite sure you feel the same way, so we've integrated donation widgets (via crowdrise.com), along with some
+          not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you
+          donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much
+          better you are than them).
+        </p>
+        <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
+        
+      </div>
+      <div class="donate-cta">
+        <img src="img/make-a-wish-logo-white-large.png">
+       <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
+          <button class="btn btn-lg btn-primary btn-donate">Donate</button></a>
+      </div>
   </div>
-  <div id="message-modal" class="modal fade" role="dialog" >
+  <div id="message-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" style="color: #800000">Diversity is Good, But Simplicity is the Best</h4>
+          <h4 class="modal-title">Diversity is Good, But Simplicity is the Best</h4>
         </div>
         <div class="modal-body">
           <p>{{message}}</p><br>
           <p>Kindly select a region&nbsp;&nbsp;
-          <select id="selectedCountry" style="text-align:center;" ng-model="selectedCountry" >
+            <select id="selectedCountry" style="text-align:center;" ng-model="selectedCountry">
             <option ng-repeat="country in countries" value={{country.regionId}} >{{country.country}}</option>
           </select>
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" style="width:30%; background-color: #B22222; border:none;" data-dismiss="modal" >Close</button>
-          <button type="button" class="btn btn-primary" style="width:30%;" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
+          <button type="button" class="btn btn-primary button2"  data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
         </div>
       </div>
     </div>
