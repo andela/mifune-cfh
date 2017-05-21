@@ -1348,6 +1348,10 @@ li {
   }
 }
 
+.main-section {
+  height: 100vh;
+}
+
 
 /*Cfh buttons*/
 
@@ -1428,15 +1432,8 @@ li {
   color: #ff0e52;
 }
 
-.cfh-btn-container {}
-
 .cfh-btn-container a {
   padding: 0 !important;
-}
-
-.cfh-team-row {
-  margin: 0 0 40px 0;
-  position: relative;
 }
 
 .cfh-explanation {
@@ -1532,7 +1529,6 @@ li {
 
 .cfh-bg {
   background-color: #24282e;
-  min-height: 100vh;
 }
 
 .flat-button {
@@ -1554,61 +1550,12 @@ li {
   top: 47%;
 }
 
-.team-overlay {
-  background: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)), url("../img/mifune-team.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  color: #fff;
-  min-height: 100vh;
-  text-align: center;
-}
-
-.team-txt {
-  font-size: 20px;
-  padding: 0 20%;
-  line-height: 25px;
-}
-
-.team-header {
-  padding: 60px 0;
-  margin-top: 13%;
-}
-
-.team-txt .btn-team {
-  padding: 15px 40px;
-  width: auto;
-  margin: 0;
-}
-
-.team-text p {
-  font-size: 22px;
-}
-
-.team-text h5 {
-  line-height: 8vh;
-  color: white;
-}
-
-.team-name {
-  color: #eeeeee;
-}
-
-.team-container {
-  margin: 12% 14%;
-  width: 210px;
-  height: 140px;
-  position: relative;
-  perspective: 1000px;
-}
-
 .homeLink {
   font-size: 2rem;
 }
 
 .join-game-container {
   font-family: sans-serif;
-  /*border: 2px solid#ff0e52;*/
   background: #ddd;
   border-radius: 5px;
   padding: 15px;
@@ -1683,14 +1630,11 @@ li {
 
 /*Donate section*/
 
-body {
-  background-color: #24282e;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .donate {
   color: #FFF;
   text-align: center;
+  margin: 1%;
+  padding: 5%;
 }
 
 .donate-txt {
@@ -1716,9 +1660,10 @@ body {
   width: auto;
   margin: 0;
 }
-.donate-cta >img {
+
+.donate-cta>img {
   margin: 0 30px;
-} 
+}
 
 .donate-header>p {
   font-size: 16px;
@@ -1727,6 +1672,111 @@ body {
 .donate-header>h1 {
   font-size: 42px;
   margin-bottom: 20px;
+}
+
+
+/* TeamCSS 
+===========================*/
+
+.team {
+  color: #FFF;
+  text-align: center;
+}
+
+h1.team-h1 {
+  position: absolute;
+  font-style: italic;
+  color: #FFF;
+}
+
+.cf {
+  *zoom: 1;
+}
+
+.team-member {
+  width: 16%;
+  float: left;
+  text-align: center;
+  margin: 3%;
+}
+
+.team-member h3 {
+  max-width: 200px;
+}
+
+.team-photo {
+  border-radius: 50%;
+  max-width: 100%;
+  width: 200px;
+  height: 200px;
+}
+
+.team-photo:hover {
+  transform: scale(0.9);
+  cursor: pointer;
+}
+
+.team-txt {
+  font-size: 20px;
+  padding: 0 20%;
+  line-height: 25px;
+}
+
+.team-header {
+  padding: 5% 10% 10% 42%;
+  margin: 1%;
+}
+
+.team-txt .btn-team {
+  padding: 15px 40px;
+  width: auto;
+  margin: 0;
+}
+
+.team-text p {
+  font-size: 22px;
+}
+
+.team-text h5 {
+  line-height: 8vh;
+  color: white;
+}
+
+.team-name {
+  color: #eeeeee;
+}
+
+.team-container {
+  margin: 12% 14%;
+  width: 210px;
+  height: 140px;
+  position: relative;
+  perspective: 1000px;
+}
+
+
+/* code for phone layout */
+
+@media (max-width:850px) {
+  .team-member {
+    width: 25%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width:650px) {
+  .team-member {
+    float: none;
+    display: block;
+    margin: 50px auto;
+    width: 100%;
+    text-align: center;
+  }
+  .team-member h3 {
+    margin: 15px auto;
+  }
 }
 
 @media screen and (max-width: 768px) {
