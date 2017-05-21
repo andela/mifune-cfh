@@ -73,6 +73,33 @@ angular.module('mean.system')
         return false;
       };
 
+      $scope.getPlayerPosition = obj => obj.color + 1;
+
+      $scope.getBackgroundImage = (id) => {
+        const backgroundImageClasses = [
+          'spade-on-white-bg',
+          'heart-on-white-bg',
+          'diamond-on-white-bg',
+          'club-on-white-bg',
+        ];
+        const numOfImageClasses = backgroundImageClasses.length;
+        const imgClassIndex = id % numOfImageClasses;
+        const imgClass = backgroundImageClasses[imgClassIndex];
+
+        return imgClass;
+      };
+
+      $scope.getCardIcon = (id) => {
+        const icons = [
+          '/img/icons/spade-extra-small.png',
+          '/img/icons/heart-extra-small.png',
+          '/img/icons/diamond-extra-small.png',
+          '/img/icons/club-extra-small.png',
+        ];
+        const quotient = id % icons.length;
+        const cardIcon = icons[quotient];
+        return cardIcon;
+      };
       $scope.showFirst = card =>
         game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
 
@@ -102,9 +129,23 @@ angular.module('mean.system')
       };
 
       $scope.pickWinning = (winningSet) => {
-        if ($scope.isCzar()) {
+        if ($scope.isCzar() && game.state === 'waiting for czar to decide') {
+          $scope.highlightWinningSet(winningSet);
           game.pickWinning(winningSet.card[0]);
           $scope.winningCardPicked = true;
+        }
+      };
+
+      $scope.highlightWinningSet = (winningSet) => {
+        console.log($scope.winningCardPicked);
+        if (game.state === 'waiting for czar to decide' &&
+        $scope.winningCardPicked === false) {
+          const cards = winningSet.card;
+          for (let i = 0; i < cards.length; i += 1) {
+            const card = cards[i];
+            const cardElement = angular.element(document.querySelector(`#card-${card.id}`));
+            cardElement.addClass('card-winning-answer');
+          }
         }
       };
 
@@ -131,13 +172,6 @@ angular.module('mean.system')
           makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
         }
         $scope.pickedCards = [];
-      });
-
-      // In case player doesn't pick a card in time, show the table
-      $scope.$watch('game.state', () => {
-        if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
-          $scope.showTable = true;
-        }
       });
 
     // In case player doesn't pick a card in time, show the table
@@ -232,19 +266,8 @@ angular.module('mean.system')
         }
       });
 
-      $scope.shuffleCards = () => {
-        const card = $('#card');
-        card.addClass('animated rotateOut');
-        $timeout(() => {
-          $scope.CzarCardDraw();
-        }, 1000);
-      };
-
       $scope.CzarCardDraw = () => {
-        if ($scope.isCzar()) {
-          game.CzarCardDraw();
-        }
+        game.CzarCardDraw();
       };
     }
   ]);
-

@@ -23,7 +23,6 @@ angular.module('mean.system')
         userService.signIn(data).then(({ data: { token, user } }) => {
           Global.saveTokenAndUser(token, user);
           socket.emit('loggedIn', user);
-          console.log(user, 'log');
           $location.path('/');
         }, (err) => {
           $scope.errorMsg = 'An error occured!!! '.concat(err.error);

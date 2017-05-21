@@ -5,6 +5,7 @@ const Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const sendMail = require('../mailer');
 
 const avatars = require(`${__dirname}/../../app/controllers/avatars.js`).all();
 // Valid characters to use to generate random private game IDs
@@ -19,8 +20,14 @@ const config = {
   storageBucket: process.env.STORAGEBUCKET,
   messagingSenderId: process.env.MESSAGIGSENDERID,
 };
-firebase.initializeApp(config);
-const database = firebase.database();
+let database;
+
+const nodeEnv = process.env.NODE_ENV;
+const isTestEnv = (nodeEnv === 'travis') || (nodeEnv === 'test');
+if (!isTestEnv) {
+  firebase.initializeApp(config);
+  database = firebase.database();
+}
 
 module.exports = (io) => {
   const allGames = {};
@@ -31,7 +38,6 @@ module.exports = (io) => {
   const chatMessages = [];
 
   io.sockets.on('connection', (socket) => {
-    console.log(allGames, 'ongoing games');
     console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
     socket.emit('onlineUsers', onlineUsers);
@@ -45,7 +51,7 @@ module.exports = (io) => {
       io.sockets.in(gameID).emit('chat message', chat);
       socket.emit('onlineUsers', onlineUsers);
       chatMessages.push(chat);
-      database.ref(`chat/${gameID}`).set(chatMessages);
+      if (!isTestEnv) database.ref(`chat/${gameID}`).set(chatMessages);
     });
 
     socket.on('loggedIn', (data) => {
@@ -64,11 +70,13 @@ module.exports = (io) => {
     });
 
     socket.on('invite', (data) => {
-      console.log(data, 'data');
-      socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, gameID: data.gameID });
+      if (data.to) {
+        socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, link: data.link });
+      }
+      console.log(`sent ${data.link} to ${data.email}`);
+      sendMail(data.email, data.link);
     });
     socket.on('pickCards', (data) => {
-      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
@@ -98,7 +106,6 @@ module.exports = (io) => {
     socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
-        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
           gamesNeedingPlayers.forEach((game, index) => {
@@ -122,8 +129,9 @@ module.exports = (io) => {
     });
 
     socket.on('CzarCardDraw', () => {
-      console.log(allGames[socket.gameID]);
-      allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
+      if (allGames[socket.gameID]) {
+        allGames[socket.gameID].CzarCardDraw(allGames[socket.gameID]);
+      }
     });
   });
 
@@ -179,14 +187,14 @@ module.exports = (io) => {
         game.players.push(player);
         socket.join(game.gameID);
         socket.gameID = game.gameID;
-        game.region = socket.regionId;
+        game.region = socket.regionId || game.region;
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
         game.sendNotification(`${player.username} has joined the game!`);
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
-          game.state = 'waiting to start';
+          game.prepareGame();
         }
       } else {
         io.to(player.socket.id).emit('alert',
@@ -233,7 +241,7 @@ module.exports = (io) => {
       game.sendNotification(`${player.username} has joined the game!`);
       if (game.players.length >= game.playerMaxLimit) {
         gamesNeedingPlayers.shift();
-        game.state = 'waiting to start';
+        game.prepareGame();
       }
     }
   };
@@ -259,7 +267,7 @@ module.exports = (io) => {
     allGames[uniqueRoom] = game;
     socket.join(game.gameID);
     socket.gameID = game.gameID;
-    game.region = socket.regionId;
+    game.region = socket.regionId || game.region;
     game.assignPlayerColors();
     game.assignGuestNames();
     game.sendUpdate();
