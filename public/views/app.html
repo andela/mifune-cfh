@@ -43,3 +43,35 @@
       <button class="btn-donate" ng-click="sendChatMessage()">Send</button>
    </div>
  </div>
+
+ <!-- modal to retrieve all users -->
+
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+ng-controller="InviteController">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title cfh-title">All Available Users</h4>
+      </div>
+      <div class="modal-body notify-invite">
+      <div class="cfh-div-input">
+         <input type="text" ng-model="searchInput" class="form-control cfh-search" placeholder="search for user" ng-change="filterUser()">
+      </div>
+        <ul class="invite-ul">    
+          <li class="user-list" ng-repeat="user in searchResult | orderBy:'socketID'">
+            <span>{{ user.name }} </span>
+            <span class="cfh-light" ng-class="{online: user.online}"></span>
+            <button type="button" class="btn btn-primary invite-button" 
+            ng-click="inviteUsers(user)">Send Invite
+            </button>
+          </li>
+         
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

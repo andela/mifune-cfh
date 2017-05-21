@@ -157,7 +157,7 @@ class Game {
   startGame() {
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
-    this.stateChoosing(this);
+    // this.stateChoosing(this);
     this.changeCzars(this);
   }
 
@@ -174,7 +174,7 @@ class Game {
     self.winnerAutopicked = false;
     self.curQuestion = self.questions.pop();
     if (!self.questions.length) {
-      self.getQuestions((err, data) => {
+      self.getQuestions(self.region, (err, data) => {
         self.questions = data;
       });
     }

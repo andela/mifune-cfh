@@ -1,5 +1,3 @@
-<!-- modal to retrieve all users -->
-
 <div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
 ng-controller="InviteController">
   <div class="modal-dialog" role="document">
@@ -48,42 +46,34 @@ ng-controller="InviteController">
           Start Game with {{game.players.length}} players
         </button>
       </div>
-    </div>
-    <!-- Game Over Stuff -->
-    <div id="game-end-info">
-      <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
-        <div class="game-end-headline">Oh no!? The game ended because too many people left! </div>
-        Our sincere apologies.
+      <div class="cfh-btn-invite" ng-controller="InviteController">
+         <button type="button" class="btn btn-default" ng-click="openInviteModal()">Invite Player</button>
       </div>
-      <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
-        <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>
-        We hope you feel special. You really should. So, don't horde that 
-        special feeling all to youself. Share that it with the world 
-        by donating to charity!
-      </div>
-      <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
-        <div class="game-end-headline">
-          Aw no, a disaster! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!
+      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+        <div id="start-game-button">
+          Start Game<br/>with {{game.players.length}} players
         </div>
-        That makes you one of the losers. Sorry. :(
+      </div>
       </div>
     </div>
   </div>
-</div>
 
-    <!-- Game Over Stuff -->
-    <div id="game-end-info">
-      <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
-        <div class="game-end-headline">What the!? The game ended because too many people left! </div>
-        Our sincere apologies.
-      </div>
-      <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
-        <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.
-      </div>
-      <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
-        <div class="game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
-        That makes you a loser, unfortunately.
-      </div>
+<!-- Game Over Stuff -->
+<div id="game-end-info">
+  <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
+    <div class="game-end-headline">Oh no!? The game ended because too many people left! </div>
+    Our sincere apologies.
+  </div>
+  <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
+    <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>
+    We hope you feel special. You really should. So, don't horde that 
+    special feeling all to youself. Share that it with the world 
+    by donating to charity!
+  </div>
+  <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
+    <div class="game-end-headline">
+      Aw no, a disaster! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!
     </div>
+    That makes you one of the losers. Sorry. :(
   </div>
 </div>

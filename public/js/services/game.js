@@ -1,6 +1,6 @@
 /* global _, window */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function GameService (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', 'Global', function GameService (socket, $timeout, Global) {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -71,15 +71,15 @@ angular.module('mean.system')
     });
 
     socket.on('gameUpdate', (data) => {
-    // Update gameID field only if it changed.
-    // That way, we don't trigger the $scope.$watch too often
+      // Update gameID field only if it changed.
+      // That way, we don't trigger the $scope.$watch too often
       if (game.gameID !== data.gameID) {
         game.gameID = data.gameID;
       }
       game.joinOverride = false;
       clearTimeout(game.joinOverrideTimeout);
 
-    // Cache the index of the player in the players array
+      // Cache the index of the player in the players array
       for (let i = 0; i < data.players.length; i += 1) {
         if (game.id === data.players[i].socketID) {
           game.playerIndex = i;
@@ -88,9 +88,9 @@ angular.module('mean.system')
 
       const newState = (data.state !== game.state);
 
-    // Handle updating game.time
+      // Handle updating game.time
       if (data.round !== game.round && data.state !== 'awaiting players' &&
-      data.state !== 'game ended' && data.state !== 'game dissolved') {
+        data.state !== 'game ended' && data.state !== 'game dissolved') {
         game.time = game.timeLimits.stateChoosing - 1;
         timeSetViaUpdate = true;
       } else if (newState && data.state === 'waiting for czar to decide') {
@@ -101,7 +101,7 @@ angular.module('mean.system')
         timeSetViaUpdate = true;
       }
 
-    // Set these properties on each update
+      // Set these properties on each update
       game.round = data.round;
       game.winningCard = data.winningCard;
       game.winningCardPlayer = data.winningCardPlayer;
@@ -109,7 +109,7 @@ angular.module('mean.system')
       game.gameWinner = data.gameWinner;
       game.pointLimit = data.pointLimit;
 
-    // Handle updating game.table
+      // Handle updating game.table
       if (data.table.length === 0) {
         game.table = [];
       } else {
@@ -145,15 +145,13 @@ angular.module('mean.system')
         } else {
           addToNotificationQueue('wait for czar to shuffle');
         }
-      } else
-
-      if (data.state === 'waiting for players to pick') {
+      } else if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
-      // Extending the underscore within the question
+        // Extending the underscore within the question
         game.curQuestion.text = data.curQuestion.text.replace(/_/g, '<u></u>');
 
-      // Set notifications only when entering state
+        // Set notifications only when entering state
         if (newState) {
           if (game.czar === game.playerIndex) {
             addToNotificationQueue('You\'re the Card Czar! Please wait!');
@@ -176,7 +174,7 @@ angular.module('mean.system')
           addToNotificationQueue('The czar is drawing the cards...');
         }
       } else if (data.state === 'winner has been chosen' &&
-              game.curQuestion.text.indexOf('<u></u>') > -1) {
+      game.curQuestion.text.indexOf('<u></u>') > -1) {
         game.curQuestion = data.curQuestion;
       } else if (data.state === 'awaiting players') {
         game.joinOverrideTimeout = $timeout(() => {
@@ -196,7 +194,9 @@ angular.module('mean.system')
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      const userID = window.user ? user._id : 'unauthenticated'; // eslint-disable-line
+      const { user } = Global.getSavedUser();
+      const savedUser = JSON.parse(user || JSON.stringify({}));
+      const userID = user ? savedUser.id : 'unauthenticated'; // eslint-disable-line
       socket.emit(mode, { userID, room, createPrivate });
     };
 
