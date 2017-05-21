@@ -1637,14 +1637,14 @@ li {
   padding: 5%;
 }
 
-.donate-txt {
+.section-txt {
   font-size: 16px;
   padding: 0 10%;
   line-height: 25px;
 }
 
-.donate-header {
-  padding: 20px 0 60px 0;
+.section-header {
+  padding: 20px 0 46px 0;
 }
 
 .donate-cta {
@@ -1665,11 +1665,11 @@ li {
   margin: 0 30px;
 }
 
-.donate-header>p {
+.section-header>p {
   font-size: 16px;
 }
 
-.donate-header>h1 {
+.section-header>h1 {
   font-size: 42px;
   margin-bottom: 20px;
 }
@@ -1693,11 +1693,16 @@ h1.team-h1 {
   *zoom: 1;
 }
 
+.team-photos {
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .team-member {
-  width: 16%;
-  float: left;
-  text-align: center;
-  margin: 3%;
+  padding: 10px 40px;
 }
 
 .team-member h3 {
@@ -1705,21 +1710,16 @@ h1.team-h1 {
 }
 
 .team-photo {
-  border-radius: 50%;
+  border-radius: 100%;
   max-width: 100%;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid blue;
 }
 
 .team-photo:hover {
   transform: scale(0.9);
   cursor: pointer;
-}
-
-.team-txt {
-  font-size: 20px;
-  padding: 0 20%;
-  line-height: 25px;
 }
 
 .team-header {
