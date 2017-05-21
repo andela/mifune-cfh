@@ -32,6 +32,7 @@ module.exports = (io) => {
   const chatMessages = [];
 
   io.sockets.on('connection', (socket) => {
+    console.log(`${socket.id} Connected`);
     socket.emit('id', { id: socket.id });
     socket.emit('onlineUsers', onlineUsers);
 
@@ -187,7 +188,7 @@ module.exports = (io) => {
         game.sendNotification(`${player.username} has joined the game!`);
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
-          game.state = 'waiting to start';
+          game.prepareGame();
         }
       } else {
         io.to(player.socket.id).emit('alert',
@@ -234,7 +235,7 @@ module.exports = (io) => {
       game.sendNotification(`${player.username} has joined the game!`);
       if (game.players.length >= game.playerMaxLimit) {
         gamesNeedingPlayers.shift();
-        game.state = 'waiting to start';
+        game.prepareGame();
       }
     }
   };

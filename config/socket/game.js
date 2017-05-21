@@ -157,7 +157,7 @@ class Game {
   startGame() {
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
-    this.stateChoosing(this);
+    // this.stateChoosing(this);
     this.changeCzars(this);
   }
 
@@ -438,7 +438,6 @@ class Game {
   CzarCardDraw(self) {
     if (self.state === 'Please wait for Czar to draw cards') {
       self.stateChoosing(self);
-      // self.prepareGame();
     }
   }
 

@@ -118,19 +118,19 @@ describe("Game Server",function(){
     const expectStartGame = function() {
       client1.emit('startGame');
       client1.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client2.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client3.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client4.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client5.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client6.on('gameUpdate', function(data) {
         data.state.should.equal("Please wait for Czar to draw cards");
