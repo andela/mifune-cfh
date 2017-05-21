@@ -4,7 +4,7 @@
     var ChroMo = '(Chrome)/(\d+)\.(\d+)\.(\d+)\.(\d+) Mobile';
 
     if (/Android|webOS|CriOs|ChroMo|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ===
-      false && location.href !== "http://localhost:3000/#!/app") {}
+      false && location.href !== "http://localhost:3000/#!/app") { }
 
     //Twitter buttons
     ! function (d, s, id) {
@@ -19,10 +19,11 @@
     }(document, 'script', 'twitter-wjs');
 
   });
+
 </script>
 
 <div id="container-fluid" ng-controller="IndexController">
-  <div class="cfh-bg">
+  <div class="cfh-bg main-section">
     <header></header>
     <div class="row cfh-explanation">
       <section class="col-xs-12 col-md-7">
@@ -66,41 +67,79 @@
       </section>
     </div>
   </div>
-  <div id="team" class="team-overlay">
-    <div class="row">
-      <h1 class="team-header">Meet the Team - Team Mifune</h1>
+  <div id="donate" class="donate cfh-bg">
+    <div class="section-header">
+      <h1> Donate now </h1>
+      <p>"If you don't give back, no one will like you™" - <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">crowdrise.com</a></p>
     </div>
-    <div class="team-txt">
-      <p> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
-        <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank"><b>give</b></a>. Please, have fun while playing!
+    <div class="section-txt">
+      <p>We're quite sure you feel the same way, so we've integrated donation widgets (via crowdrise.com), along with some not-so-subtle
+        reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even
+        upgrade your account and place a crown on your avatar's head (to remind other players how much better you are than
+        them).
       </p>
-Don't forget to give to charity to save the people in desperate situations.
-      </p>
+      <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
+
+    </div>
+    <div class="donate-cta">
+      <img src="img/make-a-wish-logo-white-large.png">
       <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
-        <button class="btn btn-lg btn-primary btn-team">
-        Donate to charity
-      </button></a>
+          <button class="btn btn-lg btn-primary btn-donate">Donate</button></a>
     </div>
   </div>
-  <div id="donate" class="col-md-12 donate cfh-bg">
-      <div class="donate-header">
-        <h1> Donate now </h1>
-        <p>"If you don't give back, no one will like you™" - <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">crowdrise.com</a></p>
+  <div id="team" class="team cfh-bg">
+    <div class="section-header">
+      <h1>Team Mifune</h1>
+    </div>
+    <div class="section-txt">
+      <p> This project was done as our first project for Team Mifune. We encourage you to play and do not forget to
+        <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank"><b>give</b></a>
+        to charity to save the people in desperate situations. Please have fun while playing!. 
+      </p>
+    </div>
+    <div class="team-photos">
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/folusho.jpeg">
+        <h3>Folusho Oladipo</h3>
       </div>
-      <div class="donate-txt">
-        <p>We're quite sure you feel the same way, so we've integrated donation widgets (via crowdrise.com), along with some
-          not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you
-          donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much
-          better you are than them).
-        </p>
-        <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
-        
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/Ifiok.jpeg">
+        <h3>Ifiok Eyo</h3>
       </div>
-      <div class="donate-cta">
-        <img src="img/make-a-wish-logo-white-large.png">
-       <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
-          <button class="btn btn-lg btn-primary btn-donate">Donate</button></a>
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/chibujax.jpg">
+        <h3>Uchendu Chibueze</h3>
       </div>
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/Precious.png">
+        <h3>Precious Ijege</h3>
+      </div>
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/jude.jpeg">
+        <h3>Jude Etanuwoma</h3>
+      </div>
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="/img/Hope.jpg">
+        <h3>Hope Ngerebara</h3>
+      </div>
+
+      <!-- member-->
+      <div class="team-member">
+        <img class="team-photo" src="img/Obinna.jpeg">
+        <h3>Obinna Nnenanya</h3>
+      </div>
+    </div>
   </div>
   <div id="message-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -118,7 +157,7 @@ Don't forget to give to charity to save the people in desperate situations.
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary button2"  data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary button2" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gameOn()">Game On!</button>
         </div>
       </div>
