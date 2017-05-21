@@ -16,7 +16,9 @@
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
       <div class="cfh-btn-invite" ng-controller="InviteController">
-         <button type="button" class="btn btn-default" ng-click="openInviteModal()">Invite Player</button>
+         <button type="button" class="btn btn-default" 
+         ng-click="openInviteModal()" ng-show="authenticated && game.playerIndex === 0">
+         Invite Player</button>
       </div>
       <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
         <div id='start-game-button'>
