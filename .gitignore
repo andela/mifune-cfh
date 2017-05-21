@@ -9,3 +9,4 @@ coverage
 notes.txt
 heroku_lcdj5gq9
 .vscode/
+npm-debug.log
