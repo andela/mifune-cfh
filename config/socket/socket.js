@@ -72,7 +72,8 @@ module.exports = (io) => {
     socket.on('invite', (data) => {
       if (data.to) {
         socket.broadcast.to(data.to).emit('newInvite', { gameOwner: data.gameOwner, link: data.link });
-      } else sendMail(data.email, data.link);
+      }
+      sendMail(data.email, data.link);
     });
     socket.on('pickCards', (data) => {
       if (allGames[socket.gameID]) {
