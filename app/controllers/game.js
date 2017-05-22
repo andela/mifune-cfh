@@ -9,29 +9,58 @@ const Game = mongoose.model('Game');
  */
 
 exports.save = (req, res) => {
+  const { gameID, gameOwerName, gameOwnerId, players, gameWinner, rounds } = req.body;
   const newGame = new Game();
-  newGame.gameOwnerId = req.body.gameOwnerId;
-  newGame.players = req.body.players;
-  newGame.gameWinner = req.body.gameWinner;
+  newGame.gameID = gameID;
+  newGame.gameOwnerId = gameOwnerId;
+  newGame.gameOwerName = gameOwerName;
+  newGame.rounds = Number(rounds);
+  newGame.players = players;
+  newGame.gameWinner = gameWinner;
   newGame.date = new Date();
-  newGame.save((err, success) => {
-    if (err) {
-      res.status(500).send({ error: 'An error occured' });
-    } else {
-      res.status(200).json(success);
-    }
-  });
+  Game.findOne({ gameID })
+    .exec((err, game) => {
+      if (err) {
+        res.status(500).send({ error: 'An error occured' });
+      } else if (game) {
+        res.status(200).json(game);
+      } else {
+        newGame.save((err, success) => {
+          if (err) {
+            res.status(500).send({ error: 'An error occured' });
+          } else {
+            res.status(200).json(success);
+          }
+        });
+      }
+    });
 };
 
-exports.retrieveGame = (req, res) => {
-  const { gameOwnerId } = req.params;
-  Game.find({ gameOwnerId }, (err, data) => {
+exports.retrieveGames = (req, res) => {
+  const user = JSON.parse(req.cookies.user);
+  const userID = user.id;
+  // console.log(userID);
+  Game.find({ players: { $elemMatch: { userID } } }, (err, data) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
     } else if (data.length > 0) {
       res.status(200).json(data);
     } else {
       res.status(404).json('No Game found');
+    }
+  });
+};
+
+exports.getLeaderBoard = (req, res) => {
+  Game.find({})
+  .sort('-rounds')
+  .sort('-date')
+  .limit(10)
+  .exec((err, game) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else {
+      res.status(200).json(game);
     }
   });
 };

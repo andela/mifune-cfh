@@ -253,7 +253,12 @@ exports.addDonation = (req, res) => {
           }
         }
         if (!duplicate) {
-          user.donations.push(req.body);
+          const donation = {
+            amount: req.body.amount,
+            donationID: req.body.crowdrise_donation_id,
+            data: new Date()
+          };
+          user.donations.push(donation);
           user.premium = 1;
           user.save();
         }
@@ -262,6 +267,25 @@ exports.addDonation = (req, res) => {
   }
   res.send();
 };
+
+exports.getDonations = (req, res) => {
+  const userID = JSON.parse(req.cookies.user).id;
+  // console.log('getDonations', userID);
+  if (userID) {
+    User.findOne({
+      _id: userID
+    })
+      .exec((err, user) => {
+        if (err) {
+          res.status(500).json({ error: err });
+        } else {
+          // console.log('user', user.donations);
+          res.status(200).json(user.donations);
+        }
+      });
+  }
+};
+
 
 /**
  *  Show profile
@@ -319,4 +343,3 @@ exports.retrieveUsers = (req, res) => {
     return res.status(200).json({ success: true, data });
   });
 };
-

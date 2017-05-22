@@ -12,6 +12,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap',
       .when('/privacy', {
         templateUrl: '/views/privacy.html',
       })
+      .when('/dashboard', {
+        templateUrl: '/views/dashboard.html',
+      })
       .when('/bottom', {
         templateUrl: '/views/bottom.html'
       })

@@ -20,7 +20,7 @@
           <ul class="dropdown-menu invite-dropdwn" aria-labelledby="dropdownMenu1">
             <li ng-repeat="invite in $ctrl.inviteTray">
               <span>{{invite.from}}</span> invited you to a game,
-              <a href="{{invite.link}}" target="_blank" ng-click="$ctrl.openGame(invite.link, $index)"> 
+              <a href="{{invite.link}}" target="_blank" ng-click="$ctrl.openGame(invite.link, $index)">
               Click to join game.</a>
             </li>
           </ul>
@@ -39,6 +39,16 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-btn cfh-btn-container">
             <span ng-show="$ctrl.showOptions" class="ng-hide">
+               <span>
+              <a ng-show="$ctrl.location().dashboard" ng-click="$ctrl.dashboard()">
+                <button class="cfh-btn btn-pink">Dashboard</button>
+              </a>
+            </span>
+            <span>
+              <a ng-show="$ctrl.location().backToGame" href="javascript:history.back(1)">
+                <button class="cfh-btn btn-pink">Back TO Game</button>
+              </a>
+            </span>
                       <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
                   </span>
           </li>
@@ -56,9 +66,7 @@
             <a href="#team"><button class="cfh-btn btn-pink">Meet the team</button></a>
           </li>
           <li class="navbar-btn cfh-btn-container">
-            <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()">
-              <button class="cfh-btn leave-game-btn">Leave Game</button>
-            </a>
+            <a ng-show="$ctrl.location().app" ng-click="$ctrl.abandonGame()"><button class="cfh-btn btn-pink">Abandon game</button></a>
           </li>
         </ul>
       </div>

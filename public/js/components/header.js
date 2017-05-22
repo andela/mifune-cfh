@@ -21,8 +21,29 @@ function HeaderController($location, Global, game, $window, socket) {
     return {
       signin: currentLocation !== '/signin',
       signup: currentLocation !== '/signup',
-      app: currentLocation.indexOf('/app') > -1
+      app: currentLocation.indexOf('/app') > -1,
+      dashboard: currentLocation !== '/dashboard',
+      backToGame: currentLocation === '/dashboard'
     };
+  };
+
+  ctrl.dashboard = () => {
+    ctrl.getSavedGames();
+    ctrl.getLeaderBoard();
+    ctrl.getDonations();
+    $location.path('/dashboard');
+  };
+
+  ctrl.getSavedGames = () => {
+    socket.emit('getSavedGames', true);
+  };
+
+  ctrl.getDonations = () => {
+    socket.emit('getDonations', true);
+  };
+
+  ctrl.getLeaderBoard = () => {
+    socket.emit('getLeaderBoard', true);
   };
 
   ctrl.signUp = () => {
