@@ -146,7 +146,7 @@ angular.module('mean.directives', [])
     //    if (event.which === 13) {
     //      scope.sendChatMessage();
       //    console.log(scope.emojiarea.getText());
-        //}
+        // }
     //  });
     },
   })]);
