@@ -35,7 +35,7 @@
       word-wrap: break-word; } }
   .card.how-to {
     font-size: 1.4rem; }
-  .card #selection-number {
+  .card .selection-number {
     position: absolute;
     bottom: 1px;
     left: 7px;
@@ -296,19 +296,6 @@ html {
                 font-size: 10px;
                 margin-top: 3px;
                 margin-bottom: 5px; } }
-            #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score {
-              float: left; }
-              #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                font-size: 26px;
-                margin-top: 0;
-                margin-bottom: 0; }
-                @media only screen and (min-width: 521px) and (max-width: 768px) {
-                  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                    font-size: 21px; } }
-                @media (max-width: 520px) {
-                  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-score h2 {
-                    font-size: 17px;
-                    line-height: 40%; } }
             #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-star {
               float: left;
               margin-top: 3px;
@@ -547,11 +534,7 @@ html {
                   #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info {
                     font-size: 13px; } }
                 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info .game-end-headline {
-                  font-size: 24px;
                   margin-bottom: 10px; }
-                  @media (max-width: 520px) {
-                    #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #game-end-info .game-end-headline {
-                      font-size: 18px; } }
       #main-container #app-container #gameplay-container #info-container {
         width: 100%;
         background: #252525;

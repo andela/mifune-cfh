@@ -1353,18 +1353,16 @@ li {
   margin-bottom: 1%;
 }
 
-
-/*Cfh buttons*/
-
 .cfh-btn {
+  display: inline;
   border: none;
   border-radius: 0;
-  display: inline;
+  box-sizing: content-box;
   text-decoration: none;
-  padding: 1.3rem 1.8rem;
+  padding: 1em 0.3em;
   width: 115px;
   font-family: 'Tahoma', Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
   line-height: 120%;
   margin: 8px;
@@ -1590,6 +1588,10 @@ li {
 
 .gamejoinwrapper {
   margin-bottom: 30px;
+}
+
+.full-page-section {
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 720px) {

@@ -29,10 +29,10 @@
       <section class="col-xs-12 col-md-7">
         <div class="txt">
           <p>Cards<br />for <br/>Humanity</p>
-          <h5> Cards for Humanity is a fast-paced online version of the popular card game, <a href="http://cardsagainsthumanity.com/"
+          <h3> Cards for Humanity is a fast-paced online version of the popular card game, <a href="http://cardsagainsthumanity.com/"
               target="_blank">Cards Against Humanity</a>, that gives you the opportunity to donate to children in need - all
             while remaining as despicable and awkward as you naturally are.
-          </h5>
+          </h3>
           <div class="row">
             <div class="cfh-btn-group">
               <a href="#donate">
@@ -84,7 +84,8 @@
     <div class="donate-cta">
       <img src="img/make-a-wish-logo-white-large.png">
       <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" target="_blank">
-          <button class="btn btn-lg btn-primary btn-donate">Donate</button></a>
+        <button class="btn btn-lg btn-primary btn-donate">Donate</button>
+      </a>
     </div>
   </div>
   <div id="team" class="team cfh-bg">
@@ -152,7 +153,7 @@
           <p>{{message}}</p><br>
           <p>Kindly select a region&nbsp;&nbsp;
             <select id="selectedCountry" style="text-align:center;" ng-model="selectedCountry">
-            <option ng-repeat="country in countries" value={{country.regionId}} >{{country.country}}</option>
+            <option ng-repeat="country in countries" value="{{country.regionId}}" >{{country.country}}</option>
           </select>
           </p>
         </div>
