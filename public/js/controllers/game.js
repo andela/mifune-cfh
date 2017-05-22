@@ -1,9 +1,11 @@
 /* global document, $ */
 angular.module('mean.system')
   .controller('GameController', ['$scope', 'game', '$timeout', '$location',
-    'MakeAWishFactsService', 'userService',
-    function GameController($scope, game, $timeout, $location, MakeAWishFactsService, userService) {
+    'MakeAWishFactsService', 'userService', 'Global',
+    function GameController($scope, game, $timeout, $location, MakeAWishFactsService,
+      userService, Global) {
       $scope.hasPickedCards = false;
+      $scope.global = Global.getSavedUser();
       $scope.winningCardPicked = false;
       $scope.showTable = false;
       $scope.modalShown = false;
@@ -139,7 +141,7 @@ angular.module('mean.system')
           $scope.showTable = true;
         }
         if (game.state === 'game ended') {
-          if ($scope.global && game.playerIndex === 0) {
+          if ($scope.global.authenticated && game.playerIndex === 0) {
             const { id } = JSON.parse($scope.global.user);
             const { players, gameWinner, } = game;
             const gameWinnerUsername = players[gameWinner].username;
