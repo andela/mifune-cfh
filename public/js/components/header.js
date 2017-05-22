@@ -23,7 +23,8 @@ function HeaderController($location, Global, game, $window, socket) {
       signin: currentLocation !== '/signin',
       signup: currentLocation !== '/signup',
       dashboard: currentLocation !== '/dashboard',
-      app: currentLocation.indexOf('/app') > -1
+      app: currentLocation.indexOf('/app') > -1,
+      backToGame: currentLocation === '/dashboard'
     };
   };
 

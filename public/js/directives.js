@@ -1,5 +1,5 @@
 /* global $ */
-/* eslint-disable func-names, prefer-arrow-callback */
+/* eslint-disable func-names, prefer-arrow-callback, no-undef */
 angular.module('mean.directives', [])
   .directive('player', function () {
     return {
@@ -130,10 +130,10 @@ angular.module('mean.directives', [])
       });
 
         // Submit the chat when the 'enter' key is pressed
-      $('body').on('keyup', '.emojionearea-editor', (event) => {
+      $('body').on('keyup', '#chatInput', (event) => {
         if (event.which === 13) {
-          $('.emojionearea-editor').trigger('blur');
           scope.sendChatMessage();
+          $('.emojionearea-editor').trigger('blur');
         }
       });
     },

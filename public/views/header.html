@@ -44,6 +44,11 @@
                 <button class="cfh-btn btn-pink">Dashboard</button>
               </a>
             </span>
+            <span>
+              <a ng-show="$ctrl.location().backToGame" href="javascript:history.back(1)">
+                <button class="cfh-btn btn-pink">Back TO Game</button>
+              </a>
+            </span>
                       <a ng-click="$ctrl.logout()"><button class="cfh-btn btn-pink">Sign Out</button></a>
                   </span>
           </li>
