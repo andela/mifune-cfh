@@ -5,7 +5,7 @@ angular.module('mean.system')
     function GameController($scope, game, $timeout, $location, MakeAWishFactsService,
       userService, Global) {
       $scope.hasPickedCards = false;
-      $scope.gloabl = Global.getSavedUser();
+      $scope.global = Global.getSavedUser();
       $scope.winningCardPicked = false;
       $scope.showTable = false;
       $scope.modalShown = false;
