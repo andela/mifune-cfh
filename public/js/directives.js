@@ -1,4 +1,4 @@
-/* global $ */
+/* global $ window*/
 /* eslint-disable func-names, prefer-arrow-callback */
 angular.module('mean.directives', [])
   .directive('player', function () {
@@ -74,13 +74,13 @@ angular.module('mean.directives', [])
        // Send chat message
       scope.sendChatMessage = () => {
         const chat = {};
-        chat.message = $('#chatInput').val();
+        chat.message = $('.emojionearea-editor')[2].innerHTML;
         if (!chat.message) return;
         chat.date = new Date().toString();
         chat.avatar = window.localStorage.getItem('avatar');
         chat.username = window.localStorage.getItem('username');
         socket.emit('chat message', chat);
-        $('.emojionearea-editor').html('');
+        $('.emojionearea-editor')[2].innerHTML = '';
       };
 
       // display a chat message
@@ -105,15 +105,6 @@ angular.module('mean.directives', [])
       scope.setPlayer = (avatar, username) => {
         window.localStorage.setItem('avatar', avatar);
         window.localStorage.setItem('username', username);
-
-        $('#chatInput').emojioneArea({
-          pickerPosition: 'top',
-          filtersPosition: 'top',
-          tones: false,
-          autocomplete: false,
-          inline: true,
-          hidePickerOnBlur: true
-        });
         scope.isPlayerSet = true;
       };
 
@@ -123,19 +114,39 @@ angular.module('mean.directives', [])
           displayChat(chat);
         });
       });
-
+      $('#chatInput').emojioneArea({
+        pickerPosition: 'top',
+        filtersPosition: 'top',
+        tones: false,
+        autocomplete: false,
+        inline: true,
+        hidePickerOnBlur: true,
+        events: {
+          keyup: (editor, event) => {
+            if (event.which === 13) {
+              const chat = {};
+              chat.message = editor[0].innerHTML;
+              if (!chat.message) return;
+              chat.date = new Date().toString();
+              chat.avatar = window.localStorage.getItem('avatar');
+              chat.username = window.localStorage.getItem('username');
+              socket.emit('chat message', chat);
+              editor[0].innerHTML = '';
+            }
+          },
+        },
+      });
         // listen for chat messages
       socket.on('chat message', (chat) => {
         displayChat(chat);
       });
 
         // Submit the chat when the 'enter' key is pressed
-      $('body').on('keyup', '.emojionearea-editor', (event) => {
-        if (event.which === 13) {
-          $('.emojionearea-editor').trigger('blur');
-          scope.sendChatMessage();
-        }
-      });
+    // $('body').on('keyup', '.emojionearea-editor', (event) => {
+    //    if (event.which === 13) {
+    //      scope.sendChatMessage();
+      //    console.log(scope.emojiarea.getText());
+        //}
+    //  });
     },
   })]);
-

@@ -1,5 +1,6 @@
 /* global $ */
 // Show or hide ChatBox
+
 $('body').on('click', '#endChat', () => {
   $('#endChat').hide();
   $('#startChat').show();

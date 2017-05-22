@@ -37,16 +37,18 @@
      </div>
    </div>
      <div class="input-field emoji-picker-container message-area">
-       <input type="text" class="form-control" id="chatInput" placeholder="Type a message...">
+       <input type="text" class="form-control emojionearea-editor" id="chatInput" placeholder="Type a message...">
      </div>
    <div class="text-right send-message">
       <button class="btn-donate" ng-click="sendChatMessage()">Send</button>
    </div>
  </div>
 
+
+
  <!-- modal to retrieve all users -->
 
-<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 ng-controller="InviteController">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -58,15 +60,15 @@ ng-controller="InviteController">
       <div class="cfh-div-input">
          <input type="text" ng-model="searchInput" class="form-control cfh-search" placeholder="search for user" ng-change="filterUser()">
       </div>
-        <ul class="invite-ul">    
+        <ul class="invite-ul">
           <li class="user-list" ng-repeat="user in searchResult | orderBy:'socketID'">
             <span>{{ user.name }} </span>
             <span class="cfh-light" ng-class="{online: user.online}"></span>
-            <button type="button" class="btn btn-primary invite-button" 
+            <button type="button" class="btn btn-primary invite-button"
             ng-click="inviteUsers(user)">Send Invite
             </button>
           </li>
-         
+
         </ul>
       </div>
       <div class="modal-footer">
