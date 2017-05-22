@@ -141,7 +141,7 @@ angular.module('mean.system')
           $scope.showTable = true;
         }
         if (game.state === 'game ended') {
-          if ($scope.global && game.playerIndex === 0) {
+          if ($scope.global.authenticated && game.playerIndex === 0) {
             const { id } = JSON.parse($scope.global.user);
             const { players, gameWinner, } = game;
             const gameWinnerUsername = players[gameWinner].username;
