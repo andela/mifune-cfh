@@ -136,10 +136,10 @@ class Game {
       });
 
     const self = this;
-    console.log(this.region, 'region');
+    const region = this.region;
     async.parallel([
       (cb) => {
-        this.getQuestions(this.region, cb);
+        this.getQuestions(region, cb);
       },
       this.getAnswers
     ],
@@ -157,7 +157,7 @@ class Game {
   startGame() {
     this.shuffleCards(this.questions);
     this.shuffleCards(this.answers);
-    this.stateChoosing(this);
+    // this.stateChoosing(this);
     this.changeCzars(this);
   }
 
@@ -174,7 +174,7 @@ class Game {
     self.winnerAutopicked = false;
     self.curQuestion = self.questions.pop();
     if (!self.questions.length) {
-      self.getQuestions((err, data) => {
+      self.getQuestions(self.region, (err, data) => {
         self.questions = data;
       });
     }
@@ -328,7 +328,7 @@ class Game {
             }
             if (cardIndex !== null) {
               tableCard.push(this.players[playerIndex].hand.splice(cardIndex,
-              1)[0]);
+                1)[0]);
             }
           }
           if (tableCard.length === this.curQuestion.numAnswers) {

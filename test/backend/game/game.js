@@ -67,6 +67,8 @@ describe("Game Server",function(){
   it('Should start game when startGame event is sent with 3 players', function(done){
     let client1, client2, client3;
     client1 = io.connect(socketURL, options);
+    // client2 = io.connect(socketURL, options);
+    // client3 = io.connect(socketURL, options);
     const disconnect = function() {
       client1.disconnect();
       client2.disconnect();
@@ -116,19 +118,19 @@ describe("Game Server",function(){
     const expectStartGame = function() {
       client1.emit('startGame');
       client1.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client2.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client3.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client4.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client5.on('gameUpdate', function(data) {
-        data.state.should.equal("waiting for players to pick");
+        data.state.should.equal("Please wait for Czar to draw cards");
       });
       client6.on('gameUpdate', function(data) {
         data.state.should.equal("Please wait for Czar to draw cards");

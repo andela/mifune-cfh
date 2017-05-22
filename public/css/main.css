@@ -13,6 +13,21 @@
   font-size: 20px;
   font-weight: bold;
   vertical-align: top; }
+
+.cfh-btn-invite{
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+}
+
+.cfh-btn-invite > button{
+  margin-left: 4%;
+  margin-top: 10%;
+  background-color: mintcream;
+  color: #2D2D2D;
+  border: thin solid silver;
+}
+
   @media (max-width: 520px) {
     .card {
       font-size: 14px;
@@ -74,8 +89,7 @@ html {
       margin-top: 0px; } }
       body {
   font-family: "helvetica neue", helvetica, sans-serif;
-  background: transparent;
-  margin: 10px; }
+  background: transparent; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
       margin: 5px; } }
@@ -861,3 +875,6 @@ html {
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
 
+    .hideSweetAlert ~ .modal-backdrop.in  {
+      display: none;
+    }

@@ -47,9 +47,7 @@ function HeaderController($location, Global, game, $window, socket) {
   };
 
   socket.on('newInvite', (data) => {
-    // const { host, hash } = $window.location;
-    const inviteLink = `/#!/app?game=${data.gameID}`;
-    ctrl.inviteTray.push({ link: inviteLink, from: data.gameOwner });
+    ctrl.inviteTray.push({ link: data.link, from: data.gameOwner });
   });
 
   ctrl.openGame = (link, index) => {

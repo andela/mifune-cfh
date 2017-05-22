@@ -133,13 +133,6 @@ angular.module('mean.system')
         $scope.pickedCards = [];
       });
 
-      // In case player doesn't pick a card in time, show the table
-      $scope.$watch('game.state', () => {
-        if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
-          $scope.showTable = true;
-        }
-      });
-
     // In case player doesn't pick a card in time, show the table
       $scope.$watch('game.state', () => {
         if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
@@ -232,18 +225,8 @@ angular.module('mean.system')
         }
       });
 
-      $scope.shuffleCards = () => {
-        const card = $('#card');
-        card.addClass('animated rotateOut');
-        $timeout(() => {
-          $scope.CzarCardDraw();
-        }, 1000);
-      };
-
       $scope.CzarCardDraw = () => {
-        if ($scope.isCzar()) {
-          game.CzarCardDraw();
-        }
+        game.CzarCardDraw();
       };
     }
   ]);
